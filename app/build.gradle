@@ -33,7 +33,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "random.co.uk.random"
+        applicationId "co.uk.random"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionName versionName(versionMajor, versionMinor, versionPatch)
@@ -65,6 +65,7 @@ android {
 }
 
 dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     // Android
     api "org.jetbrains.kotlin:kotlin-stdlib-jre8:$rootProject.kotlinVersion"
     api "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$rootProject.kotlinVersion"
@@ -104,6 +105,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     androidTestImplementation "com.android.support.test:runner:$androidTestRunner"
+
+    //other 3rd party lib
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 }
 
 def versionName(major, minor, patch) {

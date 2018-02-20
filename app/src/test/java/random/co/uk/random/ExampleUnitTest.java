@@ -1,4 +1,4 @@
-package random.co.uk.random;
+package co.uk.random;
 
 import org.junit.Test;
 

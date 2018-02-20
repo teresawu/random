@@ -4,26 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="co.uk.random.view.HomeActivity">
+    tools:context="co.uk.random.view.VideoActivity">
 
-    <TextView
-        android:id="@+id/txtHome"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="HOME"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_default="wrap" />
-
-    <android.support.v7.widget.RecyclerView
+    <com.google.android.youtube.player.YouTubePlayerView
         android:id="@+id/imageRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtHome" />
+        app:layout_constraintTop_toBottomOf="parent" />
 
 </tools:android.support.constraint.ConstraintLayout>

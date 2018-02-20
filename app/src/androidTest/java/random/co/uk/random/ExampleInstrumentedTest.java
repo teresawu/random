@@ -1,4 +1,4 @@
-package random.co.uk.random;
+package co.uk.random;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("random.co.uk.random", appContext.getPackageName());
+        assertEquals("co.uk.random", appContext.getPackageName());
     }
 }
