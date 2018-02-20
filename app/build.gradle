@@ -1,28 +1,119 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
+
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "https://maven.google.com" }
+    }
+}
+
+kapt {
+    generateStubs = true
+}
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    flavorDimensions "versionCode"
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/java'
+    }
+
     defaultConfig {
         applicationId "random.co.uk.random"
-        minSdkVersion 21
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionName versionName(versionMajor, versionMinor, versionPatch)
+        versionCode versionCode(versionMajor, versionMinor, versionPatch)
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        dexOptions {
+            javaMaxHeapSize "4g"
+        }
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    // Android
+    api "org.jetbrains.kotlin:kotlin-stdlib-jre8:$rootProject.kotlinVersion"
+    api "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$rootProject.kotlinVersion"
+    api "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    api "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    api "com.android.support:design:$supportLibraryVersion"
+    api "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    api "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
+
+    // RxJava
+    api "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
+    api "io.reactivex.rxjava2:rxkotlin:$rootProject.rxkotlinVersion"
+
+    // Network
+    api "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    api "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    api "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofitRxVersion"
+    api "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
+    api "com.google.code.gson:gson:$gsonVersion"
+
+    // Dagger
+    api "com.google.dagger:dagger:$rootProject.daggerVersion"
+    api "com.google.dagger:dagger-android:$rootProject.daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
+
+    // Picasso
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
+    //Junit imports
+    testImplementation "junit:junit:$junitVersion"
+
+    //android test imports
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoCoreVersion", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestImplementation "com.android.support.test:runner:$androidTestRunner"
+}
+
+def versionName(major, minor, patch) {
+    return "${major}.${minor}.${patch}"
+}
+
+def buildNumber() {
+    return System.getenv("BUILD_NUMBER") as Integer
+}
+
+def versionCode(major, minor, patch) {
+    return buildNumber() ?: major * 10000 + minor * 1000 + patch * 100
 }
