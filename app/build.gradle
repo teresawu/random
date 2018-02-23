@@ -67,37 +67,38 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     // Android
-    api "org.jetbrains.kotlin:kotlin-stdlib-jre8:$rootProject.kotlinVersion"
-    api "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$rootProject.kotlinVersion"
-    api "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
-    api "com.android.support:support-v4:$rootProject.supportLibraryVersion"
-    api "com.android.support:design:$supportLibraryVersion"
-    api "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
-    api "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$rootProject.kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$rootProject.kotlinVersion"
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:design:$supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
+    implementation "com.android.support:multidex:$rootProject.multiDexVersion"
 
     // RxJava
-    api "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
-    api "io.reactivex.rxjava2:rxkotlin:$rootProject.rxkotlinVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rxkotlinVersion"
 
     // Network
-    api "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
-    api "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
-    api "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofitRxVersion"
-    api "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
-    api "com.google.code.gson:gson:$gsonVersion"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofitRxVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
 
     // Dagger
-    api "com.google.dagger:dagger:$rootProject.daggerVersion"
-    api "com.google.dagger:dagger-android:$rootProject.daggerVersion"
+    implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
+    implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
     provided 'org.glassfish:javax.annotation:10.0-b28'
     implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
 
     // Picasso
-    compile 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 
     //Junit imports
     testImplementation "junit:junit:$junitVersion"
