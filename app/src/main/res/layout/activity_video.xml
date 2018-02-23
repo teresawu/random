@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tools:android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vodSettingsConstraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="co.uk.random.view.VideoActivity">
+    android:layout_height="wrap_content">
 
     <com.google.android.youtube.player.YouTubePlayerView
         android:id="@+id/imageRecyclerView"
@@ -13,6 +12,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-</tools:android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

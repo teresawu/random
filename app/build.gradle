@@ -39,7 +39,9 @@ android {
         versionName versionName(versionMajor, versionMinor, versionPatch)
         versionCode versionCode(versionMajor, versionMinor, versionPatch)
         multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "YOUTUBE_MAIN", '"https://www.googleapis.com/youtube/v3/"'
         dexOptions {
             javaMaxHeapSize "4g"
         }
@@ -105,9 +107,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     androidTestImplementation "com.android.support.test:runner:$androidTestRunner"
-
-    //other 3rd party lib
-    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 }
 
 def versionName(major, minor, patch) {
