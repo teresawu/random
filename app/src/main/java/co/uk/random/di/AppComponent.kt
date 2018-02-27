@@ -2,6 +2,7 @@ package co.uk.random.di
 
 import android.app.Application
 import co.uk.random.RandomApplication
+import co.uk.random.di.module.CoreModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -10,7 +11,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-        modules = [(AndroidSupportInjectionModule::class), (AndroidInjectionModule::class), (ActivityBuilder::class), (FragmentBuilder::class)]
+        modules = [(AndroidSupportInjectionModule::class), (AndroidInjectionModule::class), (CoreModule::class), (ActivityBuilder::class), (FragmentBuilder::class)]
 )
 interface AppComponent {
 

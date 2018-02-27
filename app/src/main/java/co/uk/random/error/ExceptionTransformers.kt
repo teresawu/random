@@ -2,8 +2,9 @@ package co.uk.random.error
 
 import io.reactivex.Single
 import retrofit2.Response
+import javax.inject.Inject
 
-class ExceptionTransformers {
+class ExceptionTransformers @Inject constructor() {
 
     fun <T> wrapRetrofitExceptionSingle(): (Single<Response<T>>) -> Single<T> {
         return { it: Single<Response<T>> ->

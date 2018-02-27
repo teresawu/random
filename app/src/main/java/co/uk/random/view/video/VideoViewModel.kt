@@ -8,8 +8,7 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class VideoViewModel @Inject constructor
-(private val schedulerProvider: SchedulerProvider, private val youtubeApiService: YoutubeApiService) {
-    private val exceptionTransformers by lazy { ExceptionTransformers() }
+(private val exceptionTransformers: ExceptionTransformers, private val schedulerProvider: SchedulerProvider, private val youtubeApiService: YoutubeApiService) {
 
     fun getVideo(videoId: String): Single<Video> {
         return youtubeApiService.getVideo(videoId)

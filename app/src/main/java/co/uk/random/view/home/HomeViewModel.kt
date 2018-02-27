@@ -9,18 +9,18 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor
-(private val schedulerProvider: SchedulerProvider, private val youtubeApiService: YoutubeApiService) {
-
-    private val exceptionTransformers by lazy { ExceptionTransformers() }
+(private val exceptionTransformers: ExceptionTransformers, private val schedulerProvider: SchedulerProvider, private val youtubeApiService: YoutubeApiService) {
 
     fun getChannel(): Single<Channel> {
         return youtubeApiService.getChannel()
+                .compose(schedulerProvider.getSchedulersForSingle())
                 .compose(exceptionTransformers.wrapRetrofitExceptionSingle())
                 .flatMap { return@flatMap Single.just(it) }
     }
 
     fun getPlaylist(playlistId: String): Single<Playlist> {
         return youtubeApiService.getPlaylist(playlistId)
+                .compose(schedulerProvider.getSchedulersForSingle())
                 .compose(exceptionTransformers.wrapRetrofitExceptionSingle())
                 .flatMap { return@flatMap Single.just(it) }
     }

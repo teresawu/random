@@ -3,7 +3,7 @@ package co.uk.random.util
 import io.reactivex.*
 
 
-class SchedulerProvider constructor(val backgroundScheduler: Scheduler, val foregroundScheduler: Scheduler) {
+class SchedulerProvider (val backgroundScheduler: Scheduler, val foregroundScheduler: Scheduler) {
 
     fun <T> getSchedulersForObservable(): (Observable<T>) -> Observable<T> {
         return { observable: Observable<T> ->

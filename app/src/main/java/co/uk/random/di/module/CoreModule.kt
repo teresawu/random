@@ -3,6 +3,7 @@ package co.uk.random.di.module
 import android.app.Application
 import co.uk.random.BuildConfig
 import co.uk.random.api.YoutubeApiService
+import co.uk.random.error.ExceptionTransformers
 import co.uk.random.util.SchedulerProvider
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -73,7 +74,6 @@ class CoreModule {
     fun provideSchedulerProvider(): SchedulerProvider {
         return SchedulerProvider(Schedulers.io(), AndroidSchedulers.mainThread())
     }
-
 
     @Provides
     @Singleton

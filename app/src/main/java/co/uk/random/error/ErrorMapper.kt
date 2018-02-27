@@ -3,12 +3,13 @@ package co.uk.random.error
 import co.uk.random.util.parseJSONToMap
 import com.google.gson.JsonSyntaxException
 import java.net.HttpURLConnection
+import javax.inject.Inject
 
 /**
  * Maps all Retrofit errors to Exceptions we define in this module. Takes into account the
  * HTTP Response code and the message.
  */
-class ErrorMapper {
+class ErrorMapper @Inject constructor(){
 
     companion object {
         private const val ERROR_KEY = "error"
