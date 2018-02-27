@@ -8,6 +8,7 @@ import co.uk.random.view.video.VideoViewModel
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnit
@@ -27,15 +28,14 @@ class ViewModelUnitTest internal constructor() {
     @Mock
     private lateinit var youtubeService: YoutubeApiService
 
-    private lateinit var homeViewModel: HomeViewModel
-    private lateinit var videoViewModel: VideoViewModel
+    @InjectMocks private lateinit var homeViewModel: HomeViewModel
+    @InjectMocks private lateinit var videoViewModel: VideoViewModel
 
     @Before
     fun beforeClassSetup() {
         MockitoAnnotations.initMocks(this)
-        homeViewModel = HomeViewModel(exceptionTransformers, schedulerProvider, youtubeService)
-        videoViewModel = VideoViewModel(exceptionTransformers, schedulerProvider, youtubeService)
     }
+
     @Test
     fun `test shouldCreateChannel`() {
         val channelObserver = homeViewModel.getChannel().test()
