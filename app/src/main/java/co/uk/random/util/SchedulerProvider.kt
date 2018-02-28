@@ -1,6 +1,8 @@
 package co.uk.random.util
 
 import io.reactivex.*
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 
 class SchedulerProvider (val backgroundScheduler: Scheduler, val foregroundScheduler: Scheduler) {
@@ -14,8 +16,8 @@ class SchedulerProvider (val backgroundScheduler: Scheduler, val foregroundSched
 
     fun <T> getSchedulersForSingle(): (Single<T>) -> Single<T> {
         return { single: Single<T> ->
-            single.subscribeOn(backgroundScheduler)
-                    .observeOn(foregroundScheduler)
+            single.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
         }
     }
 

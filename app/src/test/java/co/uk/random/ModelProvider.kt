@@ -1,18 +1,21 @@
-package co.uk.random.setup
+package co.uk.random
 
-import co.uk.random.BuildConfig
 import co.uk.random.api.YoutubeApiService
+import co.uk.random.error.ExceptionTransformers
+import co.uk.random.util.SchedulerProvider
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-internal object ServiceProvider {
+object ModelProvider {
 
     private val gson: Gson
     private var okHttpClient: OkHttpClient
@@ -37,4 +40,7 @@ internal object ServiceProvider {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)
             .build().create(YoutubeApiService::class.java)
+
+    fun getSchedulerProvider() = SchedulerProvider(Schedulers.io(), AndroidSchedulers.mainThread())
+    fun getExceptionTransformers() = ExceptionTransformers()
 }

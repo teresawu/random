@@ -1,35 +1,30 @@
 package co.uk.random
 
-import co.uk.random.api.YoutubeApiService
-import co.uk.random.error.ExceptionTransformers
-import co.uk.random.util.SchedulerProvider
 import co.uk.random.view.home.HomeViewModel
 import co.uk.random.view.video.VideoViewModel
 import org.junit.Before
+import org.junit.ClassRule
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.InjectMocks
-import org.mockito.Mock
+import org.junit.runner.RunWith
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoJUnitRunner
 
 
 @Suppress("IllegalIdentifier")
+@RunWith(MockitoJUnitRunner::class)
 class ViewModelUnitTest internal constructor() {
     @get: Rule
     var rule = MockitoJUnit.rule()
+    @get: ClassRule
+    val schedulers = SchedulerRule()
 
-    @Mock
-    private lateinit var exceptionTransformers: ExceptionTransformers
-
-    @Mock
-    private lateinit var schedulerProvider: SchedulerProvider
-
-    @Mock
-    private lateinit var youtubeService: YoutubeApiService
-
-    @InjectMocks private lateinit var homeViewModel: HomeViewModel
-    @InjectMocks private lateinit var videoViewModel: VideoViewModel
+    private val schedulerProvider by lazy { ModelProvider.getSchedulerProvider() }
+    private val exceptionTransformers by lazy { ModelProvider.getExceptionTransformers() }
+    private val youtubeService by lazy { ModelProvider.youtubeService }
+    private val homeViewModel by lazy { HomeViewModel(exceptionTransformers, schedulerProvider, youtubeService) }
+    private val videoViewModel by lazy { VideoViewModel(exceptionTransformers, schedulerProvider, youtubeService) }
 
     @Before
     fun beforeClassSetup() {

@@ -3,7 +3,6 @@ package co.uk.random
 import co.uk.random.model.Channel
 import co.uk.random.model.Playlist
 import co.uk.random.model.Video
-import co.uk.random.setup.ServiceProvider
 import io.reactivex.observers.TestObserver
 import org.junit.Before
 import org.junit.Test
@@ -12,7 +11,7 @@ import retrofit2.Response
 
 @Suppress("IllegalIdentifier")
 class ServiceApiUnitTest internal constructor() {
-    private val youtubeService by lazy { ServiceProvider.youtubeService }
+    private val youtubeService by lazy { ModelProvider.youtubeService }
 
     @Before
     fun beforeClassSetup() {
