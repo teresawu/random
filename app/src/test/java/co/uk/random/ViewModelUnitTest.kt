@@ -1,7 +1,6 @@
 package co.uk.random
 
 import co.uk.random.view.home.HomeViewModel
-import co.uk.random.view.video.VideoViewModel
 import org.junit.Before
 import org.junit.ClassRule
 import org.junit.Rule

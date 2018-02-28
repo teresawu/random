@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class VideoActivityModule {
+class VideoFragmentModule {
 
     @Provides
     fun provideViewModel(exceptionTransformers: ExceptionTransformers, schedulerProvider: SchedulerProvider, youtubeApiService: YoutubeApiService) = VideoViewModel(exceptionTransformers, schedulerProvider, youtubeApiService)

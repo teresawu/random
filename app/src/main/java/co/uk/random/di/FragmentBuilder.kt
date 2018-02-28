@@ -1,10 +1,23 @@
 package co.uk.random.di
 
+import co.uk.random.di.module.ChannelFragmentModule
+import co.uk.random.di.module.PlaylistFragmentModule
+import co.uk.random.di.module.VideoFragmentModule
+import co.uk.random.view.channel.ChannelFragment
+import co.uk.random.view.playlist.PLaylistFragment
+import co.uk.random.view.video.VideoFragment
 import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class FragmentBuilder {
 
-//    @ContributesAndroidInjector(modules = [(PlayerFragmentModule::class)])
-//    abstract fun bindPlayerFragment(): PlayerFragment
+    @ContributesAndroidInjector(modules = [ChannelFragmentModule::class])
+    abstract fun bindChannelFragment(): ChannelFragment
+
+    @ContributesAndroidInjector(modules = [VideoFragmentModule::class])
+    abstract fun bindVideoFragment(): VideoFragment
+
+    @ContributesAndroidInjector(modules = [PlaylistFragmentModule::class])
+    abstract fun bindPlaylistFragment(): PLaylistFragment
 }
