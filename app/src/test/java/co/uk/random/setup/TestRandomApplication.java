@@ -1,6 +1,8 @@
-package co.uk.random;
+package co.uk.random.setup;
 
 import android.app.Application;
+
+import co.uk.random.RandomApplication;
 
 /**
  * Test Application which prevents Robolectric from using {@link RandomApplication}.

@@ -1,5 +1,6 @@
-package co.uk.random
+package co.uk.random.setup
 
+import co.uk.random.BuildConfig
 import co.uk.random.api.YoutubeApiService
 import co.uk.random.error.ExceptionTransformers
 import co.uk.random.util.SchedulerProvider

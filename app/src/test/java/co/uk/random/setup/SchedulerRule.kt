@@ -1,4 +1,4 @@
-package co.uk.random
+package co.uk.random.setup
 
 import io.reactivex.Scheduler
 import io.reactivex.android.plugins.RxAndroidPlugins

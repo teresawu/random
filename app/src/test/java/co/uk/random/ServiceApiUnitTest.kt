@@ -3,6 +3,7 @@ package co.uk.random
 import co.uk.random.model.Channel
 import co.uk.random.model.Playlist
 import co.uk.random.model.Video
+import co.uk.random.setup.ModelProvider
 import io.reactivex.observers.TestObserver
 import org.junit.Before
 import org.junit.Test
