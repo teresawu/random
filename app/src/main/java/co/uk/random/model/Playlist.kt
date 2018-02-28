@@ -1,13 +1,14 @@
 package co.uk.random.model
 
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
 
 open class Playlist() : RealmObject() {
     @PrimaryKey
-    var primaryKey = System.currentTimeMillis() / 1000
+    var primaryKey = System.currentTimeMillis() / 1200
 
     @SerializedName("kind")
     var kind: String = ""
@@ -16,21 +17,16 @@ open class Playlist() : RealmObject() {
     var etag: String = ""
         private set
     @SerializedName("pageInfo")
-    var pageInfo: PageInfo = PageInfo()
+    var pageInfo: PageInfo? =null
         private set
     @SerializedName("items")
-    var items: List<Item> = listOf()
+    var items: RealmList<Item> = RealmList()
         private set
 
-    constructor(kind: String, etag: String, pageInfo: PageInfo, items: List<Item>) : this() {
+    constructor(kind: String, etag: String, pageInfo: PageInfo?, items: RealmList<Item>) : this() {
         this.kind = kind
         this.etag = etag
         this.pageInfo = pageInfo
         this.items = items
     }
 }
-
-data class ResourceId(
-        @SerializedName("kind") val kind: String = "",
-        @SerializedName("videoId") val videoId: String = ""
-)
