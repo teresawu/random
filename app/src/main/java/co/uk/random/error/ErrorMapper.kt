@@ -1,6 +1,6 @@
 package co.uk.random.error
 
-import co.uk.random.util.parseJSONToMap
+import co.uk.random.util.extension.parseJSONToMap
 import com.google.gson.JsonSyntaxException
 import java.net.HttpURLConnection
 import javax.inject.Inject

@@ -1,18 +1,27 @@
 package co.uk.random.view.channel
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import co.uk.random.R
-import io.reactivex.disposables.CompositeDisposable
+import co.uk.random.view.DisposableDaggerFragment
 import javax.inject.Inject
 
-class ChannelFragment : AppCompatActivity() {
+class ChannelFragment : DisposableDaggerFragment() {
     @Inject
     lateinit var channelViewModel: ChannelViewModel
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_channel)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?):
+            View = inflater.inflate(R.layout.fragment_channel, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    companion object {
+        fun newInstance(): ChannelFragment {
+            return ChannelFragment()
+        }
     }
 }

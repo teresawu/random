@@ -1,4 +1,4 @@
-package co.uk.random.util
+package co.uk.random.util.extension
 
 import com.google.gson.GsonBuilder
 

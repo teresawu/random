@@ -4,19 +4,22 @@ import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import co.uk.random.R
+import co.uk.random.util.extension.addFragment
+import co.uk.random.view.channel.ChannelFragment
+import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
 
-class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     @Inject
     lateinit var homeViewModel: HomeViewModel
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    private val channelFragment = ChannelFragment.newInstance()
 
     private val toggle by lazy {
         ActionBarDrawerToggle(
@@ -26,10 +29,15 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        setUI()
+    }
+
+    private fun setUI() {
         setSupportActionBar(toolbar)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navigationView.setNavigationItemSelectedListener(this)
+        addFragment(channelFragment, R.id.fragmentLayout)
     }
 
     override fun onBackPressed() {
