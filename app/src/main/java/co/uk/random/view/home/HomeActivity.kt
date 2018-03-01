@@ -12,6 +12,7 @@ import co.uk.random.view.channel.ChannelFragment
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.item_actionbar.*
 import javax.inject.Inject
 
 class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
