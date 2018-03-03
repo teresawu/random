@@ -12,8 +12,9 @@ import co.uk.random.view.channel.ChannelFragment
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.item_actionbar.*
+import kotlinx.android.synthetic.main.view_home.*
 import javax.inject.Inject
+
 
 class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -21,10 +22,11 @@ class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
     lateinit var homeViewModel: HomeViewModel
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     private val channelFragment = ChannelFragment.newInstance()
+    private val homePageAdapter by lazy { HomePageAdapter(supportFragmentManager) }
 
     private val toggle by lazy {
         ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+                this, drawerLayout, homeToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,11 +36,12 @@ class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
     }
 
     private fun setUI() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(homeToolbar)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navigationView.setNavigationItemSelectedListener(this)
-        addFragment(channelFragment, R.id.fragmentLayout)
+        addFragment(channelFragment, R.id.homeFragmentLayout)
+        homeViewPager.adapter = homePageAdapter
     }
 
     override fun onBackPressed() {

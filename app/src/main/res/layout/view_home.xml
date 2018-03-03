@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/homeToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -25,8 +25,25 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="co.uk.random.view.home.HomeActivity">
 
+        <android.support.v4.view.ViewPager
+            android:id="@+id/homeViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v4.view.PagerTabStrip
+                android:id="@+id/homePagerStrip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                app:tabIndicatorColor="@android:color/white"
+                app:tabIndicatorHeight="4dp" />
+
+        </android.support.v4.view.ViewPager>
+
         <FrameLayout
-            android:id="@+id/fragmentLayout"
+            android:id="@+id/homeFragmentLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
