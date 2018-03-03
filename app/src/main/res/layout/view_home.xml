@@ -14,7 +14,7 @@
             android:id="@+id/homeToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
@@ -28,17 +28,15 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/homeViewPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <android.support.v4.view.PagerTabStrip
+            <co.uk.random.view.home.DecorPagerStrip
                 android:id="@+id/homePagerStrip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                android:paddingBottom="4dp"
-                android:paddingTop="4dp"
-                app:tabIndicatorColor="@android:color/white"
-                app:tabIndicatorHeight="4dp" />
+                android:background="@color/colorPrimary"
+                android:padding="10dp"/>
 
         </android.support.v4.view.ViewPager>
 
