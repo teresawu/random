@@ -11,21 +11,22 @@
         android:id="@+id/imgChannel"
         android:layout_width="@dimen/img_channel"
         android:layout_height="@dimen/img_channel"
+        android:background="@color/greyDark"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toStartOf="@+id/txtChannelTitle"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_default="wrap"
-        android:background="@color/greyDark" />
+        app:layout_constraintWidth_default="wrap" />
 
     <TextView
         android:id="@+id/txtChannelTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtChannelNumber"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtChannelDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imgChannel"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,27 +34,27 @@
         tools:text="wiewgiwe weithowh iwehth" />
 
     <TextView
-        android:id="@+id/txtChannelNumber"
+        android:id="@+id/txtChannelDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/subscriber"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtChannelSubscribe"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/txtChannelPublished"
         app:layout_constraintStart_toStartOf="@id/txtChannelTitle"
         app:layout_constraintTop_toBottomOf="@id/txtChannelTitle"
         app:layout_constraintWidth_default="wrap" />
 
     <TextView
-        android:id="@+id/txtChannelSubscribe"
+        android:id="@+id/txtChannelPublished"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/subscribe"
+        android:text="@string/published_at"
         android:textColor="@color/green"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/txtChannelTitle"
-        app:layout_constraintTop_toBottomOf="@id/txtChannelNumber"
+        app:layout_constraintTop_toBottomOf="@id/txtChannelDescription"
         app:layout_constraintWidth_default="wrap" />
 </android.support.constraint.ConstraintLayout>
