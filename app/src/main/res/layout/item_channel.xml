@@ -1,29 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/vodSettingsConstraintLayout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemChannel"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="15dp">
 
     <ImageView
-        android:id="@+id/videoThumbnail"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/imgChannel"
+        android:layout_width="@dimen/img_channel"
+        android:layout_height="@dimen/img_channel"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/btnPlayer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="center"
-        android:tint="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txtChannelTitle"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_play" />
+        app:layout_constraintWidth_default="wrap"
+        tools:background="@color/greyDark" />
+
+    <TextView
+        android:id="@+id/txtChannelTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtChannelNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imgChannel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="wrap"
+        tools:text="wiewgiwe weithowh iwehth" />
+
+    <TextView
+        android:id="@+id/txtChannelNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/subscriber"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtChannelSubscribe"
+        app:layout_constraintStart_toStartOf="@id/txtChannelTitle"
+        app:layout_constraintTop_toBottomOf="@id/txtChannelTitle"
+        app:layout_constraintWidth_default="wrap" />
+
+    <TextView
+        android:id="@+id/txtChannelSubscribe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/subscribe"
+        android:textColor="@color/green"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/txtChannelTitle"
+        app:layout_constraintTop_toBottomOf="@id/txtChannelNumber"
+        app:layout_constraintWidth_default="wrap" />
 </android.support.constraint.ConstraintLayout>

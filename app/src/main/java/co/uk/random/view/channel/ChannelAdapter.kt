@@ -6,17 +6,17 @@ import android.view.ViewGroup
 import co.uk.random.R
 import co.uk.random.model.Channel
 
-class ChannelAdapter(private val channels: List<Channel>, private val channelDelegate: () -> ChannelAdapterDelegate) : RecyclerView.Adapter<ChannelViewHolder>() {
+class ChannelAdapter(private val channels: List<Channel>, private val channelDelegate: ChannelAdapterDelegate) : RecyclerView.Adapter<ChannelViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ChannelViewHolder {
         val itemView = LayoutInflater.from(parent?.context)
-                .inflate(R.layout.item_video, parent, false)
+                .inflate(R.layout.item_channel, parent, false)
         return ChannelViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ChannelViewHolder?, position: Int) {
         val channel = channels[position]
-        holder?.let { channelDelegate().onBind(it, channel) }
+        holder?.let { channelDelegate.onBind(it, channel) }
     }
 
     override fun getItemCount(): Int = channels.size

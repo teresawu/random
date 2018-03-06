@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="co.uk.random.view.channel.ChannelFragment"
-    android:background="@color/colorAccent">
+    tools:context="co.uk.random.view.channel.ChannelFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/channelRecyclerView"

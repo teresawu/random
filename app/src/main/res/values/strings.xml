@@ -7,4 +7,6 @@
 
     <string name="playlist">playlist</string>
     <string name="video">video</string>
+    <string name="subscriber">%1$s subscribers . %2$s videos</string>
+    <string name="subscribe">SUBSCRIBE</string>
 </resources>
