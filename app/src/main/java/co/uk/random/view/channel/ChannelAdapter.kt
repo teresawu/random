@@ -4,9 +4,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import co.uk.random.R
-import co.uk.random.model.Channel
+import co.uk.random.model.Item
 
-class ChannelAdapter(private val channels: List<Channel>, private val channelDelegate: ChannelAdapterDelegate) : RecyclerView.Adapter<ChannelViewHolder>() {
+class ChannelAdapter(private val channels: List<Item>, private val channelDelegate: ChannelAdapterDelegate) : RecyclerView.Adapter<ChannelViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ChannelViewHolder {
         val itemView = LayoutInflater.from(parent?.context)

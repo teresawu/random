@@ -9,7 +9,7 @@ fun Fragment.toast(message: String) = context?.let { Toast.makeText(context, mes
 
 fun Fragment.longToast(message: String) = context?.let { Toast.makeText(context, message, Toast.LENGTH_LONG).show() }
 
-fun Fragment.createLayoutManager(orientation: Int = LinearLayoutManager.HORIZONTAL
+fun Fragment.createLayoutManager(orientation: Int = LinearLayoutManager.VERTICAL
                                  , reverseLayout: Boolean = false): RecyclerView.LayoutManager =
         LinearLayoutManager(context, orientation, reverseLayout)
 

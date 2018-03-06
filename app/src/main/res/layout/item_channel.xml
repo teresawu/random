@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_default="wrap"
-        tools:background="@color/greyDark" />
+        android:background="@color/greyDark" />
 
     <TextView
         android:id="@+id/txtChannelTitle"

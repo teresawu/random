@@ -6,7 +6,8 @@ import co.uk.random.model.Video
 import co.uk.random.util.Keys.API_KEY
 import io.reactivex.Single
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface YoutubeApiService {
 
