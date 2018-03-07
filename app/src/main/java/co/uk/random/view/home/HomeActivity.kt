@@ -3,11 +3,11 @@ package co.uk.random.view.home
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
-import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
 import co.uk.random.R
+import co.uk.random.util.RealmHelper
 import co.uk.random.util.extension.addFragment
 import co.uk.random.view.channel.ChannelFragment
 import dagger.android.support.DaggerAppCompatActivity
@@ -43,6 +43,11 @@ class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         navigationView.setNavigationItemSelectedListener(this)
         addFragment(channelFragment, R.id.homeFragmentLayout)
         homeViewPager.adapter = homePageAdapter
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        RealmHelper.clearAllCache()
     }
 
     override fun onBackPressed() {

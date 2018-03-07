@@ -26,4 +26,9 @@ object RealmHelper {
                     return@flatMap Single.just(results)
                 }
     }
+
+    fun clearAllCache() {
+        Realm.getDefaultInstance()
+                .executeTransaction { realm -> realm.deleteAll() }
+    }
 }

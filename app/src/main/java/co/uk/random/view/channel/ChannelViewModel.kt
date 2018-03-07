@@ -11,6 +11,22 @@ import javax.inject.Inject
 class ChannelViewModel @Inject constructor
 (private val exceptionTransformers: ExceptionTransformers, private val schedulerProvider: SchedulerProvider, private val youtubeApiService: YoutubeApiService) {
     fun getChannel(): Single<Channel> {
+        return getChannelFromRealm()
+                .flatMap {
+                    if (it?.items.isNotEmpty()) return@flatMap Single.just(it)
+                    else return@flatMap getChannelFromApi()
+                }
+    }
+
+    private fun getChannelFromRealm(): Single<Channel> =
+            RealmHelper.findAll<Channel>().flatMap {
+                if (it.isNotEmpty()) {
+                    return@flatMap Single.just(it.first())
+                }
+                return@flatMap Single.just(emptyList<Channel>().first())
+            }
+
+    private fun getChannelFromApi(): Single<Channel> {
         return youtubeApiService.getChannel()
                 .compose(schedulerProvider.getSchedulersForSingle())
                 .compose(exceptionTransformers.wrapRetrofitExceptionSingle())

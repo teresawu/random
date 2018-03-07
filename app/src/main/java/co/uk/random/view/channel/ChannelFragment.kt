@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import co.uk.random.R
 import co.uk.random.model.Item
+import co.uk.random.util.RealmHelper
 import co.uk.random.util.extension.createLayoutManager
 import co.uk.random.view.DisposableDaggerFragment
 import io.reactivex.rxkotlin.subscribeBy
@@ -46,6 +47,7 @@ class ChannelFragment : DisposableDaggerFragment() {
                         onSuccess = {
                             channelList.clear()
                             it.items.forEach { channelList.add(it) }
+                            RealmHelper.copyOrUpdate(it)
                             channelAdapter.notifyDataSetChanged()
                             channelProgressBar.visibility = View.GONE
                         },
