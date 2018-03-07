@@ -2,6 +2,8 @@ package co.uk.random.model
 
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject
+import io.realm.RealmResults
+import io.realm.annotations.LinkingObjects
 import io.realm.annotations.PrimaryKey
 
 
@@ -14,6 +16,7 @@ open class ResourceId() : RealmObject() {
     @SerializedName("videoId")
     var videoId: String = ""
         private set
+    @LinkingObjects("resourceId") val channel: RealmResults<Snippet>? = null
 
     constructor(kind: String, videoId: String) : this() {
         this.kind = kind

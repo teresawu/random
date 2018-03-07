@@ -2,6 +2,8 @@ package co.uk.random.model
 
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject
+import io.realm.RealmResults
+import io.realm.annotations.LinkingObjects
 import io.realm.annotations.PrimaryKey
 
 open class Maxres() : RealmObject() {
@@ -17,6 +19,8 @@ open class Maxres() : RealmObject() {
     @SerializedName("height")
     var height: Int = 0
         private set
+    @LinkingObjects("maxres")
+    val channel: RealmResults<Thumbnails>? = null
 
     constructor(url: String, width: Int, height: Int) : this() {
         this.url = url

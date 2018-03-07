@@ -9,6 +9,7 @@ import android.view.MenuItem
 import co.uk.random.R
 import co.uk.random.util.RealmHelper
 import co.uk.random.util.extension.addFragment
+import co.uk.random.util.extension.replaceFragment
 import co.uk.random.view.channel.ChannelFragment
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
@@ -41,7 +42,7 @@ class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navigationView.setNavigationItemSelectedListener(this)
-        addFragment(channelFragment, R.id.homeFragmentLayout)
+        replaceFragment(channelFragment, R.id.homeFragmentLayout)
         homeViewPager.adapter = homePageAdapter
     }
 

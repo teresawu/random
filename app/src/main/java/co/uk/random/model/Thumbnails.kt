@@ -2,6 +2,8 @@ package co.uk.random.model
 
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject
+import io.realm.RealmResults
+import io.realm.annotations.LinkingObjects
 import io.realm.annotations.PrimaryKey
 
 open class Thumbnails() : RealmObject() {
@@ -24,6 +26,8 @@ open class Thumbnails() : RealmObject() {
     var maxres: Maxres? = null
         private set
 
+    @LinkingObjects("thumbnails")
+    val snippet: RealmResults<Snippet>? = null
 
     constructor(default: Default, medium: Medium?, high: High?, standard: Standard?, maxres: Maxres?) : this() {
         this.default = default

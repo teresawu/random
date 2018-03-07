@@ -2,6 +2,8 @@ package co.uk.random.model
 
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject
+import io.realm.RealmResults
+import io.realm.annotations.LinkingObjects
 import io.realm.annotations.PrimaryKey
 
 open class Snippet() : RealmObject() {
@@ -39,6 +41,8 @@ open class Snippet() : RealmObject() {
     @SerializedName("localized")
     var localized: Localized?=null
         private set
+
+    @LinkingObjects("snippet") val channel: RealmResults<Item>? = null
 
     constructor(publishedAt: String, channelId: String, title: String, description: String, thumbnails: Thumbnails?, channelTitle: String, playlistId: String, position: Int, resourceId: ResourceId?, localized: Localized?) : this() {
         this.publishedAt = publishedAt

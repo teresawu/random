@@ -46,7 +46,11 @@ class ChannelFragment : DisposableDaggerFragment() {
                 .subscribeBy(
                         onSuccess = {
                             channelList.clear()
-                            it.items.forEach { channelList.add(it) }
+                            val channel = it
+                            channel.items.forEach {
+                                val item = it
+                                channelList.add(item)
+                            }
                             RealmHelper.copyOrUpdate(it)
                             channelAdapter.notifyDataSetChanged()
                             channelProgressBar.visibility = View.GONE
