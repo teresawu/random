@@ -5,10 +5,11 @@ import io.realm.RealmObject
 import io.realm.RealmResults
 import io.realm.annotations.LinkingObjects
 import io.realm.annotations.PrimaryKey
+import java.util.*
 
 open class Player() : RealmObject() {
     @PrimaryKey
-    var primaryKey = System.currentTimeMillis() / 1500
+    var primaryKey = UUID.randomUUID().toString()
     @SerializedName("embedHtml")
     var embedHtml: String = ""
         private set

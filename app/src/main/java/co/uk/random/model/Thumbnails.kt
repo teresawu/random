@@ -5,10 +5,11 @@ import io.realm.RealmObject
 import io.realm.RealmResults
 import io.realm.annotations.LinkingObjects
 import io.realm.annotations.PrimaryKey
+import java.util.*
 
 open class Thumbnails() : RealmObject() {
     @PrimaryKey
-    var primaryKey = System.currentTimeMillis() / 2400
+    var primaryKey = UUID.randomUUID().toString()
 
     @SerializedName("default")
     var default: Default = Default()

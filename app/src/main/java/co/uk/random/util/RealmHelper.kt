@@ -5,6 +5,7 @@ import io.realm.Realm
 import io.realm.RealmObject
 import io.realm.RealmQuery
 
+
 object RealmHelper {
 
     fun copyOrUpdate(realmObject: RealmObject) {
@@ -13,6 +14,16 @@ object RealmHelper {
         realm.copyToRealmOrUpdate(realmObject)
         realm.commitTransaction()
         realm.close()
+    }
+
+    inline fun <reified T : RealmObject> copyOrUpdate(realmObject: RealmObject, clazz: Class<T>) {
+        val realm = Realm.getDefaultInstance()
+        realm.executeTransaction {
+            val maxId = it.where(realmObject::class.java)?.max("id")
+            val nextId = if (maxId == null) 1 else maxId.toInt() + 1
+            val clazzOne = it.createObject(clazz, nextId)
+            clazzOne.realm.copyToRealmOrUpdate(clazzOne)
+        }
     }
 
     inline fun <reified T : RealmObject> findAll(): Single<List<T>> = findAllBy()

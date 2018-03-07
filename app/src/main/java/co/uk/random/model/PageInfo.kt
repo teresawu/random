@@ -5,10 +5,11 @@ import io.realm.RealmObject
 import io.realm.RealmResults
 import io.realm.annotations.LinkingObjects
 import io.realm.annotations.PrimaryKey
+import java.util.*
 
 open class PageInfo() : RealmObject() {
     @PrimaryKey
-    var primaryKey = System.currentTimeMillis() / 2200
+    var primaryKey = UUID.randomUUID().toString()
 
     @SerializedName("totalResults")
     var totalResults: Int = 0

@@ -5,10 +5,11 @@ import io.realm.RealmObject
 import io.realm.RealmResults
 import io.realm.annotations.LinkingObjects
 import io.realm.annotations.PrimaryKey
+import java.util.*
 
 open class Standard() : RealmObject() {
     @PrimaryKey
-    var primaryKey = System.currentTimeMillis() / 2300
+    var primaryKey = UUID.randomUUID().toString()
 
     @SerializedName("url")
     var url: String = ""

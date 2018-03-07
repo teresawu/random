@@ -4,11 +4,12 @@ import com.google.gson.annotations.SerializedName
 import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
+import java.util.*
 
 
 open class Playlist() : RealmObject() {
     @PrimaryKey
-    var primaryKey = System.currentTimeMillis() / 1200
+    var primaryKey = UUID.randomUUID().toString()
 
     @SerializedName("kind")
     var kind: String = ""

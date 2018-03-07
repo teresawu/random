@@ -5,11 +5,12 @@ import io.realm.RealmObject
 import io.realm.RealmResults
 import io.realm.annotations.LinkingObjects
 import io.realm.annotations.PrimaryKey
+import java.util.*
 
 
 open class ResourceId() : RealmObject() {
     @PrimaryKey
-    var primaryKey = System.currentTimeMillis() / 1300
+    var primaryKey = UUID.randomUUID().toString()
     @SerializedName("kind")
     var kind: String = ""
         private set
