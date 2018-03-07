@@ -18,7 +18,7 @@ open class Localized() : RealmObject() {
     var description: String = ""
         private set
     @LinkingObjects("localized")
-    val channel: RealmResults<Snippet>? = null
+    val snippetLocalized: RealmResults<Snippet>? = null
 
     constructor(title: String, description: String) : this() {
         this.title = title

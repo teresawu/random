@@ -16,7 +16,7 @@ object RealmHelper {
         realm.close()
     }
 
-    inline fun <reified T : RealmObject> copyOrUpdate(realmObject: RealmObject, clazz: Class<T>) {
+    inline fun <reified T : RealmObject> copyOrUpdateAutoIncrement(realmObject: RealmObject, clazz: Class<T>) {
         val realm = Realm.getDefaultInstance()
         realm.executeTransaction {
             val maxId = it.where(realmObject::class.java)?.max("id")

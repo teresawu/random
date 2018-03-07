@@ -11,16 +11,17 @@ import com.squareup.picasso.Picasso
 class ChannelAdapterDelegate() {
     fun onBind(holder: ChannelViewHolder, channel: Item) {
         with(holder) {
-            channelTitle.text = channel.snippet?.title
-            channelDescription.text = channel.snippet?.description
-            val date = channel.snippet?.publishedAt
+            val snippet = channel.snippet
+            channelTitle.text = snippet?.title
+            channelDescription.text = snippet?.description
+            val date = snippet?.publishedAt
             channelPublished.text = date?.substring(0, 10)
             try {
-                Picasso.with(channelTitle.context).load(channel.snippet?.thumbnails?.default?.url).into(channelImage)
-            }catch (exception:Exception){
+                Picasso.with(channelTitle.context).load(snippet?.thumbnails?.high?.url).into(channelImage)
+            } catch (exception: Exception) {
                 Picasso.with(channelTitle.context)
                         .load(R.drawable.ic_menu_camera)
-                        .into(channelImage);
+                        .into(channelImage)
             }
         }
     }

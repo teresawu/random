@@ -19,11 +19,11 @@ open class PageInfo() : RealmObject() {
         private set
 
     @LinkingObjects("pageInfo")
-    val channel: RealmResults<Channel>? = null
+    val channelPageInfo: RealmResults<Channel>? = null
     @LinkingObjects("pageInfo")
-    val playlist: RealmResults<Playlist>? = null
+    val playlistPageInfo: RealmResults<Playlist>? = null
     @LinkingObjects("pageInfo")
-    val video: RealmResults<Video>? = null
+    val videoPageInfo: RealmResults<Video>? = null
 
     constructor(totalResults: Int, resultsPerPage: Int) : this() {
         this.totalResults = totalResults

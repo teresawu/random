@@ -26,11 +26,11 @@ open class Item() : RealmObject() {
     var player: Player? = null
 
     @LinkingObjects("items")
-    val channel: RealmResults<Channel>? = null
+    val channelItem: RealmResults<Channel>? = null
     @LinkingObjects("items")
-    val playlist: RealmResults<Playlist>? = null
+    val playlistItem: RealmResults<Playlist>? = null
     @LinkingObjects("items")
-    val video: RealmResults<Video>? = null
+    val videoItem: RealmResults<Video>? = null
 
     constructor(kind: String, etag: String, id: String, snippet: Snippet?, player: Player?) : this() {
         this.kind = kind

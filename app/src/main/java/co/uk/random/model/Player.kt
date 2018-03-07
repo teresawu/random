@@ -15,7 +15,7 @@ open class Player() : RealmObject() {
         private set
 
     @LinkingObjects("player")
-    val channel: RealmResults<Item>? = null
+    val itemPlayer: RealmResults<Item>? = null
 
     constructor(embedHtml: String) : this() {
         this.embedHtml = embedHtml

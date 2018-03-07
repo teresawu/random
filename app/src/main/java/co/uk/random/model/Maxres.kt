@@ -20,7 +20,7 @@ open class Maxres() : RealmObject() {
     var height: Int = 0
         private set
     @LinkingObjects("maxres")
-    val channel: RealmResults<Thumbnails>? = null
+    val thumbnailsMaxres: RealmResults<Thumbnails>? = null
 
     constructor(url: String, width: Int, height: Int) : this() {
         this.url = url

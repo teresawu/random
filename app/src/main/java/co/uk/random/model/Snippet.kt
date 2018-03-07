@@ -43,7 +43,7 @@ open class Snippet() : RealmObject() {
     var localized: Localized?=null
         private set
 
-    @LinkingObjects("snippet") val channel: RealmResults<Item>? = null
+    @LinkingObjects("snippet") val itemSnippet: RealmResults<Item>? = null
 
     constructor(publishedAt: String, channelId: String, title: String, description: String, thumbnails: Thumbnails?, channelTitle: String, playlistId: String, position: Int, resourceId: ResourceId?, localized: Localized?) : this() {
         this.publishedAt = publishedAt

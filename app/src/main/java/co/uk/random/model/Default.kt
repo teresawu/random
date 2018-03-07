@@ -21,7 +21,8 @@ open class Default() : RealmObject() {
     var height: Int = 0
         private set
 
-//    @LinkingObjects("default") val channel: RealmResults<Thumbnails>? = null
+//    @LinkingObjects("default")
+//    val thumbnailsDefault: RealmResults<Thumbnails>? = null
 
     constructor(url: String, width: Int, height: Int) : this() {
         this.url = url
@@ -29,3 +30,4 @@ open class Default() : RealmObject() {
         this.height = height
     }
 }
+

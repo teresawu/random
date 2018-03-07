@@ -12,7 +12,7 @@ open class Thumbnails() : RealmObject() {
     var primaryKey = UUID.randomUUID().toString()
 
     @SerializedName("default")
-    var default: Default = Default()
+    var default: Default? = null
         private set
     @SerializedName("medium")
     var medium: Medium? = null
@@ -28,9 +28,9 @@ open class Thumbnails() : RealmObject() {
         private set
 
     @LinkingObjects("thumbnails")
-    val snippet: RealmResults<Snippet>? = null
+    val snippetThumbnails: RealmResults<Snippet>? = null
 
-    constructor(default: Default, medium: Medium?, high: High?, standard: Standard?, maxres: Maxres?) : this() {
+    constructor(default: Default?, medium: Medium?, high: High?, standard: Standard?, maxres: Maxres?) : this() {
         this.default = default
         this.medium = medium
         this.high = high

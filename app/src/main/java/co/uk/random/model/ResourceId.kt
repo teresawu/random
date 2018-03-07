@@ -17,7 +17,7 @@ open class ResourceId() : RealmObject() {
     @SerializedName("videoId")
     var videoId: String = ""
         private set
-    @LinkingObjects("resourceId") val channel: RealmResults<Snippet>? = null
+    @LinkingObjects("resourceId") val snippetResourceId: RealmResults<Snippet>? = null
 
     constructor(kind: String, videoId: String) : this() {
         this.kind = kind

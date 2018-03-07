@@ -20,7 +20,7 @@ open class Standard() : RealmObject() {
     @SerializedName("height")
     var height: Int = 0
         private set
-    @LinkingObjects("standard") val channel: RealmResults<Thumbnails>? = null
+    @LinkingObjects("standard") val thumbnailsStandard: RealmResults<Thumbnails>? = null
     constructor(url: String, width: Int, height: Int) : this() {
         this.url = url
         this.width = width

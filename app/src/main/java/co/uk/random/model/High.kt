@@ -20,7 +20,9 @@ open class High() : RealmObject() {
     @SerializedName("height")
     var height: Int = 0
         private set
-    @LinkingObjects("high") val channel: RealmResults<Thumbnails>? = null
+    @LinkingObjects("high")
+    val thumbnailsHigh: RealmResults<Thumbnails>? = null
+
     constructor(url: String, width: Int, height: Int) : this() {
         this.url = url
         this.width = width
