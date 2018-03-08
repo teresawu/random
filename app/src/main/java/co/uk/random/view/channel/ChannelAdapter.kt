@@ -20,4 +20,6 @@ class ChannelAdapter(private val channels: List<Item>, private val channelDelega
     }
 
     override fun getItemCount(): Int = channels.size
+
+    fun getClickSubject() = channelDelegate.onClickSubject
 }

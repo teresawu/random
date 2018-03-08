@@ -8,8 +8,12 @@ import co.uk.random.R
 import co.uk.random.model.Item
 import co.uk.random.util.Util
 import com.squareup.picasso.Picasso
+import io.reactivex.subjects.PublishSubject
+
 
 class ChannelAdapterDelegate {
+    val onClickSubject = PublishSubject.create<String>()
+
     fun onBind(holder: ChannelViewHolder, channel: Item) {
         with(holder) {
             val snippet = channel.snippet
@@ -25,6 +29,7 @@ class ChannelAdapterDelegate {
                         .load(R.drawable.ic_menu_camera)
                         .into(channelImage)
             }
+            viewItem.setOnClickListener { onClickSubject.onNext(snippet!!.channelId) }
         }
     }
 }
@@ -34,4 +39,5 @@ class ChannelViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val channelPublished = view.findViewById<TextView>(R.id.txtChannelPublished)
     val channelDescription = view.findViewById<TextView>(R.id.txtChannelDescription)
     val channelImage = view.findViewById<ImageView>(R.id.imgChannel)
+    val viewItem = view
 }

@@ -24,7 +24,15 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {
     supportFragmentManager.inTransaction { replace(frameId, fragment) }
 }
 
-fun FragmentActivity.replaceFragment(fragment: Fragment, view: View) {
+fun FragmentActivity.removeFragment(fragment: Fragment) {
+    supportFragmentManager.inTransaction { remove(fragment) }
+}
+
+fun FragmentActivity.replaceFragment(fragment: Fragment, frameId: Int) {
+    supportFragmentManager.inTransaction { replace(frameId, fragment) }
+}
+
+fun AppCompatActivity.replaceFragment(fragment: Fragment, view: View) {
     supportFragmentManager.inTransaction { replace(view.id, fragment) }
 }
 
