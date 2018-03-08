@@ -11,31 +11,32 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imgChannel"
-            android:layout_width="@dimen/img_channel"
+            android:layout_width="0dp"
             android:layout_height="@dimen/img_channel"
-            android:background="@color/greyDark"
+            android:background="@color/greyLight"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/txtChannelTitle"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_default="wrap" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtChannelTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/txtChannelDescription"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imgChannel"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgChannel"
             app:layout_constraintWidth_default="wrap"
             tools:text="wiewgiwe weithowh iwehth" />
 
@@ -43,26 +44,38 @@
             android:id="@+id/txtChannelDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/greyText"
             android:textSize="14sp"
             android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@+id/txtChannelPublished"
-            app:layout_constraintStart_toStartOf="@id/txtChannelTitle"
+            app:layout_constraintBottom_toTopOf="@+id/view"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtChannelTitle"
             app:layout_constraintWidth_default="wrap"
             tools:text="wiewgiwe weithowh iwehth itgiugukglgoguo" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/txtChannelPublished"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtChannelDescription" />
 
         <TextView
             android:id="@+id/txtChannelPublished"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/published_at"
             android:textColor="@color/green"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/txtChannelTitle"
-            app:layout_constraintTop_toBottomOf="@id/txtChannelDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view"
             app:layout_constraintWidth_default="wrap" />
 
     </android.support.constraint.ConstraintLayout>

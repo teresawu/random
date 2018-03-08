@@ -7,5 +7,5 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="padding_normal">15dp</dimen>
-    <dimen name="img_channel">100dp</dimen>
+    <dimen name="img_channel">150dp</dimen>
 </resources>

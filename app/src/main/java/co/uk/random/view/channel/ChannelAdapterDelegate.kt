@@ -6,14 +6,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import co.uk.random.R
 import co.uk.random.model.Item
+import co.uk.random.util.Util
 import com.squareup.picasso.Picasso
 
-class ChannelAdapterDelegate() {
+class ChannelAdapterDelegate {
     fun onBind(holder: ChannelViewHolder, channel: Item) {
         with(holder) {
             val snippet = channel.snippet
+            val description = Util.shortDescription(snippet?.description)
             channelTitle.text = snippet?.title
-            channelDescription.text = snippet?.description
+            channelDescription.text = description
             val date = snippet?.publishedAt
             channelPublished.text = date?.substring(0, 10)
             try {
@@ -27,7 +29,7 @@ class ChannelAdapterDelegate() {
     }
 }
 
-class ChannelViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+class ChannelViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val channelTitle = view.findViewById<TextView>(R.id.txtChannelTitle)
     val channelPublished = view.findViewById<TextView>(R.id.txtChannelPublished)
     val channelDescription = view.findViewById<TextView>(R.id.txtChannelDescription)
