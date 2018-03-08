@@ -35,14 +35,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
                 android:background="@color/colorPrimaryDark"
-                android:padding="10dp"/>
+                android:padding="10dp" />
 
         </android.support.v4.view.ViewPager>
 
         <FrameLayout
-            android:id="@+id/homeFragmentLayout"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="4dp"
             android:background="@android:color/white"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -8,4 +8,6 @@
     <string name="playlist">playlist</string>
     <string name="video">video</string>
     <string name="published_at">Published At: </string>
+
+    <integer name="anim_duration_medium">300</integer>
 </resources>
