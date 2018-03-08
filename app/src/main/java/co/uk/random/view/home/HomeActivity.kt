@@ -8,7 +8,6 @@ import android.view.Menu
 import android.view.MenuItem
 import co.uk.random.R
 import co.uk.random.util.RealmHelper
-import co.uk.random.util.extension.addFragment
 import co.uk.random.util.extension.replaceFragment
 import co.uk.random.view.channel.ChannelFragment
 import dagger.android.support.DaggerAppCompatActivity

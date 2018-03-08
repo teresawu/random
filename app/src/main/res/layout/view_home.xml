@@ -18,9 +18,10 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="co.uk.random.view.home.HomeActivity">
 
@@ -40,6 +41,7 @@
         </android.support.v4.view.ViewPager>
 
         <FrameLayout
+            android:id="@+id/homeFragmentLayout"
             android:layout_width="0dp"
             android:layout_height="4dp"
             android:background="@android:color/white"
@@ -48,6 +50,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
