@@ -63,22 +63,10 @@ class ChannelFragment : DisposableDaggerFragment() {
                             RealmHelper.copyOrUpdate(it)
                             channelAdapter.notifyDataSetChanged()
                             channelProgressBar.visibility = View.GONE
-                            onLoadingPlaylistData(it.items.first()?.snippet?.playlistId)
+                            sharedPreferences[PREF_PLAYLIST_ID] = it.items.first()?.id
                         },
                         onError = {
                             channelProgressBar.setBackgroundColor(ContextCompat.getColor(channelProgressBar.context, R.color.green))
-                        }
-                )
-        )
-    }
-
-    private fun onLoadingPlaylistData(playlistID: String?) {
-        if (playlistID == null || playlistID.isEmpty()) return
-        compositeDisposable.add(playlistViewModel.getPlaylist(playlistID)
-                .subscribeBy(
-                        onSuccess = {
-                            sharedPreferences[PREF_PLAYLIST_ID] = playlistID
-                            RealmHelper.copyOrUpdate(it)
                         }
                 )
         )

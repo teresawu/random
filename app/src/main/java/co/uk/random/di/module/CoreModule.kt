@@ -1,7 +1,6 @@
 package co.uk.random.di.module
 
 import android.app.Application
-import android.content.Context
 import co.uk.random.BuildConfig
 import co.uk.random.api.YoutubeApiService
 import co.uk.random.util.SchedulerProvider
@@ -26,12 +25,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class CoreModule(private val app: Application) {
-
-    @Provides
-    @Singleton
-    fun provideContext(): Context = app
-
+class CoreModule() {
     @Provides
     @Singleton
     fun provideYoutubeApiService(okHttpClient: OkHttpClient, gson: Gson): YoutubeApiService {
