@@ -2,14 +2,18 @@ package co.uk.random.view.channel
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import co.uk.random.R
 import co.uk.random.model.Item
+import co.uk.random.model.Playlist
 import co.uk.random.util.Keys.PREF_PLAYLIST_ID
 import co.uk.random.util.PreferenceHandler
+import co.uk.random.util.RealmHelper
 import co.uk.random.util.extension.createLayoutManager
+import co.uk.random.util.get
 import co.uk.random.util.set
 import co.uk.random.view.DisposableDaggerFragment
 import co.uk.random.view.home.HomeActivity
@@ -72,7 +76,13 @@ class ChannelFragment : DisposableDaggerFragment() {
 
     private fun gotoPlaylist() {
         compositeDisposable.add(channelAdapter.getClickSubject().subscribeBy(onNext = {
-            sharedPreferences[PREF_PLAYLIST_ID] = it
+
+            val previousPlaylistID = sharedPreferences[PREF_PLAYLIST_ID, ""]
+            Log.i("previousPlaylistID", previousPlaylistID + " current = " + it)
+            if (!previousPlaylistID.equals(it)) {
+                RealmHelper.delete(Playlist::class.java)
+                sharedPreferences[PREF_PLAYLIST_ID] = it
+            }
             (activity as HomeActivity).navigateToFragment(1)
         }))
     }

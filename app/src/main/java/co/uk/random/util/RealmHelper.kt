@@ -2,6 +2,7 @@ package co.uk.random.util
 
 import io.reactivex.Single
 import io.realm.Realm
+import io.realm.RealmModel
 import io.realm.RealmObject
 import io.realm.RealmQuery
 
@@ -36,6 +37,14 @@ object RealmHelper {
                     it.forEach { results.add(it) }
                     return@flatMap Single.just(results)
                 }
+    }
+
+    fun delete(clazz: Class<out RealmModel>) {
+        val realm = Realm.getDefaultInstance()
+        realm.beginTransaction()
+        realm.where(clazz).findAll().deleteAllFromRealm()
+        realm.commitTransaction()
+        realm.close()
     }
 
     fun clearAllCache() {
