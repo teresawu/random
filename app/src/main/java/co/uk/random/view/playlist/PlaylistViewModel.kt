@@ -11,6 +11,15 @@ import javax.inject.Inject
 class PlaylistViewModel @Inject constructor
 (private val exceptionTransformers: ExceptionTransformers, private val schedulerProvider: SchedulerProvider, private val youtubeApiService: YoutubeApiService) {
     fun getPlaylist(playlistId: String): Single<Playlist> {
+        return getPlaylistFromRealm()
+                .flatMap {
+                    if (it.isNotEmpty()) return@flatMap Single.just(it.first())
+                    else return@flatMap getPlaylistFromApi(playlistId)
+                }
+    }
+
+
+    private fun getPlaylistFromApi(playlistId: String): Single<Playlist> {
         return youtubeApiService.getPlaylist(playlistId)
                 .compose(schedulerProvider.getSchedulersForSingle())
                 .compose(exceptionTransformers.wrapRetrofitExceptionSingle())
@@ -19,4 +28,9 @@ class PlaylistViewModel @Inject constructor
                     return@flatMap Single.just(it)
                 }
     }
+
+    private fun getPlaylistFromRealm(): Single<List<Playlist>> =
+            RealmHelper.findAll<Playlist>().flatMap {
+                return@flatMap Single.just(it)
+            }
 }

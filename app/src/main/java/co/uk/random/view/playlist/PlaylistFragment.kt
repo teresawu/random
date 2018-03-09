@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import co.uk.random.R
 import co.uk.random.model.Item
-import co.uk.random.util.Keys.PLAYLIST_ID
+import co.uk.random.util.Keys.PREF_PLAYLIST_ID
+import co.uk.random.util.PreferenceHandler
 import co.uk.random.util.RealmHelper
 import co.uk.random.util.extension.createLayoutManager
+import co.uk.random.util.get
 import co.uk.random.view.DisposableDaggerFragment
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_playlist.*
@@ -20,6 +22,7 @@ import javax.inject.Inject
 class PLaylistFragment : DisposableDaggerFragment() {
     @Inject
     lateinit var playlistViewModel: PlaylistViewModel
+    private val sharedPreferences by lazy { PreferenceHandler.getSharePref(context!!) }
     private var playlistList = ArrayList<Item>()
     private val playlistAdapter: PlaylistAdapter by lazy { PlaylistAdapter(playlistList, playlistDelegate = PlaylistAdapterDelegate()) }
 
@@ -38,19 +41,22 @@ class PLaylistFragment : DisposableDaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val playlistID = arguments?.getString(PLAYLIST_ID)
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        if (!isVisibleToUser) return
+        val playlistID = sharedPreferences[PREF_PLAYLIST_ID, ""]
         onLoadingData(playlistID)
     }
 
-    fun onLoadingData(playlistID: String?) {
-        compositeDisposable.add(playlistViewModel.getPlaylist(if (playlistID == null) "" else playlistID)
+    private fun onLoadingData(playlistID: String?) {
+        if (playlistID == null || playlistID.isEmpty()) return
+        compositeDisposable.add(playlistViewModel.getPlaylist(playlistID)
                 .subscribeBy(
                         onSuccess = {
                             playlistList.clear()
-                            val playlist = it
-                            playlist.items.forEach {
-                                val item = it
-                                playlistList.add(item)
+                            it.items.forEach {
+                                playlistList.add(it)
                             }
                             RealmHelper.copyOrUpdate(it)
                             playlistAdapter.notifyDataSetChanged()
@@ -62,5 +68,4 @@ class PLaylistFragment : DisposableDaggerFragment() {
                 )
         )
     }
-
 }

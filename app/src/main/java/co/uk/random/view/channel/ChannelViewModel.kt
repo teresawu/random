@@ -13,10 +13,7 @@ class ChannelViewModel @Inject constructor
     fun getChannel(): Single<Channel> {
         return getChannelFromRealm()
                 .flatMap {
-                    if (it.isNotEmpty()) {
-                        val channel = it.first()
-                        return@flatMap Single.just(it.first())
-                    }
+                    if (it.isNotEmpty()) return@flatMap Single.just(it.first())
                     else return@flatMap getChannelFromApi()
                 }
     }

@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import co.uk.random.R
 import co.uk.random.model.Item
-import co.uk.random.util.Keys.PLAYLIST_ID
+import co.uk.random.util.Keys.PREF_PLAYLIST_ID
+import co.uk.random.util.PreferenceHandler
 import co.uk.random.util.RealmHelper
 import co.uk.random.util.extension.createLayoutManager
 import co.uk.random.util.extension.replaceFragment
+import co.uk.random.util.set
 import co.uk.random.view.DisposableDaggerFragment
 import co.uk.random.view.playlist.PLaylistFragment
+import co.uk.random.view.playlist.PlaylistViewModel
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_channel.*
 import kotlinx.android.synthetic.main.fragment_channel.view.*
@@ -22,9 +25,11 @@ import javax.inject.Inject
 class ChannelFragment : DisposableDaggerFragment() {
     @Inject
     lateinit var channelViewModel: ChannelViewModel
+    @Inject
+    lateinit var playlistViewModel: PlaylistViewModel
+    private val sharedPreferences by lazy { PreferenceHandler.getSharePref(context!!) }
     private var channelList = ArrayList<Item>()
     private val channelAdapter: ChannelAdapter by lazy { ChannelAdapter(channelList, ChannelAdapterDelegate()) }
-    private val bundle: Bundle by lazy { Bundle() }
     private val playlistFragment: PLaylistFragment by lazy { PLaylistFragment.newInstance() }
 
     companion object {
@@ -47,7 +52,7 @@ class ChannelFragment : DisposableDaggerFragment() {
     }
 
 
-    fun onLoadingData() {
+    private fun onLoadingData() {
         compositeDisposable.add(channelViewModel.getChannel()
                 .subscribeBy(
                         onSuccess = {
@@ -55,11 +60,10 @@ class ChannelFragment : DisposableDaggerFragment() {
                             it.items.forEach {
                                 channelList.add(it)
                             }
-                            bundle.putString(PLAYLIST_ID, it.items.first()?.snippet?.playlistId)
-                            playlistFragment.setArguments(bundle)
                             RealmHelper.copyOrUpdate(it)
                             channelAdapter.notifyDataSetChanged()
                             channelProgressBar.visibility = View.GONE
+                            onLoadingPlaylistData(it.items.first()?.snippet?.playlistId)
                         },
                         onError = {
                             channelProgressBar.setBackgroundColor(ContextCompat.getColor(channelProgressBar.context, R.color.green))
@@ -68,10 +72,21 @@ class ChannelFragment : DisposableDaggerFragment() {
         )
     }
 
-    fun gotoPlaylist() {
+    private fun onLoadingPlaylistData(playlistID: String?) {
+        if (playlistID == null || playlistID.isEmpty()) return
+        compositeDisposable.add(playlistViewModel.getPlaylist(playlistID)
+                .subscribeBy(
+                        onSuccess = {
+                            sharedPreferences[PREF_PLAYLIST_ID] = playlistID
+                            RealmHelper.copyOrUpdate(it)
+                        }
+                )
+        )
+    }
+
+    private fun gotoPlaylist() {
         compositeDisposable.add(channelAdapter.getClickSubject().subscribeBy(onNext = {
-            bundle.putString(PLAYLIST_ID, it)
-            playlistFragment.setArguments(bundle)
+            sharedPreferences[PREF_PLAYLIST_ID] = it
             activity?.replaceFragment(playlistFragment, R.id.homeFragmentLayout)
         }))
     }

@@ -11,18 +11,11 @@ import co.uk.random.util.RealmHelper
 import co.uk.random.util.extension.replaceFragment
 import co.uk.random.view.channel.ChannelFragment
 import dagger.android.support.DaggerAppCompatActivity
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.view_home.*
-import javax.inject.Inject
 
 
 class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
-    @Inject
-    lateinit var homeViewModel: HomeViewModel
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
-    private val channelFragment = ChannelFragment.newInstance()
     private val homePageAdapter by lazy { HomePageAdapter(supportFragmentManager) }
 
     private val toggle by lazy {
@@ -41,7 +34,7 @@ class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navigationView.setNavigationItemSelectedListener(this)
-        replaceFragment(channelFragment, R.id.homeFragmentLayout)
+        replaceFragment(ChannelFragment.newInstance(), R.id.homeFragmentLayout)
         homeViewPager.adapter = homePageAdapter
     }
 

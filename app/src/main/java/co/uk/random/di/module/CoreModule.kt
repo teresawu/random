@@ -1,9 +1,9 @@
 package co.uk.random.di.module
 
 import android.app.Application
+import android.content.Context
 import co.uk.random.BuildConfig
 import co.uk.random.api.YoutubeApiService
-import co.uk.random.error.ExceptionTransformers
 import co.uk.random.util.SchedulerProvider
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -26,7 +26,11 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class CoreModule {
+class CoreModule(private val app: Application) {
+
+    @Provides
+    @Singleton
+    fun provideContext(): Context = app
 
     @Provides
     @Singleton
