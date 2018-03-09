@@ -38,6 +38,10 @@ class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         homeViewPager.adapter = homePageAdapter
     }
 
+    fun navigateToFragment(position: Int) {
+        homeViewPager.setCurrentItem(position, true)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         RealmHelper.clearAllCache()

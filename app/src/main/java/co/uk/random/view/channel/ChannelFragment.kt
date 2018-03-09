@@ -9,11 +9,10 @@ import co.uk.random.R
 import co.uk.random.model.Item
 import co.uk.random.util.Keys.PREF_PLAYLIST_ID
 import co.uk.random.util.PreferenceHandler
-import co.uk.random.util.RealmHelper
 import co.uk.random.util.extension.createLayoutManager
-import co.uk.random.util.extension.replaceFragment
 import co.uk.random.util.set
 import co.uk.random.view.DisposableDaggerFragment
+import co.uk.random.view.home.HomeActivity
 import co.uk.random.view.playlist.PLaylistFragment
 import co.uk.random.view.playlist.PlaylistViewModel
 import io.reactivex.rxkotlin.subscribeBy
@@ -74,7 +73,7 @@ class ChannelFragment : DisposableDaggerFragment() {
     private fun gotoPlaylist() {
         compositeDisposable.add(channelAdapter.getClickSubject().subscribeBy(onNext = {
             sharedPreferences[PREF_PLAYLIST_ID] = it
-            activity?.replaceFragment(playlistFragment, R.id.homeFragmentLayout)
+            (activity as HomeActivity).navigateToFragment(1)
         }))
     }
 }

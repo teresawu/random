@@ -24,6 +24,7 @@ class PLaylistFragment : DisposableDaggerFragment() {
     private val sharedPreferences by lazy { PreferenceHandler.getSharePref(context!!) }
     private var playlistList = ArrayList<Item>()
     private val playlistAdapter: PlaylistAdapter by lazy { PlaylistAdapter(playlistList, playlistDelegate = PlaylistAdapterDelegate()) }
+    private val playlistID by lazy {sharedPreferences[PREF_PLAYLIST_ID, ""]}
 
     companion object {
         fun newInstance(): PLaylistFragment {
@@ -44,7 +45,6 @@ class PLaylistFragment : DisposableDaggerFragment() {
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         if (!isVisibleToUser) return
-        val playlistID = sharedPreferences[PREF_PLAYLIST_ID, ""]
         onLoadingData(playlistID)
     }
 

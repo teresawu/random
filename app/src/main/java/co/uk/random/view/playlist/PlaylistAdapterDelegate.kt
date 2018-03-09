@@ -18,9 +18,9 @@ class PlaylistAdapterDelegate {
         with(holder) {
             val snippet = playlist.snippet
             val description = Util.shortDescription(snippet?.description)
+            val date = snippet?.publishedAt
             playlistTitle.text = snippet?.title
             playlistDescription.text = description
-            val date = snippet?.publishedAt
             playlistPublished.text = date?.substring(0, 10)
             try {
                 Picasso.with(playlistTitle.context).load(snippet?.thumbnails?.high?.url).into(playlistImage)
