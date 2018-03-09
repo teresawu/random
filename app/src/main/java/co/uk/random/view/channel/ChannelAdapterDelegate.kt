@@ -29,7 +29,7 @@ class ChannelAdapterDelegate {
                         .load(R.drawable.ic_menu_camera)
                         .into(channelImage)
             }
-            viewItem.setOnClickListener { onClickSubject.onNext(snippet!!.channelId) }
+            viewItem.setOnClickListener { onClickSubject.onNext(channel.id) }
         }
     }
 }

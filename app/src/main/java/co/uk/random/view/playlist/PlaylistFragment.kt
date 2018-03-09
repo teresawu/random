@@ -9,7 +9,6 @@ import co.uk.random.R
 import co.uk.random.model.Item
 import co.uk.random.util.Keys.PREF_PLAYLIST_ID
 import co.uk.random.util.PreferenceHandler
-import co.uk.random.util.RealmHelper
 import co.uk.random.util.extension.createLayoutManager
 import co.uk.random.util.get
 import co.uk.random.view.DisposableDaggerFragment
@@ -58,7 +57,6 @@ class PLaylistFragment : DisposableDaggerFragment() {
                             it.items.forEach {
                                 playlistList.add(it)
                             }
-                            RealmHelper.copyOrUpdate(it)
                             playlistAdapter.notifyDataSetChanged()
                             playlistProgressBar.visibility = View.GONE
                         },

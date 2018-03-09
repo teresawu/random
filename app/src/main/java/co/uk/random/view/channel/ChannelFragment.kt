@@ -60,7 +60,6 @@ class ChannelFragment : DisposableDaggerFragment() {
                             it.items.forEach {
                                 channelList.add(it)
                             }
-                            RealmHelper.copyOrUpdate(it)
                             channelAdapter.notifyDataSetChanged()
                             channelProgressBar.visibility = View.GONE
                             sharedPreferences[PREF_PLAYLIST_ID] = it.items.first()?.id
