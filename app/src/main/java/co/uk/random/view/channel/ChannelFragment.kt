@@ -16,8 +16,6 @@ import co.uk.random.util.get
 import co.uk.random.util.set
 import co.uk.random.view.DisposableDaggerFragment
 import co.uk.random.view.home.HomeActivity
-import co.uk.random.view.playlist.PLaylistFragment
-import co.uk.random.view.playlist.PlaylistViewModel
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_channel.*
 import kotlinx.android.synthetic.main.fragment_channel.view.*
@@ -27,12 +25,9 @@ import javax.inject.Inject
 class ChannelFragment : DisposableDaggerFragment() {
     @Inject
     lateinit var channelViewModel: ChannelViewModel
-    @Inject
-    lateinit var playlistViewModel: PlaylistViewModel
     private val sharedPreferences by lazy { PreferenceHandler.getSharePref(context!!) }
     private var channelList = ArrayList<Item>()
     private val channelAdapter: ChannelAdapter by lazy { ChannelAdapter(channelList, ChannelAdapterDelegate()) }
-    private val playlistFragment: PLaylistFragment by lazy { PLaylistFragment.newInstance() }
 
     companion object {
         fun newInstance(): ChannelFragment {
@@ -51,10 +46,6 @@ class ChannelFragment : DisposableDaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
         onLoadingData()
         gotoPlaylist()
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
     }
 
     private fun onLoadingData() {

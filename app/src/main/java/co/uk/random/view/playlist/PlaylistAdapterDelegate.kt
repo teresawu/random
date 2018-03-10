@@ -29,7 +29,7 @@ class PlaylistAdapterDelegate {
                         .load(R.drawable.ic_menu_camera)
                         .into(playlistImage)
             }
-            viewItem.setOnClickListener { onClickSubject.onNext(snippet!!.playlistId) }
+            viewItem.setOnClickListener { onClickSubject.onNext(snippet?.resourceId?.videoId!!) }
         }
     }
 }

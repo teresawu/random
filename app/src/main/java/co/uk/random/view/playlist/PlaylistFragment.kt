@@ -7,11 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import co.uk.random.R
 import co.uk.random.model.Item
-import co.uk.random.util.Keys
-import co.uk.random.util.PreferenceHandler
+import co.uk.random.model.Video
+import co.uk.random.util.*
+import co.uk.random.util.Keys.PREF_VIDEO_ID
 import co.uk.random.util.extension.createLayoutManager
-import co.uk.random.util.get
 import co.uk.random.view.DisposableDaggerFragment
+import co.uk.random.view.home.HomeActivity
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_playlist.*
 import kotlinx.android.synthetic.main.fragment_playlist.view.*
@@ -34,11 +35,8 @@ class PLaylistFragment : DisposableDaggerFragment() {
         val view = inflater.inflate(R.layout.fragment_playlist, container, false)
         view.playlistRecyclerView.layoutManager = createLayoutManager()
         view.playlistRecyclerView.adapter = playlistAdapter
+        gotoVideo()
         return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
@@ -61,5 +59,16 @@ class PLaylistFragment : DisposableDaggerFragment() {
                         }
                 )
         )
+    }
+
+    private fun gotoVideo() {
+        compositeDisposable.add(playlistAdapter.getClickSubject().subscribeBy(onNext = {
+            val previousVideoID = sharedPreferences[Keys.PREF_VIDEO_ID, ""]
+            if (!previousVideoID.equals(it)) {
+                RealmHelper.delete(Video::class.java)
+                sharedPreferences[Keys.PREF_VIDEO_ID] = it
+            }
+            (activity as HomeActivity).navigateToFragment(2)
+        }))
     }
 }
