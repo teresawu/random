@@ -37,4 +37,32 @@ open class Thumbnails() : RealmObject() {
         this.standard = standard
         this.maxres = maxres
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Thumbnails) return false
+
+        if (primaryKey != other.primaryKey) return false
+        if (default != other.default) return false
+        if (medium != other.medium) return false
+        if (high != other.high) return false
+        if (standard != other.standard) return false
+        if (maxres != other.maxres) return false
+        if (snippetThumbnails != other.snippetThumbnails) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = primaryKey.hashCode()
+        result = 31 * result + (default?.hashCode() ?: 0)
+        result = 31 * result + (medium?.hashCode() ?: 0)
+        result = 31 * result + (high?.hashCode() ?: 0)
+        result = 31 * result + (standard?.hashCode() ?: 0)
+        result = 31 * result + (maxres?.hashCode() ?: 0)
+        result = 31 * result + (snippetThumbnails?.hashCode() ?: 0)
+        return result
+    }
+
+
 }

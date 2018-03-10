@@ -24,7 +24,7 @@ class PLaylistFragment : DisposableDaggerFragment() {
     private val sharedPreferences by lazy { PreferenceHandler.getSharePref(context!!) }
     private var playlistList = ArrayList<Item>()
     private val playlistAdapter: PlaylistAdapter by lazy { PlaylistAdapter(playlistList, playlistDelegate = PlaylistAdapterDelegate()) }
-    private val playlistID by lazy {sharedPreferences[PREF_PLAYLIST_ID, ""]}
+    private val playlistID by lazy { sharedPreferences[PREF_PLAYLIST_ID, ""] }
 
     companion object {
         fun newInstance(): PLaylistFragment {
@@ -53,11 +53,13 @@ class PLaylistFragment : DisposableDaggerFragment() {
         compositeDisposable.add(playlistViewModel.getPlaylist(playlistID)
                 .subscribeBy(
                         onSuccess = {
-                            playlistList.clear()
-                            it.items.forEach {
-                                playlistList.add(it)
+                            if (it.items.containsAll(playlistList)) {//modify list if it has changed
+                                playlistList.clear()
+                                it.items.forEach {
+                                    playlistList.add(it)
+                                }
+                                playlistAdapter.notifyDataSetChanged()
                             }
-                            playlistAdapter.notifyDataSetChanged()
                             playlistProgressBar.visibility = View.GONE
                         },
                         onError = {

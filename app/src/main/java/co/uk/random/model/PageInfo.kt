@@ -29,4 +29,30 @@ open class PageInfo() : RealmObject() {
         this.totalResults = totalResults
         this.resultsPerPage = resultsPerPage
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is PageInfo) return false
+
+        if (primaryKey != other.primaryKey) return false
+        if (totalResults != other.totalResults) return false
+        if (resultsPerPage != other.resultsPerPage) return false
+        if (channelPageInfo != other.channelPageInfo) return false
+        if (playlistPageInfo != other.playlistPageInfo) return false
+        if (videoPageInfo != other.videoPageInfo) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = primaryKey.hashCode()
+        result = 31 * result + totalResults
+        result = 31 * result + resultsPerPage
+        result = 31 * result + (channelPageInfo?.hashCode() ?: 0)
+        result = 31 * result + (playlistPageInfo?.hashCode() ?: 0)
+        result = 31 * result + (videoPageInfo?.hashCode() ?: 0)
+        return result
+    }
+
+
 }

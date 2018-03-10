@@ -28,4 +28,28 @@ open class High() : RealmObject() {
         this.width = width
         this.height = height
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is High) return false
+
+        if (primaryKey != other.primaryKey) return false
+        if (url != other.url) return false
+        if (width != other.width) return false
+        if (height != other.height) return false
+        if (thumbnailsHigh != other.thumbnailsHigh) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = primaryKey.hashCode()
+        result = 31 * result + url.hashCode()
+        result = 31 * result + width
+        result = 31 * result + height
+        result = 31 * result + (thumbnailsHigh?.hashCode() ?: 0)
+        return result
+    }
+
+
 }
