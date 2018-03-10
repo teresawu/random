@@ -15,7 +15,6 @@ import co.uk.random.view.DisposableDaggerFragment
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_playlist.*
 import kotlinx.android.synthetic.main.fragment_playlist.view.*
-import java.util.*
 import javax.inject.Inject
 
 class PLaylistFragment : DisposableDaggerFragment() {
@@ -53,13 +52,7 @@ class PLaylistFragment : DisposableDaggerFragment() {
         compositeDisposable.add(playlistViewModel.getPlaylist(playlistID)
                 .subscribeBy(
                         onSuccess = {
-                            if (it.items.containsAll(playlistList)) {//modify list if it has changed
-                                playlistList.clear()
-                                it.items.forEach {
-                                    playlistList.add(it)
-                                }
-                                playlistAdapter.notifyDataSetChanged()
-                            }
+                            playlistAdapter.refresh(it.items)
                             playlistProgressBar.visibility = View.GONE
                         },
                         onError = {
