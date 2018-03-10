@@ -1,5 +1,6 @@
 package co.uk.random.view.channel
 
+import android.util.Log
 import co.uk.random.api.YoutubeApiService
 import co.uk.random.error.ExceptionTransformers
 import co.uk.random.model.Channel
@@ -13,7 +14,9 @@ class ChannelViewModel @Inject constructor
     fun getChannel(): Single<Channel> {
         return getChannelFromRealm()
                 .flatMap {
-                    if (it.isNotEmpty()) return@flatMap Single.just(it.first())
+                    if (it.isNotEmpty()) {
+                        return@flatMap Single.just(it.first())
+                    }
                     else return@flatMap getChannelFromApi()
                 }
     }

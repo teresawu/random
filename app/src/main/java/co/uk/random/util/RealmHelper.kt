@@ -1,8 +1,10 @@
 package co.uk.random.util
 
+import android.util.Log
+import co.uk.random.model.Playlist
 import io.reactivex.Single
+import io.reactivex.rxkotlin.subscribeBy
 import io.realm.Realm
-import io.realm.RealmModel
 import io.realm.RealmObject
 import io.realm.RealmQuery
 
@@ -39,7 +41,7 @@ object RealmHelper {
                 }
     }
 
-    fun delete(clazz: Class<out RealmModel>) {
+    fun delete(clazz: Class<out RealmObject>) {
         val realm = Realm.getDefaultInstance()
         realm.beginTransaction()
         realm.where(clazz).findAll().deleteAllFromRealm()
@@ -51,4 +53,9 @@ object RealmHelper {
         Realm.getDefaultInstance()
                 .executeTransaction { realm -> realm.deleteAll() }
     }
+
+    private fun getPlaylistFromRealm(): Single<List<Playlist>> =
+            RealmHelper.findAll<Playlist>().flatMap {
+                return@flatMap Single.just(it)
+            }
 }

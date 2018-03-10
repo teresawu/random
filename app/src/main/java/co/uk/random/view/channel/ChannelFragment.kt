@@ -2,7 +2,6 @@ package co.uk.random.view.channel
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,16 +53,15 @@ class ChannelFragment : DisposableDaggerFragment() {
         gotoPlaylist()
     }
 
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+    }
 
     private fun onLoadingData() {
         compositeDisposable.add(channelViewModel.getChannel()
                 .subscribeBy(
                         onSuccess = {
-                            channelList.clear()
-                            it.items.forEach {
-                                channelList.add(it)
-                            }
-                            channelAdapter.notifyDataSetChanged()
+                            channelAdapter.refresh(it.items)
                             channelProgressBar.visibility = View.GONE
                             sharedPreferences[PREF_PLAYLIST_ID] = it.items.first()?.id
                         },
@@ -76,9 +74,7 @@ class ChannelFragment : DisposableDaggerFragment() {
 
     private fun gotoPlaylist() {
         compositeDisposable.add(channelAdapter.getClickSubject().subscribeBy(onNext = {
-
             val previousPlaylistID = sharedPreferences[PREF_PLAYLIST_ID, ""]
-            Log.i("previousPlaylistID", previousPlaylistID + " current = " + it)
             if (!previousPlaylistID.equals(it)) {
                 RealmHelper.delete(Playlist::class.java)
                 sharedPreferences[PREF_PLAYLIST_ID] = it

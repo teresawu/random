@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import co.uk.random.R
 import co.uk.random.model.Item
+import io.realm.RealmList
 
-class ChannelAdapter(private val channels: List<Item>, private val channelDelegate: ChannelAdapterDelegate) : RecyclerView.Adapter<ChannelViewHolder>() {
+class ChannelAdapter(private val channels: ArrayList<Item>, private val channelDelegate: ChannelAdapterDelegate) : RecyclerView.Adapter<ChannelViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ChannelViewHolder {
         val itemView = LayoutInflater.from(parent?.context)
@@ -22,4 +23,11 @@ class ChannelAdapter(private val channels: List<Item>, private val channelDelega
     override fun getItemCount(): Int = channels.size
 
     fun getClickSubject() = channelDelegate.onClickSubject
+
+    fun refresh(data: RealmList<Item>?) {
+        if (data == null || data.size == 0) return
+        channels.clear()
+        channels.addAll(data)
+        notifyDataSetChanged()
+    }
 }

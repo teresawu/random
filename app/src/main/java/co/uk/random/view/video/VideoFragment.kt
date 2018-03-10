@@ -26,6 +26,6 @@ class VideoFragment : DisposableDaggerFragment() {
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        val isVisible = isVisibleToUser
+        super.setUserVisibleHint(isVisibleToUser)
     }
 }

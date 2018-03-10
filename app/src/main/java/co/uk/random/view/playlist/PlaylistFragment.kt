@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import co.uk.random.R
 import co.uk.random.model.Item
-import co.uk.random.util.Keys.PREF_PLAYLIST_ID
+import co.uk.random.util.Keys
 import co.uk.random.util.PreferenceHandler
 import co.uk.random.util.extension.createLayoutManager
 import co.uk.random.util.get
@@ -23,7 +23,6 @@ class PLaylistFragment : DisposableDaggerFragment() {
     private val sharedPreferences by lazy { PreferenceHandler.getSharePref(context!!) }
     private var playlistList = ArrayList<Item>()
     private val playlistAdapter: PlaylistAdapter by lazy { PlaylistAdapter(playlistList, playlistDelegate = PlaylistAdapterDelegate()) }
-    private val playlistID by lazy { sharedPreferences[PREF_PLAYLIST_ID, ""] }
 
     companion object {
         fun newInstance(): PLaylistFragment {
@@ -43,11 +42,13 @@ class PLaylistFragment : DisposableDaggerFragment() {
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
         if (!isVisibleToUser) return
-        onLoadingData(playlistID)
+        onLoadingData()
     }
 
-    private fun onLoadingData(playlistID: String?) {
+    private fun onLoadingData() {
+        var playlistID = sharedPreferences[Keys.PREF_PLAYLIST_ID, ""]
         if (playlistID == null || playlistID.isEmpty()) return
         compositeDisposable.add(playlistViewModel.getPlaylist(playlistID)
                 .subscribeBy(
