@@ -1,18 +1,16 @@
 package co.uk.random.view.video
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import co.uk.random.R
-import co.uk.random.model.Video
-import co.uk.random.util.Keys
 import co.uk.random.util.PreferenceHandler
-import co.uk.random.util.get
 import co.uk.random.view.DisposableDaggerFragment
+import com.squareup.picasso.Picasso
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.android.synthetic.main.fragment_playlist.*
 import kotlinx.android.synthetic.main.fragment_video.*
 import javax.inject.Inject
 
@@ -20,7 +18,6 @@ class VideoFragment : DisposableDaggerFragment() {
     @Inject
     lateinit var videoViewModel: VideoViewModel
     private val sharedPreferences by lazy { PreferenceHandler.getSharePref(context!!) }
-    private lateinit var video: Video
 
     companion object {
         fun newInstance(): VideoFragment {
@@ -36,22 +33,26 @@ class VideoFragment : DisposableDaggerFragment() {
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         if (!isVisibleToUser) return
-        onLoadingData()
+//        onLoadingData()
     }
 
     private fun onLoadingData() {
-        var videoID = sharedPreferences[Keys.PREF_VIDEO_ID, ""]
-        if (videoID == null || videoID.isEmpty()) return
-        compositeDisposable.add(videoViewModel.getVideo(videoID)
-                .subscribeBy(
-                        onSuccess = {
-                            videoProgressBar.visibility = View.GONE
-                            videoPlayerView.text = it.items[0]?.id
-                        },
-                        onError = {
-                            videoProgressBar.setBackgroundColor(ContextCompat.getColor(playlistProgressBar.context, R.color.green))
-                        }
-                )
-        )
+        val video = videoViewModel.getVideo().subscribeBy(
+                onSuccess = {
+                    val snippet = it.items.first()?.snippet
+                    txtVideoTitle.text = snippet?.title
+                    txtVideoDescription.text = snippet?.description
+                    try {
+                        Picasso.with(imgVideoPlayer.context).load(snippet?.thumbnails?.high?.url).into(imgVideoPlayer)
+                    } catch (exception: Exception) {
+                        Picasso.with(imgVideoPlayer.context)
+                                .load(R.drawable.ic_menu_camera)
+                                .into(imgVideoPlayer)
+                    }
+                    imgVideoPlayer.setOnClickListener {
+                        startActivity(Intent(Intent.ACTION_VIEW,
+                                Uri.parse("http://www.youtube.com/watch?v=" + snippet?.resourceId?.videoId)))
+                    }
+                })
     }
 }

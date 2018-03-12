@@ -6,17 +6,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import co.uk.random.R
 import co.uk.random.model.Item
+import co.uk.random.model.Video
 import co.uk.random.util.Util
+import co.uk.random.util.Util.getMockVideo
 import com.squareup.picasso.Picasso
 import io.reactivex.subjects.PublishSubject
 
 
 class PlaylistAdapterDelegate {
-    val onClickSubject = PublishSubject.create<String>()
+    val onClickSubject = PublishSubject.create<Video>()
 
-    fun onBind(holder: PlaylistViewHolder, playlist: Item) {
+    fun onBind(holder: PlaylistViewHolder, playlistItem: Item) {
         with(holder) {
-            val snippet = playlist.snippet
+            val snippet = playlistItem.snippet
             val description = Util.shortDescription(snippet?.description)
             val date = snippet?.publishedAt
             playlistTitle.text = snippet?.title
@@ -29,7 +31,9 @@ class PlaylistAdapterDelegate {
                         .load(R.drawable.ic_menu_camera)
                         .into(playlistImage)
             }
-            viewItem.setOnClickListener { onClickSubject.onNext(snippet?.resourceId?.videoId!!) }
+            viewItem.setOnClickListener {
+                onClickSubject.onNext(getMockVideo(playlistItem))
+            }
         }
     }
 }

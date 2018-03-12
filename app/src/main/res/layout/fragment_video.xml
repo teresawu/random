@@ -8,23 +8,42 @@
     android:background="@color/greyLight"
     tools:context="co.uk.random.view.video.VideoFragment">
 
-    <TextView
-        android:id="@+id/videoPlayerView"
+    <ImageView
+        android:id="@+id/imgVideoPlayer"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtVideoTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/txtVideoTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:textColor="@color/greyDark"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/txtVideoDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/imgVideoPlayer"
+        tools:text="qorjoqtwoentwelngwti" />
 
-    <ProgressBar
-        android:id="@+id/videoProgressBar"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/txtVideoDescription"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:textColor="@color/greyDark"
+        android:textSize="14sp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/txtVideoTitle"
+        tools:text="qorjoqtwoentwelngwti heirewhot wtwihypwhy whtwipht" />
+
 </android.support.constraint.ConstraintLayout>

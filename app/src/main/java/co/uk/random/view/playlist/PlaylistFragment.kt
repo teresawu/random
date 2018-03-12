@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import co.uk.random.R
 import co.uk.random.model.Item
 import co.uk.random.model.Video
-import co.uk.random.util.*
-import co.uk.random.util.Keys.PREF_VIDEO_ID
+import co.uk.random.util.Keys
+import co.uk.random.util.PreferenceHandler
+import co.uk.random.util.RealmHelper
+import co.uk.random.util.Util.getMockVideo
 import co.uk.random.util.extension.createLayoutManager
+import co.uk.random.util.get
 import co.uk.random.view.DisposableDaggerFragment
 import co.uk.random.view.home.HomeActivity
 import io.reactivex.rxkotlin.subscribeBy
+import io.realm.RealmList
 import kotlinx.android.synthetic.main.fragment_playlist.*
 import kotlinx.android.synthetic.main.fragment_playlist.view.*
 import javax.inject.Inject
@@ -52,6 +56,7 @@ class PLaylistFragment : DisposableDaggerFragment() {
                 .subscribeBy(
                         onSuccess = {
                             playlistAdapter.refresh(it.items)
+//                            RealmHelper.copyOrUpdate(getMockVideo(it.items.first()))
                             playlistProgressBar.visibility = View.GONE
                         },
                         onError = {
@@ -63,11 +68,7 @@ class PLaylistFragment : DisposableDaggerFragment() {
 
     private fun gotoVideo() {
         compositeDisposable.add(playlistAdapter.getClickSubject().subscribeBy(onNext = {
-            val previousVideoID = sharedPreferences[Keys.PREF_VIDEO_ID, ""]
-            if (!previousVideoID.equals(it)) {
-                RealmHelper.delete(Video::class.java)
-                sharedPreferences[Keys.PREF_VIDEO_ID] = it
-            }
+//            RealmHelper.copyOrUpdate(it)
             (activity as HomeActivity).navigateToFragment(2)
         }))
     }
