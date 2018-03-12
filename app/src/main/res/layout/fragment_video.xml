@@ -11,7 +11,8 @@
     <ImageView
         android:id="@+id/imgVideoPlayer"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/img_channel"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/txtVideoTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

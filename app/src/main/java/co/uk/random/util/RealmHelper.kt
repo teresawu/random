@@ -1,9 +1,7 @@
 package co.uk.random.util
 
-import android.util.Log
 import co.uk.random.model.Playlist
 import io.reactivex.Single
-import io.reactivex.rxkotlin.subscribeBy
 import io.realm.Realm
 import io.realm.RealmObject
 import io.realm.RealmQuery
