@@ -2,7 +2,6 @@ package co.uk.random.api
 
 import co.uk.random.model.Channel
 import co.uk.random.model.Playlist
-import co.uk.random.model.Video
 import co.uk.random.util.Keys.API_KEY
 import io.reactivex.Single
 import retrofit2.Response

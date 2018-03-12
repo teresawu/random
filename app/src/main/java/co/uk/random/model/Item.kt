@@ -29,8 +29,6 @@ open class Item() : RealmObject() {
     val channelItem: RealmResults<Channel>? = null
     @LinkingObjects("items")
     val playlistItem: RealmResults<Playlist>? = null
-    @LinkingObjects("items")
-    val videoItem: RealmResults<Video>? = null
 
     constructor(kind: String, etag: String, id: String, snippet: Snippet?, player: Player?) : this() {
         this.kind = kind
@@ -52,7 +50,6 @@ open class Item() : RealmObject() {
         if (player != other.player) return false
         if (channelItem != other.channelItem) return false
         if (playlistItem != other.playlistItem) return false
-        if (videoItem != other.videoItem) return false
 
         return true
     }
@@ -66,7 +63,6 @@ open class Item() : RealmObject() {
         result = 31 * result + (player?.hashCode() ?: 0)
         result = 31 * result + (channelItem?.hashCode() ?: 0)
         result = 31 * result + (playlistItem?.hashCode() ?: 0)
-        result = 31 * result + (videoItem?.hashCode() ?: 0)
         return result
     }
 

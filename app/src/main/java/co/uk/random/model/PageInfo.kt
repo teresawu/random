@@ -22,8 +22,6 @@ open class PageInfo() : RealmObject() {
     val channelPageInfo: RealmResults<Channel>? = null
     @LinkingObjects("pageInfo")
     val playlistPageInfo: RealmResults<Playlist>? = null
-    @LinkingObjects("pageInfo")
-    val videoPageInfo: RealmResults<Video>? = null
 
     constructor(totalResults: Int, resultsPerPage: Int) : this() {
         this.totalResults = totalResults
@@ -39,7 +37,6 @@ open class PageInfo() : RealmObject() {
         if (resultsPerPage != other.resultsPerPage) return false
         if (channelPageInfo != other.channelPageInfo) return false
         if (playlistPageInfo != other.playlistPageInfo) return false
-        if (videoPageInfo != other.videoPageInfo) return false
 
         return true
     }
@@ -50,7 +47,6 @@ open class PageInfo() : RealmObject() {
         result = 31 * result + resultsPerPage
         result = 31 * result + (channelPageInfo?.hashCode() ?: 0)
         result = 31 * result + (playlistPageInfo?.hashCode() ?: 0)
-        result = 31 * result + (videoPageInfo?.hashCode() ?: 0)
         return result
     }
 

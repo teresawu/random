@@ -3,6 +3,7 @@ package co.uk.random.view.video
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +13,11 @@ import co.uk.random.util.Keys
 import co.uk.random.util.PreferenceHandler
 import co.uk.random.util.RealmHelper
 import co.uk.random.util.get
-import co.uk.random.view.DisposableDaggerFragment
 import com.squareup.picasso.Picasso
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_video.*
-import javax.inject.Inject
 
-class VideoFragment : DisposableDaggerFragment() {
-    @Inject
-    lateinit var videoViewModel: VideoViewModel
+class VideoFragment : Fragment() {
     private val sharedPreferences by lazy { PreferenceHandler.getSharePref(context!!) }
 
     companion object {
@@ -42,7 +39,8 @@ class VideoFragment : DisposableDaggerFragment() {
 
     private fun onLoadingData() {
         RealmHelper.findAll<Playlist>().subscribeBy(onSuccess = {
-            val item = it[0].items[sharedPreferences[Keys.PREF_VIDEO_ID]!!]
+            val index= sharedPreferences[Keys.PREF_VIDEO_ID, 0]
+            val item = it[0].items[index!!]
             txtVideoTitle.text = item?.snippet?.title
             txtVideoDescription.text = item?.snippet?.description
             try {

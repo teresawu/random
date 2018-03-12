@@ -4,7 +4,6 @@ import co.uk.random.setup.ModelProvider
 import co.uk.random.setup.SchedulerRule
 import co.uk.random.view.channel.ChannelViewModel
 import co.uk.random.view.playlist.PlaylistViewModel
-import co.uk.random.view.video.VideoViewModel
 import org.junit.Before
 import org.junit.ClassRule
 import org.junit.Rule

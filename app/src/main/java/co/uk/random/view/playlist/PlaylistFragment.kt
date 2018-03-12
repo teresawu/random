@@ -54,7 +54,6 @@ class PLaylistFragment : DisposableDaggerFragment() {
                 .subscribeBy(
                         onSuccess = {
                             playlistAdapter.refresh(it.items)
-                            sharedPreferences[PREF_VIDEO_ID] = 0
                             playlistProgressBar.visibility = View.GONE
                         },
                         onError = {

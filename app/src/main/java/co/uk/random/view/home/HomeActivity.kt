@@ -50,6 +50,8 @@ class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START))
             drawerLayout.closeDrawer(GravityCompat.START)
+        else if (homeViewPager.currentItem==1) navigateToFragment(0)
+        else if (homeViewPager.currentItem==2) navigateToFragment(1)
         else super.onBackPressed()
     }
 

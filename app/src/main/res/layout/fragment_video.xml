@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/greyLight"
+    android:padding="10dp"
     tools:context="co.uk.random.view.video.VideoFragment">
 
     <ImageView
@@ -24,7 +25,7 @@
         android:id="@+id/txtVideoTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:textColor="@color/greyDark"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/txtVideoDescription"
@@ -37,7 +38,7 @@
         android:id="@+id/txtVideoDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="10dp"
         android:textColor="@color/greyDark"
         android:textSize="14sp"
         android:textStyle="italic"
