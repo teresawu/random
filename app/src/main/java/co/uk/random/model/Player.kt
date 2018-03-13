@@ -20,24 +20,4 @@ open class Player() : RealmObject() {
     constructor(embedHtml: String) : this() {
         this.embedHtml = embedHtml
     }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Player) return false
-
-        if (primaryKey != other.primaryKey) return false
-        if (embedHtml != other.embedHtml) return false
-        if (itemPlayer != other.itemPlayer) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = primaryKey.hashCode()
-        result = 31 * result + embedHtml.hashCode()
-        result = 31 * result + (itemPlayer?.hashCode() ?: 0)
-        return result
-    }
-
-
 }

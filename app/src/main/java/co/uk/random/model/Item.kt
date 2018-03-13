@@ -37,34 +37,4 @@ open class Item() : RealmObject() {
         this.snippet = snippet
         this.player = player
     }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Item) return false
-
-        if (primaryKey != other.primaryKey) return false
-        if (kind != other.kind) return false
-        if (etag != other.etag) return false
-        if (id != other.id) return false
-        if (snippet != other.snippet) return false
-        if (player != other.player) return false
-        if (channelItem != other.channelItem) return false
-        if (playlistItem != other.playlistItem) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = primaryKey.hashCode()
-        result = 31 * result + kind.hashCode()
-        result = 31 * result + etag.hashCode()
-        result = 31 * result + id.hashCode()
-        result = 31 * result + (snippet?.hashCode() ?: 0)
-        result = 31 * result + (player?.hashCode() ?: 0)
-        result = 31 * result + (channelItem?.hashCode() ?: 0)
-        result = 31 * result + (playlistItem?.hashCode() ?: 0)
-        return result
-    }
-
-
 }

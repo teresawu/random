@@ -1,51 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragmentVideo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/greyLight"
-    android:padding="10dp"
-    tools:context="co.uk.random.view.video.VideoFragment">
+    android:padding="10dp">
 
-    <ImageView
-        android:id="@+id/imgVideoPlayer"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/img_channel"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/txtVideoTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintVertical_chainStyle="packed" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txtVideoTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:textColor="@color/greyDark"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtVideoDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgVideoPlayer"
-        tools:text="qorjoqtwoentwelngwti" />
+        <ImageView
+            android:id="@+id/imgVideoPlayer"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/img_video"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@+id/txtVideoTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <TextView
-        android:id="@+id/txtVideoDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:textColor="@color/greyDark"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtVideoTitle"
-        tools:text="qorjoqtwoentwelngwti heirewhot wtwihypwhy whtwipht" />
+        <TextView
+            android:id="@+id/txtVideoTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/greyDark"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/txtVideoDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgVideoPlayer"
+            tools:text="qorjoqtwoentwelngwti" />
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/txtVideoDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:textColor="@color/greyDark"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtVideoTitle"
+            tools:text="qorjoqtwoentwelngwti heirewhot wtwihypwhy whtwipht" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

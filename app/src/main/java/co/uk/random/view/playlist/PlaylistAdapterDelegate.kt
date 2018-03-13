@@ -1,5 +1,6 @@
 package co.uk.random.view.playlist
 
+import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
@@ -8,11 +9,9 @@ import co.uk.random.R
 import co.uk.random.model.Item
 import co.uk.random.util.Util
 import com.squareup.picasso.Picasso
-import io.reactivex.subjects.PublishSubject
 
 
 class PlaylistAdapterDelegate {
-
     fun onBind(holder: PlaylistViewHolder, playlistItem: Item) {
         with(holder) {
             val snippet = playlistItem.snippet
@@ -37,4 +36,5 @@ class PlaylistViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val playlistPublished = view.findViewById<TextView>(R.id.txtPlaylistPublished)
     val playlistDescription = view.findViewById<TextView>(R.id.txtPlaylistDescription)
     val playlistImage = view.findViewById<ImageView>(R.id.imgPlaylist)
+    val playlistLayout = view.findViewById<ConstraintLayout>(R.id.playlistLayout)
 }

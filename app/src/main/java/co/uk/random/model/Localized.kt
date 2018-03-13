@@ -24,26 +24,4 @@ open class Localized() : RealmObject() {
         this.title = title
         this.description = description
     }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Localized) return false
-
-        if (primaryKey != other.primaryKey) return false
-        if (title != other.title) return false
-        if (description != other.description) return false
-        if (snippetLocalized != other.snippetLocalized) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = primaryKey.hashCode()
-        result = 31 * result + title.hashCode()
-        result = 31 * result + description.hashCode()
-        result = 31 * result + (snippetLocalized?.hashCode() ?: 0)
-        return result
-    }
-
-
 }

@@ -30,28 +30,4 @@ open class Playlist() : RealmObject() {
         this.pageInfo = pageInfo
         this.items = items
     }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Playlist) return false
-
-        if (primaryKey != other.primaryKey) return false
-        if (kind != other.kind) return false
-        if (etag != other.etag) return false
-        if (pageInfo != other.pageInfo) return false
-        if (items != other.items) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = primaryKey.hashCode()
-        result = 31 * result + kind.hashCode()
-        result = 31 * result + etag.hashCode()
-        result = 31 * result + (pageInfo?.hashCode() ?: 0)
-        result = 31 * result + items.hashCode()
-        return result
-    }
-
-
 }
