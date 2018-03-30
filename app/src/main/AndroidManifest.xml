@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.home.HomeActivity"
+            android:name=".view.NavActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -27,6 +27,16 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcut" />
         </activity>
+
+        <activity
+            android:name=".view.home.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="app.co.uk.tensorflow.view.TensorFlowActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

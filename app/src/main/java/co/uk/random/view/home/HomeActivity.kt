@@ -54,7 +54,6 @@ class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
             drawerLayout.closeDrawer(GravityCompat.START)
         else if (homeViewPager.currentItem == 1) navigateToFragment(0)
         else if (homeViewPager.currentItem == 2) navigateToFragment(1)
-        else if (homeViewPager.currentItem == 3) navigateToFragment(2)
         else super.onBackPressed()
     }
 

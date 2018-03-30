@@ -10,15 +10,14 @@ import co.uk.random.view.video.VideoFragment
 
 class HomePageAdapter(supportFragmentManager: FragmentManager) : FragmentPagerAdapter(supportFragmentManager) {
 
-    private val titles = arrayOf("IMAGE", "CHANNEL", "PLAYLIST", "VIDEOS")
+    private val titles = arrayOf("CHANNEL", "PLAYLIST", "VIDEOS")
 
 
     override fun getItem(position: Int): Fragment =
             when (position) {
-                0 -> ImageFragment.newInstance()
-                1 -> ChannelFragment.newInstance()
-                2 -> PLaylistFragment.newInstance()
-                3 -> VideoFragment.newInstance()
+                0 -> ChannelFragment.newInstance()
+                1 -> PLaylistFragment.newInstance()
+                2 -> VideoFragment.newInstance()
                 else -> ImageFragment.newInstance()
             }
 
