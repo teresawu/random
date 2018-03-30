@@ -34,7 +34,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="app.co.uk.tensorflow.view.TensorFlowActivity"
+            android:name="app.co.uk.tensorflow.view.ImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="app.co.uk.tensorflow.view.VideoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

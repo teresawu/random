@@ -6,12 +6,12 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
-import app.co.uk.tensorflow.view.ImageFragment
 import co.uk.random.R
 import co.uk.random.util.RealmHelper
 import co.uk.random.util.extension.addFragment
 import co.uk.random.util.extension.replaceFragment
 import co.uk.random.view.channel.ChannelFragment
+import co.uk.random.view.playlist.PLaylistFragment
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.view_home.*
@@ -36,7 +36,7 @@ class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navigationView.setNavigationItemSelectedListener(this)
-        addFragment(ImageFragment.newInstance(), R.id.homeFragmentLayout)
+        addFragment(ChannelFragment.newInstance(), R.id.homeFragmentLayout)
         homeViewPager.adapter = homePageAdapter
     }
 
@@ -71,8 +71,8 @@ class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_youtube -> replaceFragment(ChannelFragment.newInstance(), R.id.homeFragmentLayout)
-            R.id.nav_image -> replaceFragment(ImageFragment.newInstance(), R.id.homeFragmentLayout)
+            R.id.nav_camera -> replaceFragment(ChannelFragment.newInstance(), R.id.homeFragmentLayout)
+            R.id.nav_image -> replaceFragment(PLaylistFragment.newInstance(), R.id.homeFragmentLayout)
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
