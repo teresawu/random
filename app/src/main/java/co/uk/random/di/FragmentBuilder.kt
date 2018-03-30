@@ -1,6 +1,6 @@
 package co.uk.random.di
 
-import app.co.uk.image.view.ImageFragment
+import app.co.uk.tensorflow.view.ImageFragment
 import co.uk.random.di.module.ChannelFragmentModule
 import co.uk.random.di.module.ImageFragmentModule
 import co.uk.random.di.module.PlaylistFragmentModule

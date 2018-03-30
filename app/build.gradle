@@ -68,7 +68,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':image')
+    implementation project(':tensorflow')
     // Android
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$rootProject.kotlinVersion"
     implementation "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$rootProject.kotlinVersion"

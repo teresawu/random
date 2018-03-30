@@ -6,9 +6,10 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
-import app.co.uk.image.view.ImageFragment
+import app.co.uk.tensorflow.view.ImageFragment
 import co.uk.random.R
 import co.uk.random.util.RealmHelper
+import co.uk.random.util.extension.addFragment
 import co.uk.random.util.extension.replaceFragment
 import co.uk.random.view.channel.ChannelFragment
 import dagger.android.support.DaggerAppCompatActivity
@@ -35,7 +36,7 @@ class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navigationView.setNavigationItemSelectedListener(this)
-        replaceFragment(ChannelFragment.newInstance(), R.id.homeFragmentLayout)
+        addFragment(ImageFragment.newInstance(), R.id.homeFragmentLayout)
         homeViewPager.adapter = homePageAdapter
     }
 
@@ -53,6 +54,7 @@ class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
             drawerLayout.closeDrawer(GravityCompat.START)
         else if (homeViewPager.currentItem == 1) navigateToFragment(0)
         else if (homeViewPager.currentItem == 2) navigateToFragment(1)
+        else if (homeViewPager.currentItem == 3) navigateToFragment(2)
         else super.onBackPressed()
     }
 

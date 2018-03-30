@@ -71,7 +71,6 @@ dependencies {
 
     //other library
     implementation 'org.tensorflow:tensorflow-android:+'
-    implementation 'com.wonderkiln:camerakit:0.13.1'
 
     //Junit imports
     testImplementation "junit:junit:$junitVersion"
