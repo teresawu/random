@@ -6,6 +6,7 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
+import app.co.uk.image.view.ImageFragment
 import co.uk.random.R
 import co.uk.random.util.RealmHelper
 import co.uk.random.util.extension.replaceFragment
@@ -50,8 +51,8 @@ class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START))
             drawerLayout.closeDrawer(GravityCompat.START)
-        else if (homeViewPager.currentItem==1) navigateToFragment(0)
-        else if (homeViewPager.currentItem==2) navigateToFragment(1)
+        else if (homeViewPager.currentItem == 1) navigateToFragment(0)
+        else if (homeViewPager.currentItem == 2) navigateToFragment(1)
         else super.onBackPressed()
     }
 
@@ -68,21 +69,9 @@ class HomeActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
-        val id = item.itemId
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        when (item.itemId) {
+            R.id.nav_youtube -> replaceFragment(ChannelFragment.newInstance(), R.id.homeFragmentLayout)
+            R.id.nav_image -> replaceFragment(ImageFragment.newInstance(), R.id.homeFragmentLayout)
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <com.wonderkiln.camerakit.CameraView
+        android:id="@+id/cameraView"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewResult"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewResult"
+        android:layout_width="75dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnToggleCamera"
+        app:layout_constraintEnd_toStartOf="@+id/textViewResult"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cameraView"
+        tools:background="@android:color/holo_red_dark" />
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:fadeScrollbars="false"
+        android:maxLines="15"
+        android:scrollbars="vertical"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/btnToggleCamera"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageViewResult"
+        app:layout_constraintTop_toBottomOf="@id/cameraView"
+        tools:background="@android:color/holo_green_dark" />
+
+    <Button
+        android:id="@+id/btnToggleCamera"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:text="@string/toggle_camera"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/btnDetectObject"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewResult"
+        tools:background="@android:color/holo_blue_bright" />
+
+    <Button
+        android:id="@+id/btnDetectObject"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:text="@string/detect_object"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnToggleCamera"
+        tools:background="@android:color/holo_orange_dark" />
+</android.support.constraint.ConstraintLayout>
