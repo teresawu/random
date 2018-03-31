@@ -10,6 +10,7 @@ import app.co.uk.tensorflow.util.Keys.INPUT_SIZE
 import app.co.uk.tensorflow.util.Keys.LABEL_PATH
 import app.co.uk.tensorflow.util.Keys.MAX_RESULTS
 import app.co.uk.tensorflow.util.Keys.MODEL_PATH
+import io.reactivex.Single
 import org.tensorflow.lite.Interpreter
 import java.io.BufferedReader
 import java.io.FileInputStream
@@ -78,7 +79,7 @@ class ImageClassifier constructor(private val assetManager: AssetManager) {
         return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
     }
 
-    fun recognizeImage(bitmap: Bitmap): List<Result> {
+    fun recognizeImage(bitmap: Bitmap): Single<List<Result>> {
         convertBitmapToByteBuffer(bitmap)
         interpreter!!.run(imgData, labelProb)
         val pq = PriorityQueue<Result>(3,
@@ -92,7 +93,7 @@ class ImageClassifier constructor(private val assetManager: AssetManager) {
         val recognitions = ArrayList<Result>()
         val recognitionsSize = Math.min(pq.size, MAX_RESULTS)
         for (i in 0 until recognitionsSize) recognitions.add(pq.poll())
-        return recognitions
+        return Single.just(recognitions)
     }
 
     fun close() {

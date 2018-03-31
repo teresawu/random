@@ -13,14 +13,13 @@ import android.support.v7.app.AppCompatActivity
 import app.co.uk.tensorflow.R
 import app.co.uk.tensorflow.util.ImageClassifier
 import app.co.uk.tensorflow.util.Keys.INPUT_SIZE
+import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_image.*
 import java.io.FileNotFoundException
-import java.io.InputStream
 
 
 class ImageActivity : AppCompatActivity() {
-
-    private val code = 1001
+    private val CHOOSE_IMAGE = 1001
     private lateinit var photoImage: Bitmap
     private lateinit var classifier: ImageClassifier
 
@@ -46,20 +45,22 @@ class ImageActivity : AppCompatActivity() {
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         intent.addCategory(Intent.CATEGORY_OPENABLE)
-        startActivityForResult(intent, code)
+        startActivityForResult(intent, CHOOSE_IMAGE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        var stream: InputStream
-        if (requestCode == code && resultCode == Activity.RESULT_OK)
+        if (requestCode == CHOOSE_IMAGE && resultCode == Activity.RESULT_OK)
             try {
-                stream = contentResolver!!.openInputStream(data.getData())
+                val stream = contentResolver!!.openInputStream(data.getData())
                 if (::photoImage.isInitialized) photoImage.recycle()
                 photoImage = BitmapFactory.decodeStream(stream)
                 photoImage = Bitmap.createScaledBitmap(photoImage, INPUT_SIZE, INPUT_SIZE, false)
                 imageResult.setImageBitmap(photoImage)
-                val results = classifier.recognizeImage(photoImage)
-                txtResult.text = results.toString()
+                classifier.recognizeImage(photoImage).subscribeBy(
+                        onSuccess = {
+                            txtResult.text = it.toString()
+                        }
+                )
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
             }
