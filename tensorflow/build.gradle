@@ -11,7 +11,8 @@ repositories {
 buildscript {
     repositories {
         jcenter()
-        maven { url "https://maven.google.com" }
+        google()
+        maven { url 'https://google.bintray.com/tensorflow'}
     }
 }
 
@@ -70,7 +71,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
     //other library
-    implementation 'org.tensorflow:tensorflow-android:+'
+    implementation 'org.tensorflow:tensorflow-lite:0.1'
 
     //Junit imports
     testImplementation "junit:junit:$junitVersion"

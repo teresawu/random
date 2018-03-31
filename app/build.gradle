@@ -32,6 +32,11 @@ android {
         main.java.srcDirs += 'src/main/java'
     }
 
+    aaptOptions {
+        noCompress "tflite"
+        noCompress "lite"
+    }
+
     defaultConfig {
         applicationId "co.uk.random"
         minSdkVersion rootProject.ext.minSdkVersion

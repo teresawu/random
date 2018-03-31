@@ -11,6 +11,10 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import app.co.uk.tensorflow.R
+import app.co.uk.tensorflow.util.Keys.INPUT_SIZE
+import app.co.uk.tensorflow.util.Keys.LABEL_PATH
+import app.co.uk.tensorflow.util.Keys.MODEL_PATH
+import app.co.uk.tensorflow.util.TFImageClassifier
 import kotlinx.android.synthetic.main.activity_image.*
 import java.io.FileNotFoundException
 import java.io.InputStream
@@ -20,24 +24,26 @@ class ImageActivity : AppCompatActivity() {
 
     private val code = 1001
     private lateinit var photoImage: Bitmap
+    private lateinit var classifier: TFImageClassifier
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image)
+        classifier = TFImageClassifier.create(getAssets(), MODEL_PATH, LABEL_PATH, INPUT_SIZE)
         checkPermission()
-        btnCamera.setOnClickListener {
-            takePicture()
+        imageResult.setOnClickListener {
+            choosePicture()
         }
     }
 
     private fun checkPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            btnCamera.setEnabled(false)
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
+            imageResult.setEnabled(false)
         }
     }
 
-    private fun takePicture() {
+    private fun choosePicture() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
@@ -49,10 +55,12 @@ class ImageActivity : AppCompatActivity() {
         var stream: InputStream
         if (requestCode == code && resultCode == Activity.RESULT_OK)
             try {
-                if (photoImage != null) photoImage.recycle()
                 stream = contentResolver!!.openInputStream(data.getData())
                 photoImage = BitmapFactory.decodeStream(stream)
+                val croppedBitmap = Bitmap.createBitmap(INPUT_SIZE, INPUT_SIZE, Bitmap.Config.ARGB_8888)
                 imageResult.setImageBitmap(photoImage)
+                val results = classifier.recognizeImage(croppedBitmap)
+                txtResult.text = results.toString()
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
             }
@@ -62,8 +70,13 @@ class ImageActivity : AppCompatActivity() {
         if (requestCode == 0) {
             if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                btnCamera.setEnabled(true)
+                imageResult.setEnabled(true)
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        classifier.close()
     }
 }
