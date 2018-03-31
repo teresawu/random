@@ -14,7 +14,7 @@ import app.co.uk.tensorflow.R
 import app.co.uk.tensorflow.util.Keys.INPUT_SIZE
 import app.co.uk.tensorflow.util.Keys.LABEL_PATH
 import app.co.uk.tensorflow.util.Keys.MODEL_PATH
-import app.co.uk.tensorflow.util.TFImageClassifier
+import app.co.uk.tensorflow.util.ImageClassifier
 import kotlinx.android.synthetic.main.activity_image.*
 import java.io.FileNotFoundException
 import java.io.InputStream
@@ -24,12 +24,12 @@ class ImageActivity : AppCompatActivity() {
 
     private val code = 1001
     private lateinit var photoImage: Bitmap
-    private lateinit var classifier: TFImageClassifier
+    private lateinit var classifier: ImageClassifier
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image)
-        classifier = TFImageClassifier.create(getAssets(), MODEL_PATH, LABEL_PATH, INPUT_SIZE)
+        classifier = ImageClassifier.create(getAssets(), MODEL_PATH, LABEL_PATH, INPUT_SIZE)
         checkPermission()
         imageResult.setOnClickListener {
             choosePicture()
@@ -56,10 +56,11 @@ class ImageActivity : AppCompatActivity() {
         if (requestCode == code && resultCode == Activity.RESULT_OK)
             try {
                 stream = contentResolver!!.openInputStream(data.getData())
+                if (::photoImage.isInitialized) photoImage.recycle()
                 photoImage = BitmapFactory.decodeStream(stream)
-                val croppedBitmap = Bitmap.createBitmap(INPUT_SIZE, INPUT_SIZE, Bitmap.Config.ARGB_8888)
+                photoImage = Bitmap.createScaledBitmap(photoImage, INPUT_SIZE, INPUT_SIZE, false)
                 imageResult.setImageBitmap(photoImage)
-                val results = classifier.recognizeImage(croppedBitmap)
+                val results = classifier.recognizeImage(photoImage)
                 txtResult.text = results.toString()
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()

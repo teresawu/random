@@ -4,7 +4,11 @@ import android.content.res.AssetManager
 import android.graphics.Bitmap
 import android.os.SystemClock
 import android.os.Trace
-import android.util.Log
+import app.co.uk.tensorflow.util.Keys.DIM_BATCH_SIZE
+import app.co.uk.tensorflow.util.Keys.DIM_IMG_SIZE_X
+import app.co.uk.tensorflow.util.Keys.DIM_IMG_SIZE_Y
+import app.co.uk.tensorflow.util.Keys.DIM_PIXEL_SIZE
+import app.co.uk.tensorflow.util.Keys.MAX_RESULTS
 import org.tensorflow.lite.Interpreter
 import java.io.BufferedReader
 import java.io.FileInputStream
@@ -16,26 +20,19 @@ import java.nio.MappedByteBuffer
 import java.nio.channels.FileChannel
 import java.util.*
 
-class TFImageClassifier constructor() {
+class ImageClassifier constructor() {
 
     private var tfLite: Interpreter? = null
-
-    lateinit var labelProb: Array<ByteArray>
+    private lateinit var labelProb: Array<ByteArray>
 
     // Pre-allocated buffers.
     private val labels = Vector<String>()
     private var intValues: IntArray? = null
     private lateinit var imgData: ByteBuffer
 
-    val statString: String
-        get() = ""
-
     /** Writes Image data into a `ByteBuffer`.  */
     private fun convertBitmapToByteBuffer(bitmap: Bitmap) {
-        if (imgData ==
-                null) {
-            return
-        }
+        if (imgData == null) return
         imgData!!.rewind()
         bitmap.getPixels(intValues, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)
         // Convert the image to floating point.
@@ -50,10 +47,9 @@ class TFImageClassifier constructor() {
             }
         }
         val endTime = SystemClock.uptimeMillis()
-        Log.d(TAG, "Timecost to put values into ByteBuffer: " + java.lang.Long.toString(endTime - startTime))
     }
 
-    fun recognizeImage(bitmap: Bitmap): List<Classifier.Recognition> {
+    fun recognizeImage(bitmap: Bitmap): List<Result> {
         // Log this method so that it can be analyzed with systrace.
         Trace.beginSection("recognizeImage")
 
@@ -70,24 +66,22 @@ class TFImageClassifier constructor() {
         startTime = SystemClock.uptimeMillis()
         tfLite!!.run(imgData, labelProb)
         endTime = SystemClock.uptimeMillis()
-        Log.i(TAG, "Inf time: " + (endTime - startTime))
         Trace.endSection()
 
         // Find the best classifications.
-        val pq = PriorityQueue<Classifier.Recognition>(
+        val pq = PriorityQueue<Result>(
                 3,
-                Comparator<Classifier.Recognition> { lhs, rhs ->
+                Comparator<Result> { lhs, rhs ->
                     // Intentionally reversed to put high confidence at the head of the queue.
                     java.lang.Float.compare(rhs.confidence!!, lhs.confidence!!)
                 })
         for (i in labels.indices) {
-            pq.add(
-                    Classifier.Recognition(
-                            "" + i,
-                            if (labels.size > i) labels[i] else "unknown",
-                            labelProb[0][i].toFloat(), null))
+            pq.add(Result(
+                    "" + i,
+                    if (labels.size > i) labels[i] else "unknown",
+                    labelProb[0][i].toFloat(), null))
         }
-        val recognitions = ArrayList<Classifier.Recognition>()
+        val recognitions = ArrayList<Result>()
         val recognitionsSize = Math.min(pq.size, MAX_RESULTS)
         for (i in 0 until recognitionsSize) {
             recognitions.add(pq.poll())
@@ -96,24 +90,7 @@ class TFImageClassifier constructor() {
         return recognitions
     }
 
-    fun enableStatLogging(logStats: Boolean) {}
-
-    fun close() {}
-
     companion object {
-        private val TAG = "TFLiteImageClassifier"
-
-        // Only return this many results with at least this confidence.
-        private val MAX_RESULTS = 3
-
-        /** Dimensions of inputs.  */
-        private val DIM_BATCH_SIZE = 1
-
-        private val DIM_PIXEL_SIZE = 3
-
-        private val DIM_IMG_SIZE_X = 224
-        private val DIM_IMG_SIZE_Y = 224
-
         /** Memory-map the model file in Assets.  */
         @Throws(IOException::class)
         private fun loadModelFile(assets: AssetManager, modelFilename: String): MappedByteBuffer {
@@ -135,16 +112,11 @@ class TFImageClassifier constructor() {
          * @throws IOException
          */
         fun create(
-                assetManager: AssetManager, modelFilename: String, labelFilename: String, inputSize: Int): TFImageClassifier {
-            val c = TFImageClassifier()
-
-            // Read the label names into memory.
-            // TODO(andrewharp): make this handle non-assets.
-            Log.i(TAG, "Reading labels from: " + labelFilename)
+                assetManager: AssetManager, modelFilename: String, labelFilename: String, inputSize: Int): ImageClassifier {
+            val c = ImageClassifier()
             var br: BufferedReader? = null
             try {
                 br = BufferedReader(InputStreamReader(assetManager.open(labelFilename)))
-                var line: String
                 while (true) {
                     val line = br.readLine() ?: break
                     c.labels.add(line)
@@ -163,16 +135,14 @@ class TFImageClassifier constructor() {
             } catch (e: Exception) {
                 throw RuntimeException(e)
             }
-
-            // The shape of the output is [N, NUM_CLASSES], where N is the batch size.
-            Log.i(TAG, "Read " + c.labels.size + " labels")
-
             // Pre-allocate buffers.
             c.intValues = IntArray(inputSize * inputSize)
-
             c.labelProb = Array(1) { ByteArray(c.labels.size) }
-
             return c
         }
+    }
+
+    fun close() {
+        tfLite?.close()
     }
 }
