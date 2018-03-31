@@ -2,6 +2,7 @@ package app.co.uk.tensorflow.util
 
 import android.content.res.AssetManager
 import android.graphics.Bitmap
+import app.co.uk.tensorflow.model.Result
 import app.co.uk.tensorflow.util.Keys.DIM_BATCH_SIZE
 import app.co.uk.tensorflow.util.Keys.DIM_IMG_SIZE_X
 import app.co.uk.tensorflow.util.Keys.DIM_IMG_SIZE_Y

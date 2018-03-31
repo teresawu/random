@@ -1,4 +1,4 @@
-package app.co.uk.tensorflow.util
+package app.co.uk.tensorflow.model
 
 import android.graphics.RectF
 
