@@ -28,7 +28,7 @@ class ImageClassifier constructor(private val assetManager: AssetManager) {
     private var interpreter: Interpreter? = null
     private var labelProb: Array<ByteArray>
     private val labels = Vector<String>()
-    private var intValues: IntArray? = null
+    private val intValues by lazy { IntArray(INPUT_SIZE * INPUT_SIZE) }
     private var imgData: ByteBuffer
 
     init {
@@ -42,7 +42,7 @@ class ImageClassifier constructor(private val assetManager: AssetManager) {
         } catch (e: IOException) {
             throw RuntimeException("Problem reading label file!", e)
         }
-
+        labelProb = Array(1) { ByteArray(labels.size) }
         imgData = ByteBuffer.allocateDirect(DIM_BATCH_SIZE * DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y * DIM_PIXEL_SIZE)
         imgData!!.order(ByteOrder.nativeOrder())
         try {
@@ -50,9 +50,6 @@ class ImageClassifier constructor(private val assetManager: AssetManager) {
         } catch (e: Exception) {
             throw RuntimeException(e)
         }
-        // Pre-allocate buffers.
-        intValues = IntArray(INPUT_SIZE * INPUT_SIZE)
-        labelProb = Array(1) { ByteArray(labels.size) }
     }
 
 
@@ -63,10 +60,10 @@ class ImageClassifier constructor(private val assetManager: AssetManager) {
         var pixel = 0
         for (i in 0 until DIM_IMG_SIZE_X) {
             for (j in 0 until DIM_IMG_SIZE_Y) {
-                val `val` = intValues!![pixel++]
-                imgData!!.put((`val` shr 16 and 0xFF).toByte())
-                imgData!!.put((`val` shr 8 and 0xFF).toByte())
-                imgData!!.put((`val` and 0xFF).toByte())
+                val value = intValues!![pixel++]
+                imgData!!.put((value shr 16 and 0xFF).toByte())
+                imgData!!.put((value shr 8 and 0xFF).toByte())
+                imgData!!.put((value and 0xFF).toByte())
             }
         }
     }
@@ -81,20 +78,22 @@ class ImageClassifier constructor(private val assetManager: AssetManager) {
     }
 
     fun recognizeImage(bitmap: Bitmap): Single<List<Result>> {
-        convertBitmapToByteBuffer(bitmap)
-        interpreter!!.run(imgData, labelProb)
-        val pq = PriorityQueue<Result>(3,
-                Comparator<Result> { lhs, rhs ->
-                    // Intentionally reversed to put high confidence at the head of the queue.
-                    java.lang.Float.compare(rhs.confidence!!, lhs.confidence!!)
-                })
-        for (i in labels.indices) {
-            pq.add(Result("" + i, if (labels.size > i) labels[i] else "unknown", labelProb[0][i].toFloat(), null))
+        return Single.just(bitmap).flatMap {
+            convertBitmapToByteBuffer(it)
+            interpreter!!.run(imgData, labelProb)
+            val pq = PriorityQueue<Result>(3,
+                    Comparator<Result> { lhs, rhs ->
+                        // Intentionally reversed to put high confidence at the head of the queue.
+                        java.lang.Float.compare(rhs.confidence!!, lhs.confidence!!)
+                    })
+            for (i in labels.indices) {
+                pq.add(Result("" + i, if (labels.size > i) labels[i] else "unknown", labelProb[0][i].toFloat(), null))
+            }
+            val recognitions = ArrayList<Result>()
+            val recognitionsSize = Math.min(pq.size, MAX_RESULTS)
+            for (i in 0 until recognitionsSize) recognitions.add(pq.poll())
+            return@flatMap Single.just(recognitions)
         }
-        val recognitions = ArrayList<Result>()
-        val recognitionsSize = Math.min(pq.size, MAX_RESULTS)
-        for (i in 0 until recognitionsSize) recognitions.add(pq.poll())
-        return Single.just(recognitions)
     }
 
     fun close() {
