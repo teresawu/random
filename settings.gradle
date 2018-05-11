@@ -1,1 +1,1 @@
-include ':app', ':tensorflow'
+include ':app', ':tensorflow', ':mlkit'

@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'realm-android'
 
 repositories {
     mavenCentral()
@@ -37,10 +36,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    aaptOptions {
-        noCompress "tflite"
-        noCompress "lite"
-    }
 }
 
 dependencies {
@@ -66,20 +61,17 @@ dependencies {
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
     implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
 
+    //ml kit lib
+    implementation "com.google.firebase:firebase-ml-vision:$rootProject.firebaseVision"
+    implementation "com.google.firebase:firebase-ml-vision-image-label-model:$rootProject.firebaseVision"
+    implementation "com.google.firebase:firebase-core:$rootProject.firebaseVision"
+
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
-
-    //other library
-    implementation 'org.tensorflow:tensorflow-android:+'
 
     //Junit imports
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.mockito:mockito-inline:$mockitoInlineVersion"
     kaptTest "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
-
-    //android test imports
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoCoreVersion", {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    androidTestImplementation "com.android.support.test:runner:$androidTestRunner"
 }
+apply plugin: 'com.google.gms.google-services'

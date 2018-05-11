@@ -14,6 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!--automatically download the ML model to the device after  app is installed-->
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="label,face" />
+
         <activity
             android:name=".view.NavActivity"
             android:screenOrientation="portrait"
@@ -39,6 +45,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="app.co.uk.tensorflow.view.VideoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="co.uk.mlkit.MLKitActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

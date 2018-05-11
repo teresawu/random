@@ -7,6 +7,22 @@
     android:padding="20dp">
 
     <Button
+        android:id="@+id/btnMLKit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/greyLight"
+        android:padding="10dp"
+        android:text="@string/mlkit"
+        android:textColor="@color/greyDark"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnTensorFlowImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <Button
         android:id="@+id/btnTensorFlowImage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -19,8 +35,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnTensorFlowVideo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintTop_toBottomOf="@id/btnMLKit" />
 
     <Button
         android:id="@+id/btnTensorFlowVideo"

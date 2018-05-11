@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="20dp">
+
+    <Button
+        android:id="@+id/btnImageLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/greyLight"
+        android:text="@string/image_label"
+        android:textColor="@color/greyDark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageResult"
+        app:layout_constraintEnd_toStartOf="@+id/btnTextRecognition"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnTextRecognition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/greyLight"
+        android:padding="10dp"
+        android:text="@string/text_recogition"
+        android:textColor="@color/greyDark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageResult"
+        app:layout_constraintEnd_toStartOf="@+id/btnFaceDetection"
+        app:layout_constraintStart_toEndOf="@id/btnImageLabel"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnFaceDetection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/greyLight"
+        android:text="@string/face_detection"
+        android:textColor="@color/greyDark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageResult"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnTextRecognition"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageResult"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:background="@color/greyLight"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/txtResult"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnImageLabel" />
+
+    <TextView
+        android:id="@+id/txtResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/green"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageResult" />
+</android.support.constraint.ConstraintLayout>
