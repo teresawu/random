@@ -28,7 +28,7 @@ class ImageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_image)
         classifier = TensorImageClassifier(getAssets())
         checkPermission()
-        txtResult.setOnClickListener {
+        imageResult.setOnClickListener {
             choosePicture()
         }
     }
@@ -36,7 +36,6 @@ class ImageActivity : AppCompatActivity() {
     private fun checkPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
-            imageResult.setEnabled(false)
         }
     }
 
