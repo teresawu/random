@@ -6,46 +6,39 @@
     android:background="@android:color/white"
     android:padding="20dp">
 
-    <Button
-        android:id="@+id/btnImageLabel"
+    <RadioGroup
+        android:id="@+id/radioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/greyLight"
-        android:text="@string/image_label"
-        android:textColor="@color/greyDark"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageResult"
-        app:layout_constraintEnd_toStartOf="@+id/btnTextRecognition"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnTextRecognition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/greyLight"
-        android:padding="10dp"
-        android:text="@string/text_recogition"
-        android:textColor="@color/greyDark"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageResult"
-        app:layout_constraintEnd_toStartOf="@+id/btnFaceDetection"
-        app:layout_constraintStart_toEndOf="@id/btnImageLabel"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnFaceDetection"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/greyLight"
-        android:text="@string/face_detection"
-        android:textColor="@color/greyDark"
-        android:textSize="14sp"
+        android:orientation='horizontal'
         app:layout_constraintBottom_toTopOf="@+id/imageResult"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btnTextRecognition"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/btnImageLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:checked="true"
+            android:text="@string/image_label" />
+
+        <RadioButton
+            android:id="@+id/btnTextRecognition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="@string/text_recogition" />
+
+        <RadioButton
+            android:id="@+id/btnFaceDetection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="@string/face_detection" />
+
+    </RadioGroup>
 
     <ImageView
         android:id="@+id/imageResult"
@@ -56,7 +49,7 @@
         app:layout_constraintBottom_toTopOf="@+id/txtResult"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnImageLabel" />
+        app:layout_constraintTop_toBottomOf="@id/radioButton" />
 
     <TextView
         android:id="@+id/txtResult"
