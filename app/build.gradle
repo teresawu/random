@@ -41,8 +41,8 @@ android {
         applicationId "co.uk.random"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionName versionName(versionMajor, versionMinor, versionPatch)
-        versionCode versionCode(versionMajor, versionMinor, versionPatch)
+        versionCode 1
+        versionName "1.0.0"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -101,7 +101,7 @@ dependencies {
     implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
-    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28'
     implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
 
     // Picasso
@@ -117,16 +117,4 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     androidTestImplementation "com.android.support.test:runner:$androidTestRunner"
-}
-
-def versionName(major, minor, patch) {
-    return "${major}.${minor}.${patch}"
-}
-
-def buildNumber() {
-    return System.getenv("BUILD_NUMBER") as Integer
-}
-
-def versionCode(major, minor, patch) {
-    return buildNumber() ?: major * 10000 + minor * 1000 + patch * 100
 }
