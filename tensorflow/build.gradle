@@ -71,7 +71,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
     //other library
-    implementation 'org.tensorflow:tensorflow-lite:0.1'
+    implementation 'org.tensorflow:tensorflow-android:+'
 
     //Junit imports
     testImplementation "junit:junit:$junitVersion"

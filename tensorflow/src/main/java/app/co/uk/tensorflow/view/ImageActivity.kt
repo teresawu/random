@@ -11,8 +11,8 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import app.co.uk.tensorflow.R
-import app.co.uk.tensorflow.util.ImageClassifier
 import app.co.uk.tensorflow.util.Keys.INPUT_SIZE
+import app.co.uk.tensorflow.util.TensorImageClassifier
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_image.*
 import java.io.FileNotFoundException
@@ -21,14 +21,14 @@ import java.io.FileNotFoundException
 class ImageActivity : AppCompatActivity() {
     private val CHOOSE_IMAGE = 1001
     private lateinit var photoImage: Bitmap
-    private lateinit var classifier: ImageClassifier
+    private lateinit var classifier: TensorImageClassifier
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image)
-        classifier = ImageClassifier(getAssets())
+        classifier = TensorImageClassifier(getAssets())
         checkPermission()
-        imageResult.setOnClickListener {
+        txtResult.setOnClickListener {
             choosePicture()
         }
     }
