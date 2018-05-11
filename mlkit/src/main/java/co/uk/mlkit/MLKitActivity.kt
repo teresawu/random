@@ -9,9 +9,8 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
-import android.util.Log
+import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import dagger.android.support.DaggerAppCompatActivity
-import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_mlkit.*
 import java.io.FileNotFoundException
 import javax.inject.Inject
@@ -24,7 +23,6 @@ class MLKitActivity : DaggerAppCompatActivity() {
     private lateinit var photoImage: Bitmap
     @Inject
     lateinit var labelViewModel: LabelViewModel
-    private val buttons by lazy { arrayOf(btnImageLabel, btnFaceDetection, btnTextRecognition) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +33,7 @@ class MLKitActivity : DaggerAppCompatActivity() {
 
     private fun setUI() {
         imageResult.setOnClickListener {
-            choosePicture(action)
+            choosePicture(IMAGE_LABEL)
         }
 
         radioButton.setOnCheckedChangeListener { radioGroup, checkedId ->
@@ -71,19 +69,25 @@ class MLKitActivity : DaggerAppCompatActivity() {
 
     private fun imageLabelAction(data: Intent) {
         try {
+            txtResult.text = "loading..."
             val stream = contentResolver!!.openInputStream(data.getData())
+            var text = ""
             if (::photoImage.isInitialized) photoImage.recycle()
             photoImage = BitmapFactory.decodeStream(stream)
+            val image = FirebaseVisionImage.fromBitmap(photoImage)
             imageResult.setImageBitmap(photoImage)
-            labelViewModel.detectObject(photoImage).subscribeBy(
-                    onSuccess = {
-                        //                            txtResult.text = it[0].text
-                        txtResult.text = "image Label Action"
-                    },
-                    onError = {
-                        Log.i("image label", it.message + "")
+            labelViewModel.deviceDetector.detectInImage(image)
+                    .addOnSuccessListener {
+                        if (it != null && it.isNotEmpty()) {
+                            for (i in it.indices)
+                                text += it[i].label + " = " + it[i].confidence + "\n"
+                        }
+                        txtResult.text = text
                     }
-            )
+//            labelViewModel.firebaseDetector.detectInImage(image)
+//                    .addOnSuccessListener {
+//                        if (it != null && it.isNotEmpty()) txtResult.text = it[0].label
+//                    }
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
         }
