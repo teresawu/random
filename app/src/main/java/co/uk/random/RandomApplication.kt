@@ -1,9 +1,12 @@
 package co.uk.random
 
 import android.app.Activity
-import android.app.Application
+import android.support.multidex.MultiDexApplication
 import android.support.v4.app.Fragment
 import co.uk.random.di.DaggerAppComponent
+import co.uk.random.util.Keys.API_KEY_FIREBASE
+import co.uk.random.util.Keys.APP_ID
+import co.uk.random.util.Keys.APP_NAME
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import dagger.android.AndroidInjector
@@ -13,7 +16,7 @@ import dagger.android.support.HasSupportFragmentInjector
 import io.realm.Realm
 import javax.inject.Inject
 
-class RandomApplication : Application(), HasActivityInjector, HasSupportFragmentInjector {
+class RandomApplication : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInjector {
 
     @Inject lateinit var activityDispatchingInjector: DispatchingAndroidInjector<Activity>
     @Inject lateinit var fragmentDispatchingjector: DispatchingAndroidInjector<Fragment>
@@ -21,7 +24,10 @@ class RandomApplication : Application(), HasActivityInjector, HasSupportFragment
     override fun onCreate() {
         super.onCreate()
         Realm.init(this)
-        FirebaseApp.initializeApp(this, FirebaseOptions.Builder().build())
+        val firebaseOptions = FirebaseOptions.Builder()
+                .setApiKey(API_KEY_FIREBASE)
+                .setApplicationId(APP_ID).build()
+        FirebaseApp.initializeApp(this, firebaseOptions, APP_NAME)
         DaggerAppComponent.builder()
                 .application(this)
                 .build()

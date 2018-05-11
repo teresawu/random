@@ -51,11 +51,12 @@ class MLKitActivity : DaggerAppCompatActivity() {
                 if (::photoImage.isInitialized) photoImage.recycle()
                 photoImage = BitmapFactory.decodeStream(stream)
                 imageResult.setImageBitmap(photoImage)
-                labelViewModel.detectObject(photoImage).subscribeBy(
-                        onSuccess = {
-                            txtResult.text = it[0].text
-                        }
-                )
+                labelViewModel.detectObject(photoImage)
+//                        .subscribeBy(
+//                        onSuccess = {
+//                            txtResult.text = it[0].text
+//                        }
+//                )
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
             }

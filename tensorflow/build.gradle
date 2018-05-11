@@ -10,8 +10,6 @@ repositories {
 
 buildscript {
     repositories {
-        jcenter()
-        google()
         maven { url 'https://google.bintray.com/tensorflow'}
     }
 }
@@ -58,28 +56,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
     implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rxkotlinVersion"
 
-    // Dagger
-    implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
-    compileOnly 'org.glassfish:javax.annotation:10.0-b28'
-    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
-
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
     //other library
     implementation 'org.tensorflow:tensorflow-android:+'
-
-    //Junit imports
-    testImplementation "junit:junit:$junitVersion"
-    testImplementation "org.mockito:mockito-inline:$mockitoInlineVersion"
-    kaptTest "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
-
-    //android test imports
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoCoreVersion", {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    androidTestImplementation "com.android.support.test:runner:$androidTestRunner"
 }

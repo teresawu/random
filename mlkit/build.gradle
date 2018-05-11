@@ -3,18 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-repositories {
-    mavenCentral()
-}
-
-buildscript {
-    repositories {
-        jcenter()
-        google()
-        maven { url 'https://google.bintray.com/tensorflow'}
-    }
-}
-
 kapt {
     generateStubs = true
 }
@@ -24,10 +12,7 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
         vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -64,14 +49,7 @@ dependencies {
     //ml kit lib
     implementation "com.google.firebase:firebase-ml-vision:$rootProject.firebaseVision"
     implementation "com.google.firebase:firebase-ml-vision-image-label-model:$rootProject.firebaseVision"
-    implementation "com.google.firebase:firebase-core:$rootProject.firebaseVision"
 
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
-
-    //Junit imports
-    testImplementation "junit:junit:$junitVersion"
-    testImplementation "org.mockito:mockito-inline:$mockitoInlineVersion"
-    kaptTest "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
 }
-apply plugin: 'com.google.gms.google-services'
