@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:padding="20dp">
+    android:paddingHorizontal="20dp">
 
     <RadioGroup
         android:id="@+id/radioButton"
@@ -56,10 +56,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/green"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageResult" />
+        app:layout_constraintTop_toBottomOf="@id/imageResult"/>
 </android.support.constraint.ConstraintLayout>
