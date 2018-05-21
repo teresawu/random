@@ -18,7 +18,7 @@
         <!--automatically download the ML model to the device after  app is installed-->
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
-            android:value="label,face" />
+            android:value="label,text" />
 
         <activity
             android:name=".view.NavActivity"
