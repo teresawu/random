@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
-import android.util.Log
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_mlkit.*
@@ -20,7 +19,7 @@ import javax.inject.Inject
 class MLKitActivity : DaggerAppCompatActivity() {
     private val IMAGE_LABEL = 1001
     private val TEXT_RECOGNITION = 1002
-    private val FACE_DETECTION = 1003
+    private val SMART_REPLY = 1003
     private var action = IMAGE_LABEL
     private lateinit var photoImage: Bitmap
     private lateinit var firebaseImage: FirebaseVisionImage
@@ -39,18 +38,14 @@ class MLKitActivity : DaggerAppCompatActivity() {
 
     private fun setUI() {
         imageResult.setOnClickListener {
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-            intent.addCategory(Intent.CATEGORY_OPENABLE)
-            startActivityForResult(intent, action)
+            startActivityForResult(labelViewModel.imageIntent(), action)
         }
 
         radioButton.setOnCheckedChangeListener { radioGroup, checkedId ->
             when (checkedId) {
                 R.id.btnImageLabel -> action = IMAGE_LABEL
                 R.id.btnTextRecognition -> action = TEXT_RECOGNITION
-                R.id.btnFaceDetection -> action = FACE_DETECTION
+                R.id.btnSmartReply -> action = SMART_REPLY
             }
         }
     }
@@ -92,7 +87,7 @@ class MLKitActivity : DaggerAppCompatActivity() {
         var text = ""
         labelViewModel.textDeviceDetector.detectInImage(firebaseImage)
                 .addOnSuccessListener {
-                    for (block in it.blocks) text += block.text+"\n"
+                    for (block in it.blocks) text += block.text + "\n"
                     txtResult.text = text
                 }
 
@@ -113,7 +108,7 @@ class MLKitActivity : DaggerAppCompatActivity() {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 IMAGE_LABEL, TEXT_RECOGNITION -> imageRecognitionAction(data)
-                FACE_DETECTION -> faceDetectionAction(data)
+                SMART_REPLY -> faceDetectionAction(data)
             }
         }
     }

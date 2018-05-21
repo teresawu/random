@@ -50,7 +50,8 @@
         app:layout_constraintBottom_toTopOf="@+id/btnYoutube"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnTensorFlowImage" />
+        app:layout_constraintTop_toBottomOf="@id/btnTensorFlowImage"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/btnYoutube"

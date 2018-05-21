@@ -2,5 +2,5 @@
     <string name="app_name">ML Kit</string>
     <string name="image_label">Image</string>
     <string name="text_recogition">Text</string>
-    <string name="face_detection">Face</string>
+    <string name="smart_reply">Smart(coming...)</string>
 </resources>

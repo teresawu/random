@@ -1,5 +1,6 @@
 package co.uk.mlkit
 
+import android.content.Intent
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.cloud.FirebaseVisionCloudDetectorOptions
 import com.google.firebase.ml.vision.cloud.label.FirebaseVisionCloudLabelDetector
@@ -30,5 +31,13 @@ class LabelViewModel @Inject constructor() {
         labelCloudDetector = FirebaseVision.getInstance().visionCloudLabelDetector
         textDeviceDetector = FirebaseVision.getInstance().visionTextDetector
         textCloudDetector = FirebaseVision.getInstance().getVisionCloudTextDetector(cloudOption)
+    }
+
+    fun imageIntent(): Intent {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        return intent
     }
 }
