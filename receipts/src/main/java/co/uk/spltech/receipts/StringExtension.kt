@@ -2,17 +2,21 @@ package co.uk.spltech.receipts
 
 import java.util.*
 
-fun String.findLargestFloat(): String {
+fun String.findFloat(): ArrayList<Float> {
     //get digits from result
-    if (this == null || this.isEmpty()) return ""
+    if (this == null || this.isEmpty()) return ArrayList<Float>()
     val originalResult = ArrayList<Float>()
     val matchedResults = Regex(pattern = "[+-]?([0-9]*[.])?[0-9]+").findAll(this)
     if (matchedResults != null)
         for (txt in matchedResults) {
             if (txt.value.isFloatAndWhole()) originalResult.add(txt.value.toFloat())
         }
-    return if (originalResult.isNotEmpty()) Collections.max(originalResult).toString()
-    else return ""
+    return originalResult
+}
+
+fun String.firstLine(): String {
+    if (this == null || this.isEmpty()) return ""
+    return this.split("\n").get(0)
 }
 
 private fun String.isFloatAndWhole() = this.matches("\\d*\\.\\d*".toRegex())

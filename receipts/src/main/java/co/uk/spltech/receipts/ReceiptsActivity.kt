@@ -73,9 +73,10 @@ class ReceiptsActivity : DaggerAppCompatActivity() {
         receiptsViewModel.textDeviceDetector.detectInImage(firebaseImage)
                 .addOnSuccessListener {
                     for (block in it.blocks) text += block.text + "\n"
-                    val result = text.findLargestFloat()
-                    editTotal.setText(result, TextView.BufferType.EDITABLE)
-                    editLocation.setText(text, TextView.BufferType.EDITABLE)
+                    val receipts = receiptsViewModel.getReceipts(text)
+                    editTotal.setText(receipts.total, TextView.BufferType.EDITABLE)
+                    editLocation.setText(receipts.type, TextView.BufferType.EDITABLE)
+                    editVAT.setText(receipts.vat, TextView.BufferType.EDITABLE)
                 }
     }
 

@@ -64,4 +64,31 @@ class ReceiptsViewModel @Inject constructor() {
         pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageURI)
         return pictureIntent
     }
+
+    fun getReceipts(text: String): Receipts {
+        val originalResult = text.findFloat()
+        if (originalResult == null || originalResult.isEmpty()) return Receipts()
+        else {
+            val receipts = Receipts()
+            val totalF = Collections.max(originalResult)
+            val secondLargestF = findSecondLargestFloat(originalResult)
+            receipts.total = totalF.toString()
+            receipts.vat = if (secondLargestF == 0.0f) "0" else "%.2f".format(totalF - secondLargestF)
+            receipts.type = text.firstLine()
+            return receipts
+        }
+    }
+
+    private fun findSecondLargestFloat(input: ArrayList<Float>): Float {
+        if (input == null || input.isEmpty() || input.size == 1) return 0.0f
+        else {
+            try {
+                val tempSet = HashSet(input)
+                val sortedSet = TreeSet(tempSet)
+                return sortedSet.elementAt(sortedSet.size - 2)
+            } catch (e: Exception) {
+                return 0.0f
+            }
+        }
+    }
 }
