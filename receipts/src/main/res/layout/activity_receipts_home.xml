@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
@@ -13,21 +12,28 @@
         android:layout_height="match_parent">
 
         <android.support.constraint.Barrier
-            android:id="@+id/barrier"
+            android:id="@+id/barTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="right"
             app:constraint_referenced_ids="txtTotal,editTotal" />
 
+        <android.support.constraint.Barrier
+            android:id="@+id/barLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="right"
+            app:constraint_referenced_ids="txtLocation,editLocation" />
+
         <TextView
             android:id="@+id/txtCamera"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:background="@color/greyDark"
             android:gravity="center"
             android:padding="10dp"
-            android:text="@string/text_upload"
+            android:text="@string/text_camera"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -39,11 +45,11 @@
             android:id="@+id/txtUpload"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
             android:background="@color/greyDark"
             android:gravity="center"
             android:padding="10dp"
-            android:text="@string/text_camera"
+            android:text="@string/text_upload"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -62,7 +68,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtCamera" />
 
-
         <TextView
             android:id="@+id/txtTotal"
             android:layout_width="wrap_content"
@@ -78,17 +83,41 @@
 
         <EditText
             android:id="@+id/editTotal"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
-            android:gravity="center"
             android:padding="10dp"
             android:text="@string/text_total"
             android:textColor="@color/greyDark"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/txtTotal"
-            app:layout_constraintTop_toBottomOf="@id/imageResult"
-            tools:background="@color/greyDark" />
+            app:layout_constraintTop_toBottomOf="@id/imageResult" />
+
+        <TextView
+            android:id="@+id/txtLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/text_location"
+            android:textColor="@color/greyDark"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtTotal" />
+
+        <EditText
+            android:id="@+id/editLocation"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:text="@string/text_location"
+            android:textColor="@color/greyDark"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/txtLocation"
+            app:layout_constraintTop_toBottomOf="@id/txtTotal" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -4,6 +4,9 @@
 
     <uses-permission-sdk-23 android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:name=".RandomApplication"
@@ -50,6 +53,11 @@
 
         <activity
             android:name="co.uk.mlkit.MLKitActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="co.uk.spltech.receipts.ReceiptsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

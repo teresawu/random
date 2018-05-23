@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Random</string>
     <string name="mlkit">ML Kit</string>
+    <string name="receipts">Receipts</string>
     <string name="tensorflow_image">TensorFlow Image</string>
     <string name="tensorflow_video">TensorFlow Video</string>
     <string name="youtube">Youtube</string>
