@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import com.squareup.picasso.Picasso
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_receipts_home.*
 import java.io.FileNotFoundException
@@ -17,7 +18,7 @@ import javax.inject.Inject
 
 
 class ReceiptsActivity : DaggerAppCompatActivity() {
-    private val IMAGE_ACTION = 2001
+    private val UPLOAD_ACTION = 2001
     private val PERMISSION_ACTION = 2002
     private val CAMERA_ACTION = 2003
     private lateinit var photoImage: Bitmap
@@ -37,12 +38,11 @@ class ReceiptsActivity : DaggerAppCompatActivity() {
 
     private fun setUI() {
         txtUpload.setOnClickListener {
-            startActivityForResult(receiptsViewModel.uploadIntent(), IMAGE_ACTION)
+            startActivityForResult(receiptsViewModel.uploadIntent(), UPLOAD_ACTION)
         }
 
         txtCamera.setOnClickListener {
-            val intent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(intent, CAMERA_ACTION)
+            startActivityForResult(receiptsViewModel.cameraIntent(this), CAMERA_ACTION)
         }
     }
 
@@ -69,10 +69,13 @@ class ReceiptsActivity : DaggerAppCompatActivity() {
                 }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        if (resultCode == Activity.RESULT_OK) {
-            if (data != null && data.extras != null) imageRecognitionAction(data)
-        }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK)
+            when (requestCode) {
+                UPLOAD_ACTION -> if (data != null && data.extras != null) imageRecognitionAction(data)
+                CAMERA_ACTION ->
+                    Picasso.with(this).load(receiptsViewModel.imageURI).into(imageResult)
+            }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
