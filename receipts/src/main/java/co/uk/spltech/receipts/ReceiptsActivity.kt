@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.widget.TextView
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.squareup.picasso.Picasso
 import dagger.android.support.DaggerAppCompatActivity
@@ -46,36 +47,46 @@ class ReceiptsActivity : DaggerAppCompatActivity() {
         }
     }
 
-    private fun imageRecognitionAction(data: Intent) {
+    private fun uploadAction(data: Intent) {
         try {
             val stream = contentResolver!!.openInputStream(data.getData())
             if (::photoImage.isInitialized) photoImage.recycle()
             photoImage = BitmapFactory.decodeStream(stream)
             firebaseImage = FirebaseVisionImage.fromBitmap(photoImage)
             imageResult.setImageBitmap(photoImage)
-            imageTextAction()
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
         }
     }
 
-    private fun imageTextAction() {
-        var total = ""
-        var location = ""
+    private fun cameraAction() {
+        try {
+            Picasso.with(this).load(receiptsViewModel.imageURI).into(imageResult)
+            firebaseImage = FirebaseVisionImage.fromFilePath(this, receiptsViewModel.imageURI)
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun textRecognitionAction() {
+        var text = ""
         receiptsViewModel.textDeviceDetector.detectInImage(firebaseImage)
                 .addOnSuccessListener {
-                    for (block in it.blocks) total += block.text + "\n"
-                    txtTotal.text = total
+                    for (block in it.blocks) text += block.text + "\n"
+                    val result = text.findLargestFloat()
+                    editTotal.setText(result, TextView.BufferType.EDITABLE)
+                    editLocation.setText(text, TextView.BufferType.EDITABLE)
                 }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK)
+        if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
-                UPLOAD_ACTION -> if (data != null && data.extras != null) imageRecognitionAction(data)
-                CAMERA_ACTION ->
-                    Picasso.with(this).load(receiptsViewModel.imageURI).into(imageResult)
+                UPLOAD_ACTION -> uploadAction(data!!)
+                CAMERA_ACTION -> cameraAction()
             }
+            textRecognitionAction()
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {

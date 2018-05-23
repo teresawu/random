@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
@@ -88,11 +89,11 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:padding="10dp"
-            android:text="@string/text_total"
             android:textColor="@color/greyDark"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/txtTotal"
-            app:layout_constraintTop_toBottomOf="@id/imageResult" />
+            app:layout_constraintTop_toBottomOf="@id/imageResult"
+            tools:text="@string/text_total" />
 
         <TextView
             android:id="@+id/txtLocation"
@@ -114,10 +115,10 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:padding="10dp"
-            android:text="@string/text_location"
             android:textColor="@color/greyDark"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/txtLocation"
-            app:layout_constraintTop_toBottomOf="@id/txtTotal" />
+            app:layout_constraintTop_toBottomOf="@id/txtTotal"
+            tools:text="@string/text_location" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>
