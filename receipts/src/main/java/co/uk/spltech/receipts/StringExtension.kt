@@ -4,12 +4,15 @@ import java.util.*
 
 fun String.findLargestFloat(): String {
     //get digits from result
-    val matchedResults = Regex(pattern = "[+-]?([0-9]*[.])?[0-9]+").findAll(this)
+    if (this == null || this.isEmpty()) return ""
     val originalResult = ArrayList<Float>()
-    for (txt in matchedResults) {
-        if (txt.value.isFloatAndWhole()) originalResult.add(txt.value.toFloat())
-    }
-    return Collections.max(originalResult).toString()
+    val matchedResults = Regex(pattern = "[+-]?([0-9]*[.])?[0-9]+").findAll(this)
+    if (matchedResults != null)
+        for (txt in matchedResults) {
+            if (txt.value.isFloatAndWhole()) originalResult.add(txt.value.toFloat())
+        }
+    return if (originalResult.isNotEmpty()) Collections.max(originalResult).toString()
+    else return ""
 }
 
 private fun String.isFloatAndWhole() = this.matches("\\d*\\.\\d*".toRegex())

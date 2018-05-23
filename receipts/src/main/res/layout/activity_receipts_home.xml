@@ -61,7 +61,7 @@
         <ImageView
             android:id="@+id/imageResult"
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="300dp"
             android:layout_marginTop="20dp"
             android:background="@color/greyLight"
             android:scaleType="centerCrop"
