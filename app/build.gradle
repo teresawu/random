@@ -59,6 +59,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':tensorflow')
     implementation project(':mlkit')
+    implementation project(':receipts')
 
     // Android
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$rootProject.kotlinVersion"

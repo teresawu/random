@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Receipts</string>
+    <string name="text_upload">Upload</string>
+    <string name="text_camera">Camera</string>
+    <string name="text_total">Total: </string>
+    <string name="text_vat">VAT: </string>
+    <string name="text_location">Location: </string>
+</resources>
