@@ -20,26 +20,11 @@ import javax.inject.Inject
 
 
 class ReceiptsViewModel @Inject constructor() {
-    val labelDeviceDetector: FirebaseVisionLabelDetector
-    val labelCloudDetector: FirebaseVisionCloudLabelDetector
     val textDeviceDetector: FirebaseVisionTextDetector
-    val textCloudDetector: FirebaseVisionCloudTextDetector
     lateinit var imageURI: Uri
 
     init {
-        val deviceLabelOptions = FirebaseVisionLabelDetectorOptions.Builder()
-                .setConfidenceThreshold(0.8f)
-                .build()
-
-        val cloudOption = FirebaseVisionCloudDetectorOptions.Builder()
-                .setModelType(FirebaseVisionCloudDetectorOptions.LATEST_MODEL)
-                .setMaxResults(15)
-                .build()
-
-        labelDeviceDetector = FirebaseVision.getInstance().getVisionLabelDetector(deviceLabelOptions)
-        labelCloudDetector = FirebaseVision.getInstance().visionCloudLabelDetector
         textDeviceDetector = FirebaseVision.getInstance().visionTextDetector
-        textCloudDetector = FirebaseVision.getInstance().getVisionCloudTextDetector(cloudOption)
     }
 
     fun uploadIntent(): Intent {
