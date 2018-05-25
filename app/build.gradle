@@ -60,6 +60,7 @@ dependencies {
     implementation project(':tensorflow')
     implementation project(':mlkit')
     implementation project(':receipts')
+    implementation project(':youtube')
 
     // Android
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$rootProject.kotlinVersion"

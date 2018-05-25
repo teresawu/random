@@ -3,10 +3,10 @@ package co.uk.random
 import android.app.Activity
 import android.support.multidex.MultiDexApplication
 import android.support.v4.app.Fragment
+import co.uk.random.Keys.API_KEY_FIREBASE
+import co.uk.random.Keys.APP_ID
+import co.uk.random.Keys.APP_NAME
 import co.uk.random.di.DaggerAppComponent
-import co.uk.random.util.Keys.API_KEY_FIREBASE
-import co.uk.random.util.Keys.APP_ID
-import co.uk.random.util.Keys.APP_NAME
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import dagger.android.AndroidInjector
@@ -18,8 +18,10 @@ import javax.inject.Inject
 
 class RandomApplication : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInjector {
 
-    @Inject lateinit var activityDispatchingInjector: DispatchingAndroidInjector<Activity>
-    @Inject lateinit var fragmentDispatchingjector: DispatchingAndroidInjector<Fragment>
+    @Inject
+    lateinit var activityDispatchingInjector: DispatchingAndroidInjector<Activity>
+    @Inject
+    lateinit var fragmentDispatchingjector: DispatchingAndroidInjector<Fragment>
 
     override fun onCreate() {
         super.onCreate()

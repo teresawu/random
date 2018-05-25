@@ -4,13 +4,12 @@ import java.util.*
 
 fun String.findFloat(): ArrayList<Float> {
     //get digits from result
-    if (this == null || this.isEmpty()) return ArrayList<Float>()
+    if (this.isEmpty()) return ArrayList<Float>()
     val originalResult = ArrayList<Float>()
     val matchedResults = Regex(pattern = "[+-]?([0-9]*[.])?[0-9]+").findAll(this)
-    if (matchedResults != null)
-        for (txt in matchedResults) {
-            if (txt.value.isFloatAndWhole()) originalResult.add(txt.value.toFloat())
-        }
+    for (txt in matchedResults) {
+        if (txt.value.isFloatAndWhole()) originalResult.add(txt.value.toFloat())
+    }
     return originalResult
 }
 

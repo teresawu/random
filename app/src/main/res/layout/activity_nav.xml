@@ -63,11 +63,11 @@
         android:textColor="@android:color/white"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/btnYoutube"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnTensorFlowImage"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toBottomOf="@id/btnTensorFlowImage" />
 
     <Button
         android:id="@+id/btnYoutube"

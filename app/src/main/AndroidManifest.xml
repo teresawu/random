@@ -24,7 +24,7 @@
             android:value="label,text" />
 
         <activity
-            android:name=".view.NavActivity"
+            android:name=".NavActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -38,7 +38,7 @@
         </activity>
 
         <activity
-            android:name=".view.home.HomeActivity"
+            android:name="co.uk.youtube.view.home.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -68,8 +68,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_path">
-            </meta-data>
+                android:resource="@xml/file_path"></meta-data>
         </provider>
     </application>
 

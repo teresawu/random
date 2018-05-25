@@ -7,11 +7,6 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.support.v4.content.FileProvider
 import com.google.firebase.ml.vision.FirebaseVision
-import com.google.firebase.ml.vision.cloud.FirebaseVisionCloudDetectorOptions
-import com.google.firebase.ml.vision.cloud.label.FirebaseVisionCloudLabelDetector
-import com.google.firebase.ml.vision.cloud.text.FirebaseVisionCloudTextDetector
-import com.google.firebase.ml.vision.label.FirebaseVisionLabelDetector
-import com.google.firebase.ml.vision.label.FirebaseVisionLabelDetectorOptions
 import com.google.firebase.ml.vision.text.FirebaseVisionTextDetector
 import java.io.File
 import java.text.SimpleDateFormat
@@ -52,7 +47,7 @@ class ReceiptsViewModel @Inject constructor() {
 
     fun getReceipts(text: String): Receipts {
         val originalResult = text.findFloat()
-        if (originalResult == null || originalResult.isEmpty()) return Receipts()
+        if (originalResult.isEmpty()) return Receipts()
         else {
             val receipts = Receipts()
             val totalF = Collections.max(originalResult)
@@ -64,7 +59,7 @@ class ReceiptsViewModel @Inject constructor() {
         }
     }
 
-    private fun findSecondLargestFloat(input: ArrayList<Float>): Float {
+    private fun findSecondLargestFloat(input: ArrayList<Float>?): Float {
         if (input == null || input.isEmpty() || input.size == 1) return 0.0f
         else {
             try {
