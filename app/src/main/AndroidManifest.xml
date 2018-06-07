@@ -39,7 +39,10 @@
 
         <activity
             android:name="co.uk.youtube.view.home.HomeActivity"
-            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="co.uk.room.view.home.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
@@ -68,7 +71,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_path"></meta-data>
+                android:resource="@xml/file_path" />
         </provider>
     </application>
 

@@ -1,5 +1,6 @@
 package co.uk.youtube.view.playlist
 
+import android.arch.lifecycle.ViewModel
 import co.uk.youtube.api.YoutubeApiService
 import co.uk.youtube.error.ExceptionTransformers
 import co.uk.youtube.model.Playlist
@@ -9,7 +10,8 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class PlaylistViewModel @Inject constructor
-(private val exceptionTransformers: ExceptionTransformers, private val schedulerProvider: SchedulerProvider, private val youtubeApiService: YoutubeApiService) {
+(private val exceptionTransformers: ExceptionTransformers, private val schedulerProvider: SchedulerProvider, private val youtubeApiService: YoutubeApiService)
+    : ViewModel(){
     fun getPlaylist(playlistId: String): Single<Playlist> {
         return getPlaylistFromRealm()
                 .flatMap {

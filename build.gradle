@@ -10,12 +10,15 @@ buildscript {
         kotlinVersion = '1.2.31'
         googleServices = "3.2.0"
         supportLibraryVersion = '27.1.1'
-        constraintLayoutVersion = '1.1.0'
+        constraintLayoutVersion = '1.1.1'
         junitVersion = '4.12'
         espressoCoreVersion = '2.2.2'
         multiDexVersion = '1.0.2'
         androidTestRunner = "1.0.1"
         firebaseVision = "15.0.0"
+        lifecycleVersion="1.1.0"
+        roomVersion="1.1.0"
+        pagingVersion="1.0.0"
         //third party
         mockitoInlineVersion = '2.11.0'
         rxandroidVersion = "2.0.1"

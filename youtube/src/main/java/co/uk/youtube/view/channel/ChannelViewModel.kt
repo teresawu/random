@@ -1,5 +1,6 @@
 package co.uk.youtube.view.channel
 
+import android.arch.lifecycle.ViewModel
 import co.uk.youtube.api.YoutubeApiService
 import co.uk.youtube.error.ExceptionTransformers
 import co.uk.youtube.model.Channel
@@ -9,7 +10,8 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class ChannelViewModel @Inject constructor
-(private val exceptionTransformers: ExceptionTransformers, private val schedulerProvider: SchedulerProvider, private val youtubeApiService: YoutubeApiService) {
+(private val exceptionTransformers: ExceptionTransformers, private val schedulerProvider: SchedulerProvider, private val youtubeApiService: YoutubeApiService)
+    : ViewModel(){
     fun getChannel(): Single<Channel> {
         return getChannelFromRealm()
                 .flatMap {
