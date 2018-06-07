@@ -33,13 +33,14 @@ dependencies {
     implementation "com.android.support:design:$rootProject.supportLibraryVersion"
     implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
     implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
+    // Android arch component
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
-    annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"
     kapt "android.arch.persistence.room:compiler:$rootProject.roomVersion"
-    compile "android.arch.lifecycle:runtime:$rootProject.lifecycleVersion"
-    compile 'android.arch.lifecycle:extensions:1.1.1'
+    implementation "android.arch.lifecycle:runtime:$rootProject.lifecycleVersion"
+    implementation "android.arch.lifecycle:extensions:$rootProject.lifecycleVersion"
     kapt "android.arch.lifecycle:compiler:$rootProject.lifecycleVersion"
     implementation "android.arch.paging:runtime:$rootProject.pagingVersion"
+    implementation 'com.android.support:support-annotations:27.1.1'
 
     // Network
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"

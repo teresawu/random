@@ -75,6 +75,11 @@ dependencies {
     implementation "com.android.support:multidex:$rootProject.multiDexVersion"
     implementation "com.google.firebase:firebase-core:$rootProject.firebaseVision"
 
+    // Android arch component
+    implementation "android.arch.lifecycle:runtime:$rootProject.lifecycleVersion"
+    implementation "android.arch.lifecycle:extensions:$rootProject.lifecycleVersion"
+    kapt "android.arch.lifecycle:compiler:$rootProject.lifecycleVersion"
+
     // RxJava
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
     implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rxkotlinVersion"
