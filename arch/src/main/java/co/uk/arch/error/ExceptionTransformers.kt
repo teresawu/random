@@ -10,7 +10,7 @@ class ExceptionTransformers @Inject constructor() {
         return { it: Single<Response<T>> ->
             it.flatMap { t: Response<T> ->
                 if (t.errorBody() != null) {
-                    Single.error { RoomErrorMapper.transform(t.code(), t.errorBody()!!.string()) }
+                    Single.error { ArchErrorMapper.transform(t.code(), t.errorBody()!!.string()) }
                 } else {
                     Single.just(t.body())
                 }

@@ -8,7 +8,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface RoomApiService {
+interface ArchApiService {
 
     @GET("https://www.googleapis.com/youtube/v3/playlists?part=snippet&maxResults=50&channelId=UC_x5XG1OV2P6uZZ5FSM9Ttw&key=" + API_KEY)
     fun getChannel(): Single<Response<Channel>>

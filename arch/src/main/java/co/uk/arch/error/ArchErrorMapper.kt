@@ -9,13 +9,13 @@ import javax.inject.Inject
  * Maps all Retrofit errors to Exceptions we define in this module. Takes into account the
  * HTTP Response code and the message.
  */
-class RoomErrorMapper @Inject constructor() {
+class ArchErrorMapper @Inject constructor() {
 
     companion object {
         private const val ERROR_KEY = "error"
         private const val MESSAGE = "message"
 
-        fun transform(responseCode: Int, rawErrorBodyString: String): RoomHttpException =
+        fun transform(responseCode: Int, rawErrorBodyString: String): ArchHttpException =
                 when (responseCode) {
                     HttpURLConnection.HTTP_CONFLICT -> {
                         buildExceptionFromSkylarkApi(rawErrorBodyString, HttpURLConnection.HTTP_CONFLICT)
@@ -27,11 +27,11 @@ class RoomErrorMapper @Inject constructor() {
                         buildExceptionFromSkylarkApi(rawErrorBodyString, HttpURLConnection.HTTP_UNAUTHORIZED)
                     }
                     else -> {
-                        RoomHttpException(responseCode, "")
+                        ArchHttpException(responseCode, "")
                     }
                 }
 
-        private fun buildExceptionFromSkylarkApi(rawErrorBodyString: String, httpStatusCode: Int): RoomHttpException {
+        private fun buildExceptionFromSkylarkApi(rawErrorBodyString: String, httpStatusCode: Int): ArchHttpException {
             if (!rawErrorBodyString.isEmpty()) {
                 val map = rawErrorBodyString.parseJSONToMap()
                 val errorMessage: Any? = map[ERROR_KEY]
@@ -41,17 +41,17 @@ class RoomErrorMapper @Inject constructor() {
                             val skylarkErrorMessageMap = errorMessage.toString().parseJSONToMap()
                             val realMessageFromApi = skylarkErrorMessageMap[MESSAGE]
                             if (realMessageFromApi != null) {
-                                return RoomHttpException(httpStatusCode, realMessageFromApi.toString())
+                                return ArchHttpException(httpStatusCode, realMessageFromApi.toString())
                             }
                         } catch (e: JsonSyntaxException) {
-                            return RoomHttpException(httpStatusCode, errorMessage.toString())
+                            return ArchHttpException(httpStatusCode, errorMessage.toString())
                         }
-                        RoomHttpException(httpStatusCode, errorMessage.toString())
+                        ArchHttpException(httpStatusCode, errorMessage.toString())
                     }
-                    else -> RoomHttpException(httpStatusCode, "")
+                    else -> ArchHttpException(httpStatusCode, "")
                 }
             } else {
-                return RoomHttpException(httpStatusCode, "")
+                return ArchHttpException(httpStatusCode, "")
             }
         }
     }
