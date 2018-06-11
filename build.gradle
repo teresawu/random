@@ -2,6 +2,7 @@
 apply from: 'dependency.gradle'
 
 buildscript {
+    apply from: 'dependency.gradle'
     repositories {
         jcenter()
         google()
@@ -13,10 +14,7 @@ buildscript {
         maven { url 'http://clojars.org/repo' }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:3.1.3"
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.41'
-        classpath 'com.google.gms:google-services:3.2.0'
-        classpath 'io.realm:realm-gradle-plugin:4.1.1'
+        classpath classpaths.values()
     }
 }
 

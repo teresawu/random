@@ -38,6 +38,12 @@ ext.versions = [
         annotation        : "10.0-b28"
 ]
 
+ext.classpaths = [
+        gradle: "com.android.tools.build:gradle:$versions.gradle",
+        gradleKotlin: "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlinGradlePlugin",
+        googleServices: "com.google.gms:google-services:$versions.googleServices",
+        realm: "io.realm:realm-gradle-plugin:$versions.realmGradlePlugin"
+]
 ext.files = [
         files: fileTree(dir: 'libs', include: ['*.jar'])
 ]
