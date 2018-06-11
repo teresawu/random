@@ -44,7 +44,7 @@ class ImageClassifier constructor(private val assetManager: AssetManager) {
         }
         labelProb = Array(1) { ByteArray(labels.size) }
         imgData = ByteBuffer.allocateDirect(DIM_BATCH_SIZE * DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y * DIM_PIXEL_SIZE)
-        imgData!!.order(ByteOrder.nativeOrder())
+        imgData.order(ByteOrder.nativeOrder())
         try {
             interpreter = Interpreter(loadModelFile(assetManager, MODEL_PATH))
         } catch (e: Exception) {
@@ -54,16 +54,15 @@ class ImageClassifier constructor(private val assetManager: AssetManager) {
 
 
     private fun convertBitmapToByteBuffer(bitmap: Bitmap) {
-        if (imgData == null) return
-        imgData!!.rewind()
+        imgData.rewind()
         bitmap.getPixels(intValues, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)
         var pixel = 0
         for (i in 0 until DIM_IMG_SIZE_X) {
             for (j in 0 until DIM_IMG_SIZE_Y) {
-                val value = intValues!![pixel++]
-                imgData!!.put((value shr 16 and 0xFF).toByte())
-                imgData!!.put((value shr 8 and 0xFF).toByte())
-                imgData!!.put((value and 0xFF).toByte())
+                val value = intValues[pixel++]
+                imgData.put((value shr 16 and 0xFF).toByte())
+                imgData.put((value shr 8 and 0xFF).toByte())
+                imgData.put((value and 0xFF).toByte())
             }
         }
     }

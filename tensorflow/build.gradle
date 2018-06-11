@@ -10,23 +10,20 @@ repositories {
 
 buildscript {
     repositories {
-        maven { url 'https://google.bintray.com/tensorflow'}
+        maven { url 'https://google.bintray.com/tensorflow' }
     }
 }
 
-kapt {
-    generateStubs = true
-}
-
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion versions.compileVersion
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
         vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    kapt {
+        generateStubs = true
     }
 
     buildTypes {
@@ -42,23 +39,9 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    // Android
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$rootProject.kotlinVersion"
-    implementation "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$rootProject.kotlinVersion"
-    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
-
-    // RxJava
-    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
-    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rxkotlinVersion"
-
-    // Picasso
-    implementation 'com.squareup.picasso:picasso:2.5.2'
-
-    //other library
+    implementation files.values()
+    implementation androidLib.values()
+    implementation rxjava.values()
+    implementation picasso.values()
     implementation 'org.tensorflow:tensorflow-lite:+'
 }

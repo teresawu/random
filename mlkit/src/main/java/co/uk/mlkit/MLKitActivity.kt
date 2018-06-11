@@ -41,7 +41,7 @@ class MLKitActivity : DaggerAppCompatActivity() {
             startActivityForResult(labelViewModel.imageIntent(), action)
         }
 
-        radioButton.setOnCheckedChangeListener { radioGroup, checkedId ->
+        radioButton.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.btnImageLabel -> action = IMAGE_LABEL
                 R.id.btnTextRecognition -> action = TEXT_RECOGNITION

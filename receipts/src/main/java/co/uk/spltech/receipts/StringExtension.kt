@@ -14,7 +14,7 @@ fun String.findFloat(): ArrayList<Float> {
 }
 
 fun String.firstLine(): String {
-    if (this == null || this.isEmpty()) return ""
+    if (this.isEmpty()) return ""
     return this.split("\n").get(0)
 }
 

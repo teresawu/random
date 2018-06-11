@@ -1,7 +1,9 @@
 package co.uk.random.di.module
 
 import android.app.Application
+import android.content.Context
 import co.uk.random.BuildConfig
+import co.uk.room.database.AppDatabase
 import co.uk.youtube.util.SchedulerProvider
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -24,7 +26,13 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class YoutubeModule() {
+class CoreModule(private val context: Context) {
+
+    @Provides
+    @Singleton
+    fun providesAppContext() = context
+
+
     @Provides
     @Singleton
     fun provideYoutubeApiService(okHttpClient: OkHttpClient, gson: Gson): co.uk.youtube.api.YoutubeApiService {
@@ -77,4 +85,70 @@ class YoutubeModule() {
     fun provideGson() = GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
             .create()
+
+
+    @Provides
+    @Singleton
+    fun providesAppDatabase(context: Context): AppDatabase =
+            Room.databaseBuilder(context, AppDatabase::class.java, "random-app-database").allowMainThreadQueries().build()
+
+    @Provides
+    @Singleton
+    fun providesChannelDao(database: AppDatabase) = database.channelDAO()
+
+    @Provides
+    @Singleton
+    fun providesDefaultDao(database: AppDatabase) = database.defaultDAO()
+
+    @Provides
+    @Singleton
+    fun providesHighDao(database: AppDatabase) = database.highDao()
+
+    @Provides
+    @Singleton
+    fun providesItemDao(database: AppDatabase) = database.itemDao()
+
+    @Provides
+    @Singleton
+    fun providesLocalizedDao(database: AppDatabase) = database.localizedDao()
+
+    @Provides
+    @Singleton
+    fun providesMaxresDao(database: AppDatabase) = database.maxresDao()
+
+    @Provides
+    @Singleton
+    fun providesMediumDao(database: AppDatabase) = database.mediumDao()
+
+    @Provides
+    @Singleton
+    fun providesPageInfoDao(database: AppDatabase) = database.pageInfoDao()
+
+    @Provides
+    @Singleton
+    fun providesPlayerDao(database: AppDatabase) = database.playerDao()
+
+    @Provides
+    @Singleton
+    fun providesPlaylistDao(database: AppDatabase) = database.playlistDao()
+
+    @Provides
+    @Singleton
+    fun providesResourceIdDao(database: AppDatabase) = database.resourceIdDao()
+
+    @Provides
+    @Singleton
+    fun providesStandardDao(database: AppDatabase) = database.standardDao()
+
+    @Provides
+    @Singleton
+    fun providesSnippetDao(database: AppDatabase) = database.snippetDao()
+
+    @Provides
+    @Singleton
+    fun providesThumbnailsDao(database: AppDatabase) = database.thumbnailsDao()
+
+    @Provides
+    @Singleton
+    fun providesVideoDao(database: AppDatabase) = database.videoDao()
 }

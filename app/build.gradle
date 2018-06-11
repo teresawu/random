@@ -9,7 +9,7 @@ kapt {
 }
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion versions.compileVersion
     flavorDimensions "versionCode"
 
     sourceSets {
@@ -22,11 +22,11 @@ android {
     }
 
     defaultConfig {
-        applicationId "co.uk.random"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0.0"
+        applicationId versions.appId
+        minSdkVersion versions.minVersion
+        targetSdkVersion versions.targetVersion
+        versionCode versions.versionCode
+        versionName versions.versionName
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -56,61 +56,18 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':tensorflow')
-    implementation project(':mlkit')
-    implementation project(':receipts')
-    implementation project(':youtube')
-    implementation project(':room')
-
-    // Android
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$rootProject.kotlinVersion"
-    implementation "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$rootProject.kotlinVersion"
-    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
-    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
-    implementation "com.android.support:multidex:$rootProject.multiDexVersion"
-    implementation "com.google.firebase:firebase-core:$rootProject.firebaseVision"
-
-    // Android arch component
-    implementation "android.arch.lifecycle:runtime:$rootProject.lifecycleVersion"
-    implementation "android.arch.lifecycle:extensions:$rootProject.lifecycleVersion"
-    kapt "android.arch.lifecycle:compiler:$rootProject.lifecycleVersion"
-
-    // RxJava
-    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
-    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rxkotlinVersion"
-
-    // Network
-    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
-    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofitRxVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
-    implementation "com.google.code.gson:gson:$gsonVersion"
-
-    // Dagger
-    implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
-    compileOnly 'org.glassfish:javax.annotation:10.0-b28'
-    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
-
-    // Picasso
-    implementation 'com.squareup.picasso:picasso:2.5.2'
-
-    //Junit imports
-    testImplementation "junit:junit:$junitVersion"
-    testImplementation "org.mockito:mockito-inline:$mockitoInlineVersion"
-    kaptTest "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
-
-    //android test imports
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoCoreVersion", {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    androidTestImplementation "com.android.support.test:runner:$androidTestRunner"
+    implementation files.values()
+    implementation local.values()
+    implementation androidLib.values()
+    implementation archComponent.values()
+    kapt archKapt.values()
+    implementation rxjava.values()
+    implementation dagger.values()
+    compileOnly daggerCompileOnly.values()
+    kapt daggerKapt.values()
+    implementation picasso.values()
+    implementation network.values()
+    testImplementation test.values()
+    kaptTest  testKapt.values()
 }
 apply plugin: 'com.google.gms.google-services'

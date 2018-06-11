@@ -12,14 +12,14 @@ class PlaylistAdapter(private val playlist: ArrayList<Item>, private val playlis
     val onClickSubject = PublishSubject.create<Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistViewHolder {
-        val itemView = LayoutInflater.from(parent?.context)
+        val itemView = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_playlist, parent, false)
         return PlaylistViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
-        holder?.let { playlistDelegate.onBind(it, playlist[position]) }
-        holder?.playlistLayout?.setOnClickListener {
+        holder.let { playlistDelegate.onBind(it, playlist[position]) }
+        holder.playlistLayout?.setOnClickListener {
             onClickSubject.onNext(position)
         }
     }
