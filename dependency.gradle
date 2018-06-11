@@ -51,7 +51,8 @@ ext.local = [
         tensorflow: project(':tensorflow'),
         mlkit     : project(':mlkit'),
         receipts  : project(':receipts'),
-        youtube   : project(':youtube')
+        youtube   : project(':youtube'),
+        arch   : project(':arch')
 ]
 
 ext.androidLib = [
