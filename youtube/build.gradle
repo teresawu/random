@@ -1,9 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
-
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion versions.compileVersion
@@ -12,17 +11,6 @@ android {
         targetSdkVersion versions.targetSdkVersion
         vectorDrawables.useSupportLibrary = true
         buildConfigField "String", "YOUTUBE_MAIN", '"https://www.googleapis.com/youtube/v3/"'
-    }
-
-    kapt {
-        generateStubs = true
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
 }
 

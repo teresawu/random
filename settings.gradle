@@ -1,1 +1,1 @@
-include ':youtube', ':tensorflow', ':mlkit', ':receipts', ':app', ':room'
+include ':youtube', ':tensorflow', ':mlkit', ':receipts', ':app'

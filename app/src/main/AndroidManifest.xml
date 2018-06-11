@@ -42,10 +42,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="co.uk.room.view.home.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
             android:name="app.co.uk.tensorflow.view.ImageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
+apply plugin: 'kotlin-kapt'
 
 repositories {
     mavenCentral()
@@ -22,16 +22,6 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
-    kapt {
-        generateStubs = true
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
     aaptOptions {
         noCompress "tflite"
         noCompress "lite"

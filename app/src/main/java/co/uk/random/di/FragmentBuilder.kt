@@ -2,8 +2,6 @@ package co.uk.random.di
 
 import co.uk.random.di.module.ChannelFragmentModule
 import co.uk.random.di.module.PlaylistFragmentModule
-import co.uk.random.di.module.RoomChannelFragmentModule
-import co.uk.random.di.module.RoomPlaylistFragmentModule
 import co.uk.youtube.view.channel.ChannelFragment
 import co.uk.youtube.view.playlist.PLaylistFragment
 import dagger.Module
@@ -17,10 +15,4 @@ abstract class FragmentBuilder {
 
     @ContributesAndroidInjector(modules = [PlaylistFragmentModule::class])
     abstract fun bindPlaylistFragment(): PLaylistFragment
-
-    @ContributesAndroidInjector(modules = [RoomChannelFragmentModule::class])
-    abstract fun bindRoomChannelFragment(): co.uk.room.view.channel.ChannelFragment
-
-    @ContributesAndroidInjector(modules = [RoomPlaylistFragmentModule::class])
-    abstract fun bindRoomPlaylistFragment(): co.uk.room.view.playlist.PLaylistFragment
 }

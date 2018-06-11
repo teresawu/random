@@ -3,6 +3,7 @@ apply from: 'dependency.gradle'
 
 buildscript {
     apply from: 'dependency.gradle'
+
     repositories {
         jcenter()
         google()
@@ -10,6 +11,9 @@ buildscript {
         maven {
             url 'https://jitpack.io'
             credentials { username authToken }
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
         }
         maven { url 'http://clojars.org/repo' }
     }
