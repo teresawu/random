@@ -92,27 +92,11 @@ class CoreModule() {
 
     @Provides
     @Singleton
-    fun providesDefaultDao(database: AppDatabase) = database.defaultDAO()
-
-    @Provides
-    @Singleton
-    fun providesHighDao(database: AppDatabase) = database.highDao()
-
-    @Provides
-    @Singleton
     fun providesItemDao(database: AppDatabase) = database.itemDao()
 
     @Provides
     @Singleton
     fun providesLocalizedDao(database: AppDatabase) = database.localizedDao()
-
-    @Provides
-    @Singleton
-    fun providesMaxresDao(database: AppDatabase) = database.maxresDao()
-
-    @Provides
-    @Singleton
-    fun providesMediumDao(database: AppDatabase) = database.mediumDao()
 
     @Provides
     @Singleton
@@ -128,22 +112,10 @@ class CoreModule() {
 
     @Provides
     @Singleton
-    fun providesResourceIdDao(database: AppDatabase) = database.resourceIdDao()
-
-    @Provides
-    @Singleton
-    fun providesStandardDao(database: AppDatabase) = database.standardDao()
-
-    @Provides
-    @Singleton
     fun providesSnippetDao(database: AppDatabase) = database.snippetDao()
 
     @Provides
     @Singleton
     fun providesThumbnailsDao(database: AppDatabase) = database.thumbnailsDao()
-
-    @Provides
-    @Singleton
-    fun providesVideoDao(database: AppDatabase) = database.videoDao()
 
 }

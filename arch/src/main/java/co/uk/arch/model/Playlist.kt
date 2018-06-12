@@ -11,5 +11,5 @@ data class Playlist(
         @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "playlist_uid") var uid: Long,
         var kind: String = "",
         var etag: String = "",
-        @Embedded var pageInfo: PageInfo? = null,
+        var pageInfo: PageInfo? = null,
         var items: List<Item> = ArrayList())

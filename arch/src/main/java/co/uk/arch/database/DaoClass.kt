@@ -21,36 +21,6 @@ interface ChannelDao {
 }
 
 @Dao
-interface DefaultDao {
-    @Query("SELECT * FROM `default`")
-    fun getAllDefault(): LiveData<List<Default>>
-
-    @Insert(onConflict = REPLACE)
-    fun insert(default: Default)
-
-    @Update(onConflict = REPLACE)
-    fun update(default: Default)
-
-    @Delete
-    fun delete(default: Default)
-}
-
-@Dao
-interface HighDao {
-    @Query("SELECT * FROM High")
-    fun getAllHigh(): LiveData<List<High>>
-
-    @Insert(onConflict = REPLACE)
-    fun insert(high: High)
-
-    @Update(onConflict = REPLACE)
-    fun update(high: High)
-
-    @Delete
-    fun delete(high: High)
-}
-
-@Dao
 interface ItemDao {
     @Query("SELECT * FROM item")
     fun getAllItem(): LiveData<List<Item>>
@@ -78,36 +48,6 @@ interface LocalizedDao {
 
     @Delete
     fun delete(localized: Localized)
-}
-
-@Dao
-interface MaxresDao {
-    @Query("SELECT * FROM maxres")
-    fun getAllMaxres(): LiveData<List<Maxres>>
-
-    @Insert(onConflict = REPLACE)
-    fun insert(maxres: Maxres)
-
-    @Update(onConflict = REPLACE)
-    fun update(maxres: Maxres)
-
-    @Delete
-    fun delete(maxres: Maxres)
-}
-
-@Dao
-interface MediumDao {
-    @Query("SELECT * FROM medium")
-    fun getAllMedium(): LiveData<List<Medium>>
-
-    @Insert(onConflict = REPLACE)
-    fun insert(medium: Medium)
-
-    @Update(onConflict = REPLACE)
-    fun update(medium: Medium)
-
-    @Delete
-    fun delete(medium: Medium)
 }
 
 @Dao
@@ -156,21 +96,6 @@ interface PlaylistDao {
 }
 
 @Dao
-interface ResourceIdDao {
-    @Query("SELECT * FROM resourceId")
-    fun getAllResourceId(): LiveData<List<ResourceId>>
-
-    @Insert(onConflict = REPLACE)
-    fun insert(resourceId: ResourceId)
-
-    @Update(onConflict = REPLACE)
-    fun update(resourceId: ResourceId)
-
-    @Delete
-    fun delete(resourceId: ResourceId)
-}
-
-@Dao
 interface SnippetDao {
     @Query("SELECT * FROM snippet")
     fun getAllSnippet(): LiveData<List<Snippet>>
@@ -186,21 +111,6 @@ interface SnippetDao {
 }
 
 @Dao
-interface StandardDao {
-    @Query("SELECT * FROM standard")
-    fun getAllStandard(): LiveData<List<Standard>>
-
-    @Insert(onConflict = REPLACE)
-    fun insert(standard: Standard)
-
-    @Update(onConflict = REPLACE)
-    fun update(standard: Standard)
-
-    @Delete
-    fun delete(standard: Standard)
-}
-
-@Dao
 interface ThumbnailsDao {
     @Query("SELECT * FROM thumbnails")
     fun getAllThumbnails(): LiveData<List<Thumbnails>>
@@ -213,19 +123,4 @@ interface ThumbnailsDao {
 
     @Delete
     fun delete(thumbnails: Thumbnails)
-}
-
-@Dao
-interface VideoDao {
-    @Query("SELECT * FROM video")
-    fun getAllVideo(): LiveData<List<Video>>
-
-    @Insert(onConflict = REPLACE)
-    fun insert(video: Video)
-
-    @Update(onConflict = REPLACE)
-    fun update(video: Video)
-
-    @Delete
-    fun delete(video: Video)
 }

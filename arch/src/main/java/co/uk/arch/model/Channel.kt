@@ -13,6 +13,6 @@ data class Channel(
         var kind: String = "",
         var etag: String = "",
         @ColumnInfo(name = "next_page_token") var nextPageToken: String = "",
-        @Embedded var pageInfo: PageInfo? = null,
+        var pageInfo: PageInfo? = null,
         var items: List<Item> = ArrayList()
 )
