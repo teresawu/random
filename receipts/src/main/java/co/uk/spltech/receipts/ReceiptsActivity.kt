@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.widget.TextView
+import co.uk.spltech.motion.MotionOneActivity
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.squareup.picasso.Picasso
 import dagger.android.support.DaggerAppCompatActivity
@@ -45,6 +46,8 @@ class ReceiptsActivity : DaggerAppCompatActivity() {
         txtCamera.setOnClickListener {
             startActivityForResult(receiptsViewModel.cameraIntent(this), CAMERA_ACTION)
         }
+
+        txtMotion.setOnClickListener { startActivity(Intent(this@ReceiptsActivity, MotionOneActivity::class.java)) }
     }
 
     private fun uploadAction(data: Intent) {

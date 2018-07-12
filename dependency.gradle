@@ -13,7 +13,7 @@ ext.versions = [
 
         //android lib
         supportLibrary    : "27.1.1",
-        constraintLayout  : "1.1.1",
+        constraintLayout  : "2.0.0-alpha1",
         kotlin            : "1.2.41",
         multiDex          : "1.0.3",
         firebase          : "16.0.0",

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetEnd="@+id/m_one_end"
+        app:constraintSetStart="@+id/m_one_start"
+        app:duration="5000">
+        <OnSwipe
+            app:dragDirection="dragLeft"
+            app:touchAnchorId="@+id/animButon"
+            app:touchAnchorSide="left" />
+    </Transition>
+
+    <ConstraintSet android:id="@id/m_one_start">
+        <Constraint
+            android:id="@id/animButon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/yellow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@id/m_one_end">
+        <Constraint
+            android:id="@id/animButon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/greyLight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+</MotionScene>
