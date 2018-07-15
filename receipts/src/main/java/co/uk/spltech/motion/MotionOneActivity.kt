@@ -3,14 +3,14 @@ package co.uk.spltech.motion
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import co.uk.spltech.receipts.R
-import kotlinx.android.synthetic.main.activity_motion_one.*
+import kotlinx.android.synthetic.main.activity_motion_button.*
 
 
 class MotionOneActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_motion_one)
+        setContentView(R.layout.activity_motion_button)
         setUI()
     }
 

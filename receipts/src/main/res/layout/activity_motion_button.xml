@@ -6,11 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    app:layoutDescription="@xml/one_anim"
+    app:layoutDescription="@xml/image_anim"
     tools:showPaths="true">
 
-    <Button
-        android:id="@id/animButon"
+    <android.support.constraint.utils.ImageFilterView
+        android:id="@+id/imageAnim"
         android:layout_width="0dp"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:src="@drawable/rose_red"
+        app:altSrc="@drawable/rose_yellow" />
+
+    <Button
+        android:id="@+id/btnAnim"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
 </android.support.constraint.motion.MotionLayout>
