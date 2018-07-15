@@ -13,14 +13,20 @@
             app:touchAnchorSide="left" />
     </Transition>
 
+
+    <!--define CustomAttribute both in the start and the end ConstraintSet-->
     <ConstraintSet android:id="@id/m_one_start">
         <Constraint
             android:id="@id/animButon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@color/yellow"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                app:attributeName="backgroundColor"
+                app:customColorValue="@color/red" />
+        </Constraint>
     </ConstraintSet>
 
     <ConstraintSet android:id="@id/m_one_end">
@@ -28,8 +34,12 @@
             android:id="@id/animButon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@color/greyLight"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                app:attributeName="backgroundColor"
+                app:customColorValue="@color/yellow" />
+        </Constraint>
     </ConstraintSet>
 </MotionScene>
