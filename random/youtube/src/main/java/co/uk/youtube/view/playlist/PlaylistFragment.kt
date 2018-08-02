@@ -1,11 +1,13 @@
 package co.uk.youtube.view.playlist
 
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import co.uk.youtube.R
+import co.uk.youtube.databinding.FragmentPlaylistBinding
 import co.uk.youtube.model.Item
 import co.uk.youtube.util.Keys
 import co.uk.youtube.util.Keys.PREF_VIDEO_ID
@@ -26,6 +28,7 @@ class PLaylistFragment : DisposableDaggerFragment() {
     private val sharedPreferences by lazy { PreferenceHandler.getSharePref(context!!) }
     private var playlistList = ArrayList<Item>()
     private val playlistAdapter: PlaylistAdapter by lazy { PlaylistAdapter(playlistList, playlistDelegate = PlaylistAdapterDelegate()) }
+    private lateinit var playlistBinding: FragmentPlaylistBinding
 
     companion object {
         fun newInstance(): PLaylistFragment {
@@ -34,11 +37,16 @@ class PLaylistFragment : DisposableDaggerFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_playlist, container, false)
-        view.playlistRecyclerView.layoutManager = createLayoutManager()
-        view.playlistRecyclerView.adapter = playlistAdapter
+        playlistBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_playlist, container, false)
+        playlistBinding.playlist = playlistViewModel
+        return playlistBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        playlistRecyclerView.layoutManager = createLayoutManager()
+        playlistRecyclerView.adapter = playlistAdapter
         gotoVideo()
-        return view
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {

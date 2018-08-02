@@ -12,6 +12,9 @@ android {
         vectorDrawables.useSupportLibrary = true
         buildConfigField "String", "YOUTUBE_MAIN", '"https://www.googleapis.com/youtube/v3/"'
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -21,6 +24,7 @@ dependencies {
     implementation dagger.values()
     compileOnly daggerCompileOnly.values()
     kapt daggerKapt.values()
+    kapt dataBindingKapt.values()
     implementation picasso.values()
     implementation network.values()
     testImplementation test.values()
