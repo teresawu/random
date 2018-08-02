@@ -1,6 +1,7 @@
 package co.uk.youtube.view.playlist
 
 import android.databinding.BaseObservable
+import co.uk.youtube.R
 import co.uk.youtube.api.YoutubeApiService
 import co.uk.youtube.error.ExceptionTransformers
 import co.uk.youtube.model.Playlist
@@ -13,6 +14,7 @@ class PlaylistViewModel @Inject constructor
 (private val exceptionTransformers: ExceptionTransformers, private val schedulerProvider: SchedulerProvider, private val youtubeApiService: YoutubeApiService)
     : BaseObservable() {
     var progressBarVisible = true
+    var progressBarColour = R.color.green
     fun getPlaylist(playlistId: String): Single<Playlist> {
         return getPlaylistFromRealm()
                 .flatMap {
@@ -20,15 +22,15 @@ class PlaylistViewModel @Inject constructor
                     else return@flatMap getPlaylistFromApi(playlistId)
                 }
                 .doOnSubscribe {
-                    progressBarVisible = true
+                    progressBarVisible = false
                 }
                 .doOnError {
-                    //                    displayErrorMessage = true
+                    progressBarVisible = true
+                    progressBarColour = R.color.green
                 }
                 .doFinally {
                     notifyChange()
                 }
-
     }
 
 

@@ -52,7 +52,9 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
-
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -61,6 +63,7 @@ dependencies {
     implementation androidLib.values()
     implementation archComponent.values()
     kapt archKapt.values()
+    kapt dataBindingKapt.values()
     implementation rxjava.values()
     implementation dagger.values()
     compileOnly daggerCompileOnly.values()

@@ -6,7 +6,7 @@
     <data>
 
         <import type="android.view.View" />
-
+        <import type="android.support.v4.app.Fragment"/>
         <variable
             name="playlist"
             type="co.uk.youtube.view.playlist.PlaylistViewModel" />
@@ -33,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="@{playlist.progressBarVisible ? View.VISIBLE : View.GONE}"
+            android:background="@{context.getColor(playlist.progressBarColour)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

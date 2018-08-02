@@ -62,10 +62,6 @@ class PLaylistFragment : DisposableDaggerFragment() {
                 .subscribeBy(
                         onSuccess = {
                             playlistAdapter.refresh(it.items)
-                            playlistProgressBar.visibility = View.GONE
-                        },
-                        onError = {
-                            playlistProgressBar.setBackgroundColor(ContextCompat.getColor(playlistProgressBar.context, R.color.green))
                         }
                 )
         )
