@@ -1,0 +1,47 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion versions.compileVersion
+    defaultConfig {
+        minSdkVersion versions.minSdkVersion
+        vectorDrawables.useSupportLibrary = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //android values
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
+    implementation "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$versions.kotlin"
+    implementation "androidx.appcompat:appcompat:$versions.supportLibrary"
+    implementation "androidx.legacy:legacy-support-v4:$versions.supportLibrary"
+    implementation "com.google.android.material:material:$versions.supportLibrary"
+    implementation "androidx.cardview:cardview:$versions.supportLibrary"
+    implementation "androidx.recyclerview:recyclerview:$versions.supportLibrary"
+    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintLayout"
+    implementation "androidx.multidex:multidex:$versions.multiDex"
+    implementation "com.google.firebase:firebase-core:$versions.firebase"
+
+    //ML KIT
+    implementation "com.google.firebase:firebase-ml-vision:$versions.firebaseML"
+    implementation "com.google.firebase:firebase-ml-vision-image-label-model:$versions.mlLabel"
+
+    //dagger
+    implementation "com.google.dagger:dagger:$versions.dagger"
+    implementation "com.google.dagger:dagger-android:$versions.dagger"
+    implementation "com.google.dagger:dagger-android-support:$versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
+    compileOnly "org.glassfish:javax.annotation:$versions.annotation"
+
+
+    //3rd party
+    implementation "com.squareup.picasso:picasso:$versions.picasso"
+    implementation "io.reactivex.rxjava2:rxandroid:$versions.rxandroid"
+    implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxkotlin"
+
+}
+

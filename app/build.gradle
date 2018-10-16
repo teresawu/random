@@ -1,0 +1,110 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'realm-android'
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    generateStubs = true
+}
+
+android {
+    compileSdkVersion versions.compileVersion
+    flavorDimensions "versionCode"
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/java'
+    }
+
+    aaptOptions {
+        noCompress "tflite"
+        noCompress "lite"
+    }
+
+    defaultConfig {
+        applicationId versions.appId
+        minSdkVersion versions.minVersion
+        versionCode versions.versionCode
+        versionName versions.versionName
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "YOUTUBE_MAIN", '"https://www.googleapis.com/youtube/v3/"'
+        dexOptions {
+            javaMaxHeapSize "4g"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':tensorflow')
+    implementation project(':mlkit')
+    implementation project(':receipts')
+    implementation project(':youtube')
+
+    //android values
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
+    implementation "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$versions.kotlin"
+    implementation "androidx.appcompat:appcompat:$versions.supportLibrary"
+    implementation "androidx.legacy:legacy-support-v4:$versions.supportLibrary"
+    implementation "com.google.android.material:material:$versions.supportLibrary"
+    implementation "androidx.cardview:cardview:$versions.supportLibrary"
+    implementation "androidx.recyclerview:recyclerview:$versions.supportLibrary"
+    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintLayout"
+    implementation "androidx.multidex:multidex:$versions.multiDex"
+    implementation "com.google.firebase:firebase-core:$versions.firebase"
+
+    //arch componnet
+    implementation "androidx.lifecycle:lifecycle-runtime:$versions.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
+    implementation "androidx.room:room-runtime:$versions.room"
+    implementation "androidx.paging:paging-runtime:$versions.paging"
+    implementation "androidx.annotation:annotation:$versions.supportLibrary"
+    kapt "androidx.room:room-compiler:$versions.room"
+
+    //dagger
+    implementation "com.google.dagger:dagger:$versions.dagger"
+    implementation "com.google.dagger:dagger-android:$versions.dagger"
+    implementation "com.google.dagger:dagger-android-support:$versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
+    compileOnly "org.glassfish:javax.annotation:$versions.annotation"
+
+    //3rd party
+    implementation "com.squareup.picasso:picasso:$versions.picasso"
+    implementation "io.reactivex.rxjava2:rxandroid:$versions.rxandroid"
+    implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxkotlin"
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofitVersion"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$versions.retrofitRx"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
+    implementation "com.google.code.gson:gson:$versions.gson"
+
+    //test
+    kaptTest "com.google.dagger:dagger-compiler:$versions.dagger"
+    testImplementation "junit:junit:$versions.junit"
+    testImplementation "org.mockito:mockito-inline:$versions.mockitoInline"
+
+}
+apply plugin: 'com.google.gms.google-services'

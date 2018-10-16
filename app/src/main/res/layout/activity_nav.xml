@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="20dp">
+
+    <Button
+        android:id="@+id/btnReceipts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/greyLight"
+        android:padding="10dp"
+        android:text="@string/receipts"
+        android:textColor="@color/greyDark"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnMLKit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <Button
+        android:id="@+id/btnMLKit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/greyDark"
+        android:padding="10dp"
+        android:text="@string/mlkit"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnTensorFlowImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnReceipts"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <Button
+        android:id="@+id/btnTensorFlowImage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/greyDark"
+        android:padding="10dp"
+        android:text="@string/tensorflow_image"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnTensorFlowVideo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnMLKit" />
+
+    <Button
+        android:id="@+id/btnTensorFlowVideo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/greyDark"
+        android:padding="10dp"
+        android:text="@string/tensorflow_video"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btnYoutube"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnTensorFlowImage" />
+
+    <Button
+        android:id="@+id/btnYoutube"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/greyDark"
+        android:padding="10dp"
+        android:text="@string/youtube"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnTensorFlowVideo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
