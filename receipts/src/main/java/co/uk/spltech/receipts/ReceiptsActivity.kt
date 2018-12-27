@@ -72,9 +72,6 @@ class ReceiptsActivity : DaggerAppCompatActivity() {
         var text = ""
         receiptsViewModel.textDeviceDetector.processImage(firebaseImage)
                 .addOnSuccessListener {
-
-                }
-                .addOnSuccessListener {
                     for (block in it.textBlocks) text += block.text + "\n"
                     val receipts = receiptsViewModel.getReceipts(text)
                     editTotal.setText(receipts.total, TextView.BufferType.EDITABLE)

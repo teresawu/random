@@ -19,7 +19,7 @@ class ReceiptsViewModel @Inject constructor() {
     lateinit var imageURI: Uri
 
     init {
-        textDeviceDetector = FirebaseVision.getInstance().getCloudTextRecognizer()
+        textDeviceDetector = FirebaseVision.getInstance().getOnDeviceTextRecognizer()
     }
 
     fun uploadIntent(): Intent {
