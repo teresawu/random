@@ -10,7 +10,6 @@ kapt {
 
 android {
     compileSdkVersion versions.compileVersion
-    flavorDimensions "versionCode"
 
     sourceSets {
         main.java.srcDirs += 'src/main/java'
