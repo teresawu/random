@@ -1,11 +1,10 @@
 package co.uk.youtube.view.playlist
 
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import co.uk.youtube.R
 import co.uk.youtube.databinding.FragmentPlaylistBinding
 import co.uk.youtube.model.Item
@@ -19,7 +18,6 @@ import co.uk.youtube.view.DisposableDaggerFragment
 import co.uk.youtube.view.home.HomeActivity
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_playlist.*
-import kotlinx.android.synthetic.main.fragment_playlist.view.*
 import javax.inject.Inject
 
 class PLaylistFragment : DisposableDaggerFragment() {

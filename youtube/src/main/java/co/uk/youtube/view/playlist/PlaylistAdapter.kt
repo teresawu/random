@@ -1,6 +1,5 @@
 package co.uk.youtube.view.playlist
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import co.uk.youtube.R

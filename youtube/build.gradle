@@ -29,6 +29,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintLayout"
     implementation "androidx.multidex:multidex:$versions.multiDex"
     implementation "com.google.firebase:firebase-core:$versions.firebase"
+    implementation "androidx.recyclerview:recyclerview-selection:$versions.recyclerviewSelection"
 
     //dagger
     implementation "com.google.dagger:dagger:$versions.dagger"
