@@ -1,38 +1,31 @@
 package co.uk.youtube.view.channel
 
-import androidx.lifecycle.ViewModel
-import co.uk.youtube.api.YoutubeApiService
-import co.uk.youtube.error.ExceptionTransformers
-import co.uk.youtube.model.Channel
-import co.uk.youtube.util.RealmHelper
-import co.uk.youtube.util.SchedulerProvider
-import io.reactivex.Single
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.OnLifecycleEvent
+import co.uk.youtube.view.base.DisposingViewModel
+import co.uk.youtube.view.channel.state.ChannelRepo
+import co.uk.youtube.view.channel.state.ChannelState
+import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
-class ChannelViewModel @Inject constructor
-(private val exceptionTransformers: ExceptionTransformers, private val schedulerProvider: SchedulerProvider, private val youtubeApiService: YoutubeApiService)
-    : ViewModel(){
-    fun getChannel(): Single<Channel> {
-        return getChannelFromRealm()
-                .flatMap {
-                    if (it.isNotEmpty()) {
-                        return@flatMap Single.just(it.first())
-                    } else return@flatMap getChannelFromApi()
-                }
-    }
+class ChannelViewModel @Inject constructor(var channelRepo: ChannelRepo) : DisposingViewModel() {
+    val stateSubject: BehaviorSubject<ChannelState> = BehaviorSubject.create()
 
-    private fun getChannelFromRealm(): Single<List<Channel>> =
-            RealmHelper.findAll<Channel>().flatMap {
-                return@flatMap Single.just(it)
-            }
+    val channelState = ChannelState()
 
-    private fun getChannelFromApi(): Single<Channel> {
-        return youtubeApiService.getChannel()
-                .compose(schedulerProvider.getSchedulersForSingle())
-                .compose(exceptionTransformers.wrapRetrofitExceptionSingle())
-                .flatMap {
-                    RealmHelper.copyOrUpdate(it)
-                    return@flatMap Single.just(it)
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun getChannel() {
+        add(channelRepo.getChannel()
+                .doOnSubscribe {
+                    stateSubject.onNext(channelState.copy(loading = true, loaded = false, error = false))
                 }
+                .map {
+                    stateSubject.onNext(channelState.copy(loading = false, loaded = true, error = false, channel = it))
+                }
+                .onErrorReturn {
+                    stateSubject.onNext(channelState.copy(loading = false, loaded = false, error = true))
+                }
+                .subscribe()
+        )
     }
 }

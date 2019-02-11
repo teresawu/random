@@ -1,6 +1,8 @@
 package co.uk.youtube.view.playlist
 
 import androidx.databinding.BaseObservable
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.OnLifecycleEvent
 import co.uk.youtube.R
 import co.uk.youtube.api.YoutubeApiService
 import co.uk.youtube.error.ExceptionTransformers
@@ -15,6 +17,8 @@ class PlaylistViewModel @Inject constructor
     : BaseObservable() {
     var progressBarVisible = true
     var progressBarColour = R.color.green
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun getPlaylist(playlistId: String): Single<Playlist> {
         return getPlaylistFromRealm()
                 .flatMap {

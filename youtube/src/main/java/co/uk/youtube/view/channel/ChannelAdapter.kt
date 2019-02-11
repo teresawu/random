@@ -1,13 +1,27 @@
 package co.uk.youtube.view.channel
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import co.uk.youtube.R
 import co.uk.youtube.model.Item
+import co.uk.youtube.util.Util
+import com.squareup.picasso.Picasso
+import io.reactivex.subjects.PublishSubject
 import io.realm.RealmList
 
-class ChannelAdapter(private val channels: ArrayList<Item>, private val channelDelegate: ChannelAdapterDelegate) : androidx.recyclerview.widget.RecyclerView.Adapter<ChannelViewHolder>() {
+class ChannelAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<ChannelViewHolder>() {
+    val onClickSubject = PublishSubject.create<String>()
+
+    var channelList = RealmList<Item>()
+        set(value) {
+            if (value != field) {
+                field = value
+                notifyDataSetChanged()
+            }
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChannelViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -16,18 +30,36 @@ class ChannelAdapter(private val channels: ArrayList<Item>, private val channelD
     }
 
     override fun onBindViewHolder(holder: ChannelViewHolder, position: Int) {
-        val channel = channels[position]
-        holder.let { channelDelegate.onBind(it, channel) }
+        val channel = channelList[position]
+        holder.let { onBind(it, channel) }
     }
 
-    override fun getItemCount(): Int = channels.size
+    override fun getItemCount(): Int = channelList.size
 
-    fun getClickSubject() = channelDelegate.onClickSubject
-
-    fun refresh(data: RealmList<Item>?) {
-        if (data == null || data.size == 0) return
-        channels.clear()
-        channels.addAll(data)
-        notifyDataSetChanged()
+    fun onBind(holder: ChannelViewHolder, channel: Item?) {
+        with(holder) {
+            val snippet = channel?.snippet
+            val description = Util.shortDescription(snippet?.description)
+            channelTitle.text = snippet?.title
+            channelDescription.text = description
+            val date = snippet?.publishedAt
+            channelPublished.text = date?.substring(0, 10)
+            try {
+                Picasso.with(channelTitle.context).load(snippet?.thumbnails?.high?.url).into(channelImage)
+            } catch (exception: Exception) {
+                Picasso.with(channelTitle.context)
+                        .load(R.drawable.ic_menu_camera)
+                        .into(channelImage)
+            }
+            viewItem.setOnClickListener { onClickSubject.onNext(channel!!.id) }
+        }
     }
+}
+
+class ChannelViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    val channelTitle = view.findViewById<TextView>(R.id.txtChannelTitle)
+    val channelPublished = view.findViewById<TextView>(R.id.txtChannelPublished)
+    val channelDescription = view.findViewById<TextView>(R.id.txtChannelDescription)
+    val channelImage = view.findViewById<ImageView>(R.id.imgChannel)
+    val viewItem = view
 }

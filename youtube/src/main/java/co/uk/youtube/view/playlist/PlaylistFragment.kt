@@ -14,7 +14,7 @@ import co.uk.youtube.util.PreferenceHandler
 import co.uk.youtube.util.extension.createLayoutManager
 import co.uk.youtube.util.get
 import co.uk.youtube.util.set
-import co.uk.youtube.view.DisposableDaggerFragment
+import co.uk.youtube.view.base.DisposableDaggerFragment
 import co.uk.youtube.view.home.HomeActivity
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.fragment_playlist.*
