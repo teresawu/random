@@ -36,7 +36,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnReceipts"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintVertical_chainStyle="spread"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/btnTensorFlowImage"
@@ -82,6 +83,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnTensorFlowVideo" />
+        app:layout_constraintTop_toBottomOf="@id/btnTensorFlowVideo"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

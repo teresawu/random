@@ -1,8 +1,9 @@
 package co.uk.random
 
 import android.app.Activity
+import android.content.res.Configuration
+import android.util.Log
 import androidx.multidex.MultiDexApplication
-import androidx.fragment.app.Fragment
 import co.uk.random.Keys.API_KEY_FIREBASE
 import co.uk.random.Keys.APP_ID
 import co.uk.random.Keys.APP_NAME
@@ -25,6 +26,7 @@ class RandomApplication : MultiDexApplication(), HasActivityInjector, HasSupport
 
     override fun onCreate() {
         super.onCreate()
+        Log.i("RandomApplication", "RandomApplication = " + "onCreate")
         Realm.init(this)
         val firebaseOptions = FirebaseOptions.Builder()
                 .setApiKey(API_KEY_FIREBASE)
@@ -35,6 +37,17 @@ class RandomApplication : MultiDexApplication(), HasActivityInjector, HasSupport
                 .build()
                 .inject(this)
     }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        Log.i("RandomApplication", "RandomApplication = " + "onTerminate")
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        Log.i("RandomApplication", "RandomApplication = " + "onConfigurationChanged" + newConfig.toString())
+    }
+
 
     override fun activityInjector(): AndroidInjector<Activity> = activityDispatchingInjector
 
