@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Random</string>
-    <string name="mlkit">ML Kit</string>
-    <string name="receipts">Receipts</string>
-    <string name="tensorflow_image">TensorFlow Image</string>
-    <string name="tensorflow_video">TensorFlow Video</string>
-    <string name="youtube">Youtube</string>
+    <string name="app_name">Receipts</string>
+    <string name="text_upload">Upload</string>
+    <string name="text_camera">Camera</string>
+    <string name="text_total">Total: </string>
+    <string name="text_vat">VAT: </string>
+    <string name="text_type">Type: </string>
 </resources>

@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">TensorFlow</string>
-    <string name="picture">Choose a picture:</string>
-    <string name="video">Take a video</string>
-    <string name="your_video">Your video:</string>
-</resources>

@@ -24,7 +24,7 @@
             android:value="label,text" />
 
         <activity
-            android:name=".NavActivity"
+            android:name=".ReceiptsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -32,38 +32,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcut" />
         </activity>
-
-        <activity
-            android:name="co.uk.youtube.view.home.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
-            android:name="app.co.uk.tensorflow.view.ImageActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="app.co.uk.tensorflow.view.VideoActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
-            android:name="co.uk.mlkit.MLKitActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
-            android:name="co.uk.spltech.receipts.ReceiptsActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
-            android:name="co.uk.spltech.motion.MotionOneActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
