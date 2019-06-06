@@ -12,19 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barTotal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="right"
-            app:constraint_referenced_ids="txtTotal,editTotal" />
-
         <TextView
             android:id="@+id/txtCamera"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:background="@color/greyDark"
+            android:background="@color/darkGrey"
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/text_camera"
@@ -40,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:background="@color/greyDark"
+            android:background="@color/darkGrey"
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/text_upload"
@@ -56,7 +49,7 @@
             android:layout_width="0dp"
             android:layout_height="300dp"
             android:layout_marginTop="20dp"
-            android:background="@color/greyLight"
+            android:background="@color/lightGrey"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +63,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/text_total"
-            android:textColor="@color/greyDark"
+            android:textColor="@color/darkGrey"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageResult" />
@@ -82,7 +75,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:padding="10dp"
-            android:textColor="@color/greyDark"
+            android:textColor="@color/darkGrey"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/txtTotal"
             app:layout_constraintTop_toBottomOf="@id/imageResult"
@@ -96,7 +89,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/text_vat"
-            android:textColor="@color/greyDark"
+            android:textColor="@color/darkGrey"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtTotal" />
@@ -108,7 +101,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:padding="10dp"
-            android:textColor="@color/greyDark"
+            android:textColor="@color/darkGrey"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/txtTotal"
             app:layout_constraintTop_toBottomOf="@id/txtTotal"
@@ -122,7 +115,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/text_type"
-            android:textColor="@color/greyDark"
+            android:textColor="@color/darkGrey"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtVAT" />
@@ -134,10 +127,35 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:padding="10dp"
-            android:textColor="@color/greyDark"
+            android:textColor="@color/darkGrey"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/txtTotal"
             app:layout_constraintTop_toBottomOf="@id/txtVAT"
             tools:text="@string/text_type" />
+
+        <TextView
+            android:id="@+id/txtAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/text_all"
+            android:textColor="@color/darkGrey"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editLocation" />
+
+        <TextView
+            android:id="@+id/editAll"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:padding="10dp"
+            android:textColor="@color/darkGrey"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/txtTotal"
+            app:layout_constraintTop_toBottomOf="@id/editLocation" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

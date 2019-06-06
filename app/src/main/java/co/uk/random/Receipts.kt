@@ -1,6 +1,6 @@
 package co.uk.random
 
-data class Receipts(var total: String = "", var vat: String = "", var type: String = "")
+data class Receipts(var original: String = "", var total: String = "", var vat: String = "", var type: String = "")
 
 object Keys {
     const val API_KEY_FIREBASE = "AIzaSyAgGrXRlYAM2y77DvGRAF6U-moAj32WvXE"

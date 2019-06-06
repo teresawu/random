@@ -45,10 +45,11 @@ class ReceiptsViewModel {
     }
 
     fun getReceipts(text: String): co.uk.random.Receipts {
+        val receipts = Receipts()
+        receipts.original = text
         val originalResult = text.findFloat()
-        if (originalResult.isEmpty()) return co.uk.random.Receipts()
+        if (originalResult.isEmpty()) return receipts
         else {
-            val receipts = co.uk.random.Receipts()
             val totalF = Collections.max(originalResult)
             val secondLargestF = findSecondLargestFloat(originalResult)
             receipts.total = totalF.toString()

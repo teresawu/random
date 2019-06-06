@@ -75,6 +75,7 @@ class ReceiptsActivity : AppCompatActivity() {
                     editTotal.setText(receipts.total, TextView.BufferType.EDITABLE)
                     editLocation.setText(receipts.type, TextView.BufferType.EDITABLE)
                     editVAT.setText(receipts.vat, TextView.BufferType.EDITABLE)
+                    editAll.text = receipts.original
                 }
     }
 
